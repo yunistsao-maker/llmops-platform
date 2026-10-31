@@ -1,0 +1,2 @@
+# notifier runtime dependencies (smtplib is in the standard library; httpx posts webhooks).
+-r ../../libs/llmops-common/requirements.in

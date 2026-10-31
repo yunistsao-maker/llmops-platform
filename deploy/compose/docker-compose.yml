@@ -1,0 +1,87 @@
+# Local development: the whole platform on one machine, models faked by tools/mock-llm.
+#   make build          # build every image as llmops/<name>:dev
+#   cp deploy/compose/.env.example deploy/compose/.env
+#   docker compose -f deploy/compose/docker-compose.yml up -d
+# Portal: http://localhost:8080   Gateway: http://localhost:4000   (AUTH_MODE=dev: everyone is the dev user)
+name: llmops
+
+x-env: &env
+  LOG_LEVEL: INFO
+  DATABASE_URL: postgresql://llmops:${POSTGRES_PASSWORD:-llmops-local}@postgres:5432/llmops
+  S3_ENDPOINT_URL: http://object-store:7070
+  S3_REGION: us-east-1
+  S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID:-localadmin}
+  S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY:-localadmin-secret}
+  LLM_GATEWAY_URL: http://llm-gateway:4000
+  LLM_GATEWAY_KEY: ${LITELLM_MASTER_KEY:-sk-local-master-change-me}   # local only; per-component keys elsewhere
+  AUTH_MODE: dev
+  DEV_USER_EMAIL: dev@example.local
+  DEV_USER_GROUPS: llmops-admins
+  ROLE_ADMIN: llmops-admins
+
+x-hardening: &hardening
+  read_only: true
+  tmpfs: ["/tmp"]
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: ["ALL"]
+  restart: unless-stopped
+
+services:
+  # ---------------------------------------------------------------- shared infrastructure (not ours)
+  postgres:
+    image: postgres:16-alpine@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
+    environment:
+      POSTGRES_USER: llmops
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-llmops-local}
+      POSTGRES_DB: llmops
+    volumes: ["pgdata:/var/lib/postgresql/data", "./postgres-init:/docker-entrypoint-initdb.d:ro"]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U llmops -d llmops"], interval: 3s, timeout: 3s, retries: 30}
+    restart: unless-stopped
+
+  object-store:   # S3-compatible (versitygw, Apache-2.0); on-prem uses the company's S3-compatible storage
+    image: versity/versitygw@sha256:89cad13cc981986ee284cbafea4613f9533ce6fd5f37a2c96c4c4fb8adb3a316
+    command: ["posix", "/data"]
+    environment:
+      ROOT_ACCESS_KEY: ${S3_ACCESS_KEY_ID:-localadmin}
+      ROOT_SECRET_KEY: ${S3_SECRET_ACCESS_KEY:-localadmin-secret}
+    volumes: ["objdata:/data"]
+    restart: unless-stopped
+
+  mock-llm:       # local only: fake OpenAI-compatible model so nothing calls a cloud
+    image: llmops/mock-llm:${TAG:-dev}
+    <<: *hardening
+
+  # ---------------------------------------------------------------- platform components
+  db-migrate:
+    image: llmops/db-migrate:${TAG:-dev}
+    command: ["migrate"]
+    environment: *env
+    depends_on: {postgres: {condition: service_healthy}}
+    read_only: true
+    tmpfs: ["/tmp"]
+    restart: "no"
+
+  bucket-init:    # local/test helper: create the four buckets
+    image: llmops/db-migrate:${TAG:-dev}
+    command: ["ensure-buckets"]
+    environment: *env
+    depends_on: [object-store]
+    read_only: true
+    tmpfs: ["/tmp"]
+    restart: on-failure
+
+  llm-gateway:
+    image: llmops/llm-gateway:${TAG:-dev}
+    command: ["--port", "4000", "--config", "/app/llmops-config/local.yaml"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-local-master-change-me}
+      DATABASE_URL: postgresql://llmops:${POSTGRES_PASSWORD:-llmops-local}@postgres:5432/litellm
+      MOCK_LLM_URL: http://mock-llm:8000/v1
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"   # use the price map inside the image; no fetch from GitHub at start
+    depends_on: {postgres: {condition: service_healthy}, mock-llm: {condition: service_started}}
+    ports: ["127.0.0.1:4000:4000"]
+    <<: *hardening
+
+volumes:
+  pgdata: {}
+  objdata: {}

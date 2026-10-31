@@ -1,0 +1,17 @@
+# Build context is the repo root; images copy only libs/, components/<name>/, contracts/ and tools/mock-llm.
+.git
+.github
+docs
+infra
+deploy
+**/__pycache__
+**/.pytest_cache
+**/.venv
+**/node_modules
+**/tests
+**/*.md
+!components/**/README.md
+*.pem
+*.key
+# crawler-agent: the research roles' playbooks are code (Agent Skills format), not docs
+!components/crawler-agent/src/skills/**/SKILL.md

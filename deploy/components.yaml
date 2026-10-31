@@ -1,0 +1,233 @@
+# How each component runs. This is the one place to change it; then run `make render`
+# (tools/render_deploy.py), which writes deploy/k8s/base, deploy/k8s/jobs, deploy/k8s/extras,
+# deploy/k8s/components.json, deploy/compose/docker-compose.components.yml and the table in docs/onprem-handoff.md.
+#
+# Per component:
+#   uses             postgres | s3 | gateway | gateway-admin | internet. Adds the Secret keys (DATABASE_URL,
+#                    S3_ACCESS_KEY_ID + S3_SECRET_ACCESS_KEY, LLM_GATEWAY_KEY, LITELLM_MASTER_KEY), a pod label
+#                    and the matching network rules.
+#   secrets          more keys in Secret llmops-<component> (created empty on test clusters)
+#   optional_secrets keys read if present
+#   gateway_models   model aliases the component's gateway key may use (["*"] = all); gateway_budget: LiteLLM budget
+#   env              non-secret settings for all its workloads; compose_env overrides them for Docker Compose
+#   cloud_identity   reads ConfigMap llmops-cloud; mounts: extra Secret volumes
+#   workloads        name, kind (service | worker | cronjob | job), args, port, replicas, schedule, resources,
+#                    callers (workloads allowed to call a service, or "any"), probes
+#   profile: local   only for local clusters (deploy/k8s/extras); compose: false = defined by hand in docker-compose.yml
+
+defaults:
+  tag: dev
+  resources: {cpu: 50m, memory: 128Mi, memory_limit: 512Mi}
+
+# "internet" means public addresses only: never cluster, VPC or link-local (instance metadata) ranges.
+internet_except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10, 169.254.0.0/16]
+
+common:            # ConfigMap llmops-common; overlays replace values per environment
+  LOG_LEVEL: INFO
+  S3_ENDPOINT_URL: http://object-store:7070
+  S3_REGION: us-east-1
+  S3_FORCE_PATH_STYLE: "true"
+  BUCKET_RAW: llmops-raw
+  BUCKET_CURATED: llmops-curated
+  BUCKET_DATASETS: llmops-datasets
+  BUCKET_RUNS: llmops-runs
+  LLM_GATEWAY_URL: http://llm-gateway:4000
+  AUTH_MODE: oidc
+  OIDC_ISSUER: ""
+  OIDC_AUDIENCE: llmops-portal
+  OIDC_GROUPS_CLAIM: groups
+  ROLE_ADMIN: llmops-admins
+  ROLE_REVIEWER_G2: llmops-reviewers-g2
+  ROLE_REVIEWER_G8: llmops-reviewers-g8
+  PORTAL_TZ: Asia/Taipei
+
+compose:           # values for Docker Compose (local only; see deploy/compose/.env)
+  env:
+    LOG_LEVEL: INFO
+    S3_ENDPOINT_URL: http://object-store:7070
+    S3_REGION: us-east-1
+    S3_FORCE_PATH_STYLE: "true"
+    LLM_GATEWAY_URL: http://llm-gateway:4000
+    AUTH_MODE: dev
+    DEV_USER_EMAIL: dev@example.local
+    DEV_USER_GROUPS: llmops-admins
+    ROLE_ADMIN: llmops-admins
+    ROLE_REVIEWER_G2: llmops-reviewers-g2
+    ROLE_REVIEWER_G8: llmops-reviewers-g8
+    PORTAL_TZ: Asia/Taipei
+    BUCKET_RAW: llmops-raw
+    BUCKET_CURATED: llmops-curated
+    BUCKET_DATASETS: llmops-datasets
+    BUCKET_RUNS: llmops-runs
+  secrets:
+    DATABASE_URL: postgresql://llmops:${POSTGRES_PASSWORD:-llmops-local}@postgres:5432/llmops
+    S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID:-localadmin}
+    S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY:-localadmin-secret}
+    LLM_GATEWAY_KEY: ${LITELLM_MASTER_KEY:-sk-local-master-change-me}
+    LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-local-master-change-me}
+  depends_on:
+    db-migrate: service_completed_successfully
+    bucket-init: service_completed_successfully
+
+components:
+  db-migrate:
+    uses: [postgres, s3]
+    compose: false
+    workloads:
+      # Argo CD (render --argocd): Sync-phase hooks after the shared resources (wave -10) and before the workloads,
+      # recreated on every sync. Not PreSync: on the first sync of a new namespace their ServiceAccount and
+      # ConfigMap would not exist yet.
+      - {name: db-migrate, kind: job, args: [migrate], deadline_seconds: 600,
+         argocd: {hook: Sync, delete_policy: BeforeHookCreation, wave: -5}}
+      - {name: bucket-init, kind: job, args: [ensure-buckets], deadline_seconds: 300, test_only: true,   # test clusters only
+         argocd: {hook: Sync, delete_policy: BeforeHookCreation, wave: -6}}
+
+  llm-gateway:
+    run_as: 65534                 # the LiteLLM non-root image's user
+    uses: [postgres, internet]    # its own database (litellm) and the cloud model endpoints
+    secrets: [LITELLM_MASTER_KEY, LITELLM_SALT_KEY]
+    cloud_identity: true
+    mounts:
+      - {name: rolesanywhere, secret: rolesanywhere-llm-gateway, path: /var/run/secrets/rolesanywhere, optional: true}
+    env:
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+    compose: false
+    workloads:
+      - name: llm-gateway
+        kind: service
+        port: 4000
+        own_port_env: true
+        args: ["--port", "4000", "--config", "/app/llmops-config/onprem.yaml"]
+        probes: {liveness: /health/liveliness, readiness: /health/readiness, startup_failures: 60}
+        resources: {cpu: 250m, memory: 768Mi, memory_limit: 2Gi}
+
+  mock-llm:
+    profile: local
+    compose: false
+    workloads:
+      - {name: mock-llm, kind: service, port: 8000, own_port_env: true, callers: [llm-gateway],
+         probes: {liveness: /health, readiness: /health}}
+
+  # ------------------------------------------------------------------ collect and publish
+  crawler-agent:                  # research agent: 8 roles in order, then research.proposal.ready
+    uses: [postgres, s3, gateway, internet]
+    gateway_models: [agent-research]
+    gateway_budget: {max_budget: 20, budget_duration: 1d}
+    env:
+      LLM_MODEL: agent-research
+      SEARCH_BACKEND: none        # official-page list until a search service exists on-prem
+    compose_env:
+      MODEL_PROVIDER: scripted    # local: offline smoke script instead of the fake gateway model
+    workloads:
+      - {name: crawler-agent, kind: cronjob, args: [daily], schedule: "17 7 * * *", deadline_seconds: 14400,
+         resources: {cpu: 200m, memory: 512Mi, memory_limit: 1Gi}}
+
+  publisher:                      # validates proposals, applies the release gates, publishes releases
+    uses: [postgres, s3]
+    env:
+      PUBLISH_MODE: review        # every proposal waits for a person: kubectl exec deploy/publisher -- python -m publisher approve ...
+    workloads:
+      - {name: publisher, kind: worker, args: [worker], resources: {cpu: 100m, memory: 256Mi, memory_limit: 1Gi}}
+
+  # ------------------------------------------------------------------ user services
+  portal-web:                     # built in the llmops-portal-web repo
+    run_as: 101                   # nginx-unprivileged's user
+    compose_image: ${PORTAL_WEB_IMAGE:-llmops/portal-web:dev}
+    env:
+      CONTENT_API_URL: http://content-api:8080
+      ASSISTANT_API_URL: http://assistant-api:8080
+      REQUEST_API_URL: http://request-api:8080
+      TESTS_API_URL: http://test-orchestrator:8080
+    workloads:
+      - name: portal-web
+        kind: service
+        callers: any
+        compose_ports: ["127.0.0.1:8080:8080"]
+        compose_depends_on: {}
+
+  content-api:
+    uses: [s3, oidc]
+    workloads:
+      - {name: content-api, kind: service, callers: [portal-web]}
+
+  assistant-api:
+    uses: [s3, gateway, oidc]
+    gateway_models: [portal-quick]
+    gateway_budget: {max_budget: 10, budget_duration: 1d}
+    env: {LLM_MODEL: portal-quick}
+    workloads:
+      - {name: assistant-api, kind: service, callers: [portal-web], resources: {memory: 256Mi, memory_limit: 768Mi}}
+
+  request-api:                    # API and the key.* consumer in one process (REQUEST_API_WORKER)
+    uses: [postgres, oidc]
+    workloads:
+      - {name: request-api, kind: service, args: [serve], callers: [portal-web]}
+
+  key-provisioner:
+    uses: [postgres, gateway-admin]
+    optional_secrets: [VAULT_TOKEN]
+    env:
+      SECRET_SINK: vault          # on-prem; test overlays switch to "file"
+      VAULT_ADDR: https://vault.example.internal:8200
+    compose_env: {SECRET_SINK: file}
+    workloads:
+      - {name: key-provisioner, kind: worker, args: [run]}
+
+  notifier:
+    uses: [postgres, internet]    # SMTP relay or chat webhooks
+    optional_secrets: [SMTP_PASSWORD, WEBHOOK_URLS]
+    env:
+      NOTIFY_MODEL_URL: "https://llmops.example.internal/#m-{model_id}"        # set to the portal's address
+      NOTIFY_REQUEST_URL: "https://llmops.example.internal/#requests/{request_id}"
+    compose_env:
+      NOTIFY_MODEL_URL: "http://localhost:8080/#m-{model_id}"
+      NOTIFY_REQUEST_URL: "http://localhost:8080/#requests/{request_id}"
+    workloads:
+      - {name: notifier, kind: worker, args: [run]}
+
+  view-builder:
+    uses: [postgres, s3]
+    workloads:
+      - {name: view-builder, kind: worker, args: [worker], resources: {memory: 256Mi, memory_limit: 768Mi}}
+
+  # ------------------------------------------------------------------ security tests
+  dataset-manager:
+    uses: [s3, internet]          # downloads the public datasets (Hugging Face, GitHub) through the proxy
+    workloads:
+      # apply.sh runs it only when DATASET_APPROVER is set (the person approving these datasets for testing)
+      - {name: dataset-import, kind: job, args: [import, all, --approved-by, __APPROVER__], deadline_seconds: 3600,
+         retries: 1, resources: {memory: 256Mi, memory_limit: 1Gi}}
+
+  test-orchestrator:              # API (/api/tests), the plan/progress worker and the gateway watcher in one process
+    uses: [postgres, s3, gateway, oidc]
+    gateway_key_names: [GW_KEY]   # only reads the gateway version
+    gateway_models: [portal-quick]
+    gateway_budget: {max_budget: 0.01, budget_duration: 1d}
+    env:
+      GW_URL: http://llm-gateway:4000
+      ROUTES_FILE: /etc/llmops/routes/routes.json
+    mounts:
+      - {name: routes, configmap: llmops-routes, path: /etc/llmops/routes, optional: true}
+    compose_volumes: ["./routes.local.json:/etc/llmops/routes/routes.json:ro"]
+    workloads:
+      - {name: test-orchestrator, kind: service, callers: [portal-web]}
+
+  test-runner:
+    uses: [postgres, s3, gateway, internet]   # internet: direct cloud routes and the SEC-16 feeds
+    gateway_key_names: [TARGET_GATEWAY_KEY, JUDGE_GATEWAY_KEY]
+    gateway_models: ["*"]         # every gateway route under test, and the judge
+    gateway_budget: {max_budget: 100, budget_duration: 1d}
+    cloud_identity: true
+    mounts:
+      - {name: rolesanywhere, secret: rolesanywhere-test-runner, path: /var/run/secrets/rolesanywhere, optional: true}
+    env:
+      TARGET_GATEWAY_URL: http://llm-gateway:4000
+      JUDGE_GATEWAY_URL: http://llm-gateway:4000
+    workloads:
+      - {name: test-runner, kind: worker, args: [worker], replicas: 2,
+         resources: {cpu: 100m, memory: 256Mi, memory_limit: 1Gi}}
+
+  results-publisher:
+    uses: [postgres, s3]
+    workloads:
+      - {name: results-publisher, kind: worker}

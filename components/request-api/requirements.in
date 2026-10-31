@@ -1,0 +1,4 @@
+# request-api runtime dependencies (FastAPI service). Lock: see README.
+-r ../../libs/llmops-common/requirements.in
+-r ../../libs/llmops-common/requirements-fastapi.in
+jsonschema>=4.23,<5

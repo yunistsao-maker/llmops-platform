@@ -1,0 +1,2975 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ApiEndpointSupport": {
+      "additionalProperties": false,
+      "properties": {
+        "apis": {
+          "items": {
+            "$ref": "#/definitions/ApiSurface"
+          },
+          "type": "array"
+        },
+        "endpoint": {
+          "description": "e.g. \"bedrock-runtime\", \"bedrock-mantle\", \"/openai/v1\", \"/anthropic\", \"aiplatform (global)\".",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "endpoint",
+        "apis"
+      ],
+      "type": "object"
+    },
+    "ApiSurface": {
+      "enum": [
+        "anthropic-messages",
+        "openai-chat-completions",
+        "openai-responses",
+        "bedrock-converse",
+        "bedrock-invoke",
+        "gemini-generate-content",
+        "batch"
+      ],
+      "type": "string"
+    },
+    "BenchmarkResult": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "measuredBy": {
+          "enum": [
+            "vendor",
+            "independent",
+            "internal"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "unit": {
+          "enum": [
+            "index",
+            "percent",
+            "elo",
+            "usd"
+          ],
+          "type": "string"
+        },
+        "variant": {
+          "description": "Effort / harness / fallback settings the score was produced under.",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "score",
+        "unit",
+        "measuredBy",
+        "date",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "CatalogFile": {
+      "additionalProperties": false,
+      "properties": {
+        "asOf": {
+          "$ref": "#/definitions/ISODate",
+          "description": "Research cut-off for everything in this file."
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "models": {
+          "items": {
+            "$ref": "#/definitions/Model"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "catalog/v1",
+          "type": "string"
+        },
+        "watchlist": {
+          "description": "Announced or rumoured models we are tracking but cannot onboard yet.",
+          "items": {
+            "$ref": "#/definitions/WatchItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "locale",
+        "asOf",
+        "models",
+        "watchlist"
+      ],
+      "type": "object"
+    },
+    "Cloud": {
+      "enum": [
+        "aws",
+        "azure",
+        "gcp",
+        "vendor-direct"
+      ],
+      "type": "string"
+    },
+    "CodeSample": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "lang": {
+          "enum": [
+            "bash",
+            "python",
+            "typescript",
+            "yaml"
+          ],
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lang",
+        "title",
+        "code"
+      ],
+      "type": "object"
+    },
+    "CompatResult": {
+      "additionalProperties": false,
+      "properties": {
+        "caseId": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "httpStatus": {
+          "type": "number"
+        },
+        "latencyMs": {
+          "type": "number"
+        },
+        "route": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "error",
+            "skip"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "route",
+        "caseId",
+        "status"
+      ],
+      "type": "object"
+    },
+    "CompatRun": {
+      "additionalProperties": false,
+      "properties": {
+        "cases": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "required"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "finishedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "litellmVersion": {
+          "type": "string"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/CompatResult"
+          },
+          "type": "array"
+        },
+        "routes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "schema": {
+          "const": "compat-run/v1",
+          "type": "string"
+        },
+        "startedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "summary": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "error": {
+                "type": "number"
+              },
+              "fail": {
+                "type": "number"
+              },
+              "pass": {
+                "type": "number"
+              },
+              "requiredFailures": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "route": {
+                "type": "string"
+              },
+              "skip": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "route",
+              "pass",
+              "fail",
+              "error",
+              "skip",
+              "requiredFailures"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "runId",
+        "startedAt",
+        "finishedAt",
+        "gateway",
+        "routes",
+        "cases",
+        "results",
+        "summary"
+      ],
+      "type": "object"
+    },
+    "DataProcessing": {
+      "additionalProperties": false,
+      "properties": {
+        "processor": {
+          "description": "Who processes prompts/outputs on this route, e.g. \"AWS (Bedrock)\" or \"Anthropic (independent processor)\".",
+          "type": "string"
+        },
+        "residencyOptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "retentionNotes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "taiwanResidency": {
+          "description": "Whether any option keeps processing inside Taiwan.",
+          "enum": [
+            "yes",
+            "no",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "zdr": {
+          "enum": [
+            "available",
+            "on-request",
+            "not-available",
+            "unknown"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "processor",
+        "residencyOptions",
+        "taiwanResidency",
+        "zdr",
+        "retentionNotes",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "DeepDive": {
+      "additionalProperties": false,
+      "properties": {
+        "apiCompatibility": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "note": {
+                "type": "string"
+              },
+              "route": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "supported",
+                  "partial",
+                  "not-supported",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              "surface": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "route",
+              "surface",
+              "status"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "asOf": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "availabilityMatrix": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cloud": {
+                "$ref": "#/definitions/Cloud"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "service": {
+                "$ref": "#/definitions/Service"
+              },
+              "status": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/LifecycleStatus"
+                  },
+                  {
+                    "const": "not-offered",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "cloud",
+              "service",
+              "status",
+              "notes"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "avoidFor": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "bestFor": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "breakingChanges": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "migration": {
+                "type": "string"
+              },
+              "severity": {
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ],
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "detail",
+              "migration",
+              "severity",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "enterpriseNotes": {
+          "description": "Taiwan-enterprise specific notes: residency, zh-TW quality, regulation.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "onboarding": {
+          "$ref": "#/definitions/OnboardingGuide"
+        },
+        "openQuestions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "safetyAndCompliance": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "item": {
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "item",
+              "detail",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "deep-dive/v1",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "strengths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testPlanFocus": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tldr": {
+          "type": "string"
+        },
+        "vsPredecessor": {
+          "additionalProperties": false,
+          "properties": {
+            "changes": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "after": {
+                    "type": "string"
+                  },
+                  "area": {
+                    "type": "string"
+                  },
+                  "before": {
+                    "type": "string"
+                  },
+                  "impact": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "area",
+                  "before",
+                  "after",
+                  "impact"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "predecessorId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "predecessorId",
+            "changes"
+          ],
+          "type": "object"
+        },
+        "weaknesses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "whatsNew": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "detail",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "modelId",
+        "title",
+        "locale",
+        "asOf",
+        "tldr",
+        "whatsNew",
+        "breakingChanges",
+        "availabilityMatrix",
+        "apiCompatibility",
+        "strengths",
+        "weaknesses",
+        "bestFor",
+        "avoidFor",
+        "safetyAndCompliance",
+        "enterpriseNotes",
+        "testPlanFocus",
+        "onboarding",
+        "openQuestions",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "DigestFile": {
+      "additionalProperties": false,
+      "properties": {
+        "actionItems": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "due": {
+                "$ref": "#/definitions/ISODate"
+              },
+              "merges": {
+                "description": "Exact `action` texts of action items in earlier digests that this item updates.",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 10,
+                "type": "array"
+              },
+              "priority": {
+                "$ref": "#/definitions/Priority"
+              },
+              "relatedModelIds": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "topic": {
+                "description": "The subject of this action item, the same across days (see DigestItem.topic).",
+                "maxLength": 100,
+                "pattern": "^[a-z0-9][a-z0-9-]*(?::[a-z0-9][a-z0-9._-]*){1,3}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "priority",
+              "action"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lifecycleChanges": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "litellm": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "newModels": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "periodEnd": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "periodStart": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "pricingChanges": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "regulatory": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "digest/v1",
+          "type": "string"
+        },
+        "security": {
+          "items": {
+            "$ref": "#/definitions/DigestItem"
+          },
+          "type": "array"
+        },
+        "unverified": {
+          "description": "Facts the research job could not verify from a primary source.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "watchlist": {
+          "items": {
+            "$ref": "#/definitions/WatchItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "locale",
+        "periodStart",
+        "periodEnd",
+        "generatedAt",
+        "headline",
+        "newModels",
+        "lifecycleChanges",
+        "pricingChanges",
+        "litellm",
+        "security",
+        "regulatory",
+        "actionItems",
+        "watchlist",
+        "unverified"
+      ],
+      "type": "object"
+    },
+    "DigestItem": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "description": "true: a coverage note (\"checked, no change\"), not news.",
+          "type": "boolean"
+        },
+        "clouds": {
+          "items": {
+            "$ref": "#/definitions/Cloud"
+          },
+          "type": "array"
+        },
+        "date": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "impact": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "type": "string"
+        },
+        "merges": {
+          "description": "Exact titles of entries of the same section in earlier digests that this entry updates.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topic": {
+          "description": "The subject this entry is about, the same across days (e.g. \"pricing:claude-sonnet-5-5\"): entries with the same topic are merged into one Radar card.",
+          "maxLength": 100,
+          "pattern": "^[a-z0-9][a-z0-9-]*(?::[a-z0-9][a-z0-9._-]*){1,3}$",
+          "type": "string"
+        },
+        "vendor": {
+          "$ref": "#/definitions/Vendor"
+        }
+      },
+      "required": [
+        "title",
+        "detail",
+        "impact",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "FeatureKey": {
+      "enum": [
+        "streaming",
+        "tool-calling",
+        "forced-tool-choice",
+        "parallel-tool-calls",
+        "structured-outputs",
+        "vision",
+        "pdf-input",
+        "audio-input",
+        "video-input",
+        "prompt-caching",
+        "batch",
+        "reasoning-control",
+        "temperature",
+        "count-tokens",
+        "guardrails",
+        "computer-use",
+        "server-side-tools",
+        "fine-tuning",
+        "provisioned-throughput",
+        "priority-tier",
+        "flex-tier",
+        "fast-mode",
+        "zero-data-retention"
+      ],
+      "type": "string"
+    },
+    "FeatureSupport": {
+      "additionalProperties": false,
+      "properties": {
+        "feature": {
+          "$ref": "#/definitions/FeatureKey"
+        },
+        "note": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "supported",
+            "partial",
+            "not-supported",
+            "unknown"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "feature",
+        "status"
+      ],
+      "type": "object"
+    },
+    "ISODate": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "type": "string"
+    },
+    "ISODateTime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "InferenceScope": {
+      "enum": [
+        "in-region",
+        "geo",
+        "global",
+        "multi-region",
+        "data-zone",
+        "regional",
+        "vendor-default"
+      ],
+      "type": "string"
+    },
+    "InferenceTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "geography": {
+          "description": "Human description of where data is processed, e.g. \"Japan (ap-northeast-1/3)\".",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id you put in `model`, e.g. \"jp.anthropic.claude-opus-5-5\".",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/InferenceScope"
+        }
+      },
+      "required": [
+        "scope",
+        "id"
+      ],
+      "type": "object"
+    },
+    "InventoryDeployment": {
+      "additionalProperties": false,
+      "properties": {
+        "catalogModelId": {
+          "type": "string"
+        },
+        "daysToNextEvent": {
+          "type": "number"
+        },
+        "lifecycle": {
+          "additionalProperties": false,
+          "properties": {
+            "nextEvent": {
+              "type": "string"
+            },
+            "nextEventDate": {
+              "$ref": "#/definitions/ISODate"
+            },
+            "replacement": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "litellmModel": {
+          "description": "litellm_params.model with secrets removed.",
+          "type": "string"
+        },
+        "matchedProviderModelId": {
+          "type": "string"
+        },
+        "modelName": {
+          "description": "LiteLLM model_name (what apps call).",
+          "type": "string"
+        },
+        "risk": {
+          "enum": [
+            "ok",
+            "watch",
+            "act-now",
+            "retired",
+            "unknown"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "modelName",
+        "litellmModel",
+        "risk"
+      ],
+      "type": "object"
+    },
+    "LifecycleEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "cloud": {
+          "$ref": "#/definitions/Cloud"
+        },
+        "conflicts": {
+          "description": "Other published dates for the same event.  - \"conflicting\": another current official page shows this date. Plan to the earliest    (builders keep `date` = the earliest current date).  - \"superseded\": an older announcement replaced by the current source. Show as history only    (a reminder that dates move, sometimes earlier) — never count down to it.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "$ref": "#/definitions/ISODate"
+              },
+              "kind": {
+                "enum": [
+                  "conflicting",
+                  "superseded"
+                ],
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "date",
+              "kind",
+              "note",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "date": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "event": {
+          "$ref": "#/definitions/LifecycleEventType"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modelName": {
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "providerModelId": {
+          "type": "string"
+        },
+        "replacement": {
+          "type": "string"
+        },
+        "scopeNote": {
+          "description": "Regions / deployment types the event applies to.",
+          "type": "string"
+        },
+        "service": {
+          "$ref": "#/definitions/Service"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "vendor": {
+          "$ref": "#/definitions/Vendor"
+        },
+        "verification": {
+          "$ref": "#/definitions/Verification"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "modelName",
+        "vendor",
+        "providerModelId",
+        "cloud",
+        "service",
+        "event",
+        "date",
+        "sources",
+        "verification"
+      ],
+      "type": "object"
+    },
+    "LifecycleEventType": {
+      "enum": [
+        "legacy",
+        "deprecation",
+        "extended-access",
+        "retirement",
+        "eol-no-sooner-than",
+        "price-change"
+      ],
+      "type": "string"
+    },
+    "LifecycleFile": {
+      "additionalProperties": false,
+      "properties": {
+        "asOf": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/definitions/LifecycleEvent"
+          },
+          "type": "array"
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "policies": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "noticePeriod": {
+                "type": "string"
+              },
+              "service": {
+                "$ref": "#/definitions/Service"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "service",
+              "summary",
+              "noticePeriod",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "lifecycle/v1",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "locale",
+        "asOf",
+        "policies",
+        "events"
+      ],
+      "type": "object"
+    },
+    "LifecycleStatus": {
+      "description": "CSP-side lifecycle state of a model on one channel.",
+      "enum": [
+        "announced",
+        "limited-access",
+        "preview",
+        "ga",
+        "legacy",
+        "deprecated",
+        "extended-access",
+        "retired"
+      ],
+      "type": "string"
+    },
+    "LiteLLMFile": {
+      "additionalProperties": false,
+      "properties": {
+        "advisories": {
+          "items": {
+            "$ref": "#/definitions/SecurityAdvisory"
+          },
+          "type": "array"
+        },
+        "asOf": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "avoid": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              },
+              "versions": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "versions",
+              "reason",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "knownPitfalls": {
+          "description": "Cross-model parameter pitfalls seen through the gateway.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "affects": {
+                "type": "string"
+              },
+              "fix": {
+                "type": "string"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/definitions/SourceRef"
+                },
+                "type": "array"
+              },
+              "symptom": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "affects",
+              "symptom",
+              "fix",
+              "sources"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "minimumBaseline": {
+          "additionalProperties": false,
+          "properties": {
+            "rationale": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "rationale"
+          ],
+          "type": "object"
+        },
+        "recommended": {
+          "additionalProperties": false,
+          "properties": {
+            "pinning": {
+              "type": "string"
+            },
+            "rationale": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "pinning",
+            "rationale"
+          ],
+          "type": "object"
+        },
+        "releases": {
+          "items": {
+            "$ref": "#/definitions/LiteLLMRelease"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "litellm/v1",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "supportPolicy": {
+          "type": "string"
+        },
+        "supportedLines": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "locale",
+        "asOf",
+        "supportPolicy",
+        "supportedLines",
+        "recommended",
+        "minimumBaseline",
+        "avoid",
+        "releases",
+        "advisories",
+        "knownPitfalls",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "LiteLLMModelCompat": {
+      "additionalProperties": false,
+      "properties": {
+        "caveats": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "configSnippet": {
+          "type": "string"
+        },
+        "minVersionBundledCostMap": {
+          "description": "Oldest image with the model in the bundled cost map (LITELLM_LOCAL_MODEL_COST_MAP=true).",
+          "type": "string"
+        },
+        "minVersionParams": {
+          "description": "Oldest version with correct parameter handling for this model family.",
+          "type": "string"
+        },
+        "minVersionRouting": {
+          "description": "Oldest version that can route the model when the remote cost map is reloaded.",
+          "type": "string"
+        },
+        "providerStrings": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "model": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "service": {
+                "$ref": "#/definitions/Service"
+              }
+            },
+            "required": [
+              "service",
+              "model"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "recommendedVersion": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "researched",
+            "tested-pass",
+            "tested-partial",
+            "tested-fail",
+            "untested"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "providerStrings",
+        "recommendedVersion",
+        "caveats",
+        "status",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "LiteLLMRelease": {
+      "additionalProperties": false,
+      "properties": {
+        "caution": {
+          "type": "string"
+        },
+        "channel": {
+          "enum": [
+            "stable",
+            "rc",
+            "patch"
+          ],
+          "type": "string"
+        },
+        "date": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "highlights": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "supported": {
+          "description": "Inside LiteLLM's \"four most recent stable lines\" window at `asOf`.",
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "channel",
+        "highlights",
+        "supported",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "Locale": {
+      "enum": [
+        "zh-TW",
+        "en"
+      ],
+      "type": "string"
+    },
+    "Modality": {
+      "enum": [
+        "text",
+        "image",
+        "pdf",
+        "audio",
+        "video",
+        "embedding"
+      ],
+      "type": "string"
+    },
+    "Model": {
+      "additionalProperties": false,
+      "properties": {
+        "avoidFor": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "benchmarks": {
+          "items": {
+            "$ref": "#/definitions/BenchmarkResult"
+          },
+          "type": "array"
+        },
+        "bestFor": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "contextWindow": {
+          "type": "number"
+        },
+        "family": {
+          "type": "string"
+        },
+        "id": {
+          "description": "Canonical slug, stable across CSPs, e.g. \"claude-opus-5-5\".",
+          "type": "string"
+        },
+        "knowledgeCutoff": {
+          "type": "string"
+        },
+        "lastVerified": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "litellm": {
+          "$ref": "#/definitions/LiteLLMModelCompat"
+        },
+        "maxOutputTokens": {
+          "type": "number"
+        },
+        "modalities": {
+          "additionalProperties": false,
+          "properties": {
+            "input": {
+              "items": {
+                "$ref": "#/definitions/Modality"
+              },
+              "type": "array"
+            },
+            "output": {
+              "items": {
+                "$ref": "#/definitions/Modality"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "input",
+            "output"
+          ],
+          "type": "object"
+        },
+        "modelCardUrl": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "offerings": {
+          "items": {
+            "$ref": "#/definitions/Offering"
+          },
+          "type": "array"
+        },
+        "performanceReference": {
+          "items": {
+            "$ref": "#/definitions/PerformanceReference"
+          },
+          "type": "array"
+        },
+        "platformStatus": {
+          "$ref": "#/definitions/PlatformStatus",
+          "description": "Decision on YOUR platform. Seeded as \"evaluating\" for new models."
+        },
+        "predecessorId": {
+          "type": "string"
+        },
+        "reasoning": {
+          "$ref": "#/definitions/ReasoningSpec"
+        },
+        "releaseDate": {
+          "$ref": "#/definitions/ISODate",
+          "description": "First public release by the vendor (any channel)."
+        },
+        "safety": {
+          "$ref": "#/definitions/SafetyProfile"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "strengths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "summary": {
+          "description": "One-paragraph zh-TW summary for list views.",
+          "type": "string"
+        },
+        "systemCardUrl": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tier": {
+          "enum": [
+            "frontier",
+            "balanced",
+            "efficient",
+            "specialized"
+          ],
+          "type": "string"
+        },
+        "vendor": {
+          "$ref": "#/definitions/Vendor"
+        },
+        "vendorModelId": {
+          "description": "Vendor first-party model id (Anthropic API / OpenAI API / Gemini API).",
+          "type": "string"
+        },
+        "weaknesses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "family",
+        "tier",
+        "releaseDate",
+        "platformStatus",
+        "modalities",
+        "contextWindow",
+        "maxOutputTokens",
+        "reasoning",
+        "summary",
+        "strengths",
+        "weaknesses",
+        "bestFor",
+        "avoidFor",
+        "safety",
+        "offerings",
+        "benchmarks",
+        "performanceReference",
+        "litellm",
+        "tags",
+        "sources",
+        "lastVerified"
+      ],
+      "type": "object"
+    },
+    "Offering": {
+      "additionalProperties": false,
+      "description": "One route: a model on one cloud service.",
+      "properties": {
+        "apacAvailability": {
+          "description": "Regions most relevant to a Taiwan-based enterprise (TW / JP / KR / SG / AU / IN).",
+          "items": {
+            "$ref": "#/definitions/RegionAvailability"
+          },
+          "type": "array"
+        },
+        "availableSince": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "cloud": {
+          "$ref": "#/definitions/Cloud"
+        },
+        "dataProcessing": {
+          "$ref": "#/definitions/DataProcessing"
+        },
+        "endpoints": {
+          "items": {
+            "$ref": "#/definitions/ApiEndpointSupport"
+          },
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "$ref": "#/definitions/FeatureSupport"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "e.g. \"claude-opus-5-5@bedrock\".",
+          "type": "string"
+        },
+        "inferenceTargets": {
+          "items": {
+            "$ref": "#/definitions/InferenceTarget"
+          },
+          "type": "array"
+        },
+        "lifecycle": {
+          "$ref": "#/definitions/OfferingLifecycle"
+        },
+        "litellmModel": {
+          "description": "Suggested LiteLLM `litellm_params.model` string.",
+          "type": "string"
+        },
+        "onboardingNotes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pricing": {
+          "items": {
+            "$ref": "#/definitions/PriceSheet"
+          },
+          "type": "array"
+        },
+        "providerModelId": {
+          "type": "string"
+        },
+        "quotas": {
+          "items": {
+            "$ref": "#/definitions/QuotaNote"
+          },
+          "type": "array"
+        },
+        "regionNotes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "service": {
+          "$ref": "#/definitions/Service"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/LifecycleStatus"
+        },
+        "verification": {
+          "$ref": "#/definitions/Verification"
+        }
+      },
+      "required": [
+        "id",
+        "cloud",
+        "service",
+        "status",
+        "providerModelId",
+        "inferenceTargets",
+        "endpoints",
+        "apacAvailability",
+        "dataProcessing",
+        "features",
+        "pricing",
+        "quotas",
+        "lifecycle",
+        "onboardingNotes",
+        "sources",
+        "verification"
+      ],
+      "type": "object"
+    },
+    "OfferingLifecycle": {
+      "additionalProperties": false,
+      "properties": {
+        "deprecationDate": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "eolNoSoonerThan": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "legacyPeriod": {
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "replacement": {
+          "type": "string"
+        },
+        "retirementDate": {
+          "$ref": "#/definitions/ISODate"
+        }
+      },
+      "type": "object"
+    },
+    "OnboardingGuide": {
+      "additionalProperties": false,
+      "properties": {
+        "aliases": {
+          "description": "Stable aliases on your gateway -> concrete targets.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "alias": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "alias",
+              "target"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "codeSamples": {
+          "items": {
+            "$ref": "#/definitions/CodeSample"
+          },
+          "type": "array"
+        },
+        "dataClassification": {
+          "type": "string"
+        },
+        "parameterGuidance": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "guidance": {
+                "type": "string"
+              },
+              "parameter": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "parameter",
+              "guidance"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "prerequisites": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "detail"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "support": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "audience",
+        "prerequisites",
+        "steps",
+        "aliases",
+        "parameterGuidance",
+        "codeSamples",
+        "dataClassification",
+        "support"
+      ],
+      "type": "object"
+    },
+    "Percentiles": {
+      "additionalProperties": false,
+      "properties": {
+        "max": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "n": {
+          "type": "number"
+        },
+        "p50": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "p90": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "p99": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "n",
+        "p50",
+        "p90",
+        "p99",
+        "mean",
+        "min",
+        "max"
+      ],
+      "type": "object"
+    },
+    "PerfRun": {
+      "additionalProperties": false,
+      "properties": {
+        "clientLocation": {
+          "type": "string"
+        },
+        "finishedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "metrics": {
+          "additionalProperties": false,
+          "description": "All latency values are milliseconds; throughput is tokens/second.",
+          "properties": {
+            "aggregateOutputTokensPerSec": {
+              "type": "number"
+            },
+            "errorRate": {
+              "type": "number"
+            },
+            "errorsByType": {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            "goodputPct": {
+              "type": "number"
+            },
+            "itlMs": {
+              "$ref": "#/definitions/Percentiles"
+            },
+            "outputTokensPerSec": {
+              "$ref": "#/definitions/Percentiles"
+            },
+            "requestsPerSec": {
+              "type": "number"
+            },
+            "ttfatMs": {
+              "$ref": "#/definitions/Percentiles"
+            },
+            "ttftMs": {
+              "$ref": "#/definitions/Percentiles"
+            },
+            "ttltMs": {
+              "$ref": "#/definitions/Percentiles"
+            }
+          },
+          "required": [
+            "ttftMs",
+            "ttfatMs",
+            "itlMs",
+            "ttltMs",
+            "outputTokensPerSec",
+            "aggregateOutputTokensPerSec",
+            "requestsPerSec",
+            "errorRate",
+            "errorsByType"
+          ],
+          "type": "object"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "profile": {
+          "additionalProperties": false,
+          "properties": {
+            "approxInputTokens": {
+              "type": "number"
+            },
+            "concurrency": {
+              "type": "number"
+            },
+            "maxOutputTokens": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "reasoningEffort": {
+              "type": "string"
+            },
+            "requests": {
+              "type": "number"
+            },
+            "stream": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name",
+            "approxInputTokens",
+            "maxOutputTokens",
+            "concurrency",
+            "requests",
+            "stream"
+          ],
+          "type": "object"
+        },
+        "route": {
+          "description": "Gateway alias that was called, e.g. \"claude-opus-5-5@bedrock-jp\".",
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "schema": {
+          "const": "perf-run/v1",
+          "type": "string"
+        },
+        "slo": {
+          "additionalProperties": false,
+          "properties": {
+            "ttfatMs": {
+              "type": "number"
+            },
+            "ttltMs": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "startedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "usage": {
+          "additionalProperties": false,
+          "properties": {
+            "cachedInputTokens": {
+              "type": "number"
+            },
+            "inputTokens": {
+              "type": "number"
+            },
+            "outputTokens": {
+              "type": "number"
+            },
+            "reasoningTokens": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "inputTokens",
+            "outputTokens",
+            "reasoningTokens",
+            "cachedInputTokens"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema",
+        "runId",
+        "startedAt",
+        "finishedAt",
+        "gateway",
+        "route",
+        "profile",
+        "metrics",
+        "usage",
+        "notes"
+      ],
+      "type": "object"
+    },
+    "PerformanceReference": {
+      "additionalProperties": false,
+      "description": "External speed/latency reference (e.g. Artificial Analysis). Your own runs go in PerfRun.",
+      "properties": {
+        "costPerIndexTaskUsd": {
+          "type": "number"
+        },
+        "date": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "indexOutputTokensMillions": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "outputTokensPerSec": {
+          "type": "number"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "ttftSec": {
+          "description": "Seconds to first token as defined by the source (reasoning models: often includes thinking).",
+          "type": "number"
+        },
+        "variant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "variant",
+        "date",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "PlatformInventory": {
+      "additionalProperties": false,
+      "properties": {
+        "deployments": {
+          "items": {
+            "$ref": "#/definitions/InventoryDeployment"
+          },
+          "type": "array"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "litellmVersion": {
+          "type": "string"
+        },
+        "schema": {
+          "const": "platform-inventory/v1",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "gateway",
+        "deployments"
+      ],
+      "type": "object"
+    },
+    "PlatformStatus": {
+      "description": "Internal platform decision for a model (your gateway), not the CSP state.",
+      "enum": [
+        "watch",
+        "evaluating",
+        "beta",
+        "ga",
+        "restricted",
+        "deprecating",
+        "removed",
+        "not-planned"
+      ],
+      "type": "string"
+    },
+    "PriceSheet": {
+      "additionalProperties": false,
+      "properties": {
+        "batchDiscountPct": {
+          "type": "number"
+        },
+        "cacheRead": {
+          "type": "number"
+        },
+        "cacheWrite": {
+          "description": "Cache write at the default TTL (5 min for Anthropic, 30 min for OpenAI on Bedrock).",
+          "type": "number"
+        },
+        "cacheWrite1h": {
+          "type": "number"
+        },
+        "currency": {
+          "const": "USD",
+          "type": "string"
+        },
+        "input": {
+          "type": "number"
+        },
+        "longContext": {
+          "additionalProperties": false,
+          "properties": {
+            "cacheRead": {
+              "type": "number"
+            },
+            "cacheWrite": {
+              "type": "number"
+            },
+            "input": {
+              "type": "number"
+            },
+            "output": {
+              "type": "number"
+            },
+            "thresholdInputTokens": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "thresholdInputTokens",
+            "input",
+            "output"
+          ],
+          "type": "object"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "output": {
+          "type": "number"
+        },
+        "scope": {
+          "description": "e.g. \"global\", \"geo\", \"in-region\", \"data-zone-us\", \"data-zone-eu\", \"multi-region\", \"standard\".",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "thereafter": {
+          "additionalProperties": false,
+          "description": "Price that applies after `validUntil`.",
+          "properties": {
+            "cacheRead": {
+              "type": "number"
+            },
+            "input": {
+              "type": "number"
+            },
+            "output": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "input",
+            "output"
+          ],
+          "type": "object"
+        },
+        "unit": {
+          "const": "per_1m_tokens",
+          "type": "string"
+        },
+        "validFrom": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "validUntil": {
+          "$ref": "#/definitions/ISODate",
+          "description": "Promotional price end date."
+        },
+        "verification": {
+          "$ref": "#/definitions/Verification"
+        }
+      },
+      "required": [
+        "scope",
+        "currency",
+        "unit",
+        "input",
+        "output",
+        "sources",
+        "verification"
+      ],
+      "type": "object"
+    },
+    "Priority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "type": "string"
+    },
+    "QuotaNote": {
+      "additionalProperties": false,
+      "properties": {
+        "inputTpm": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        },
+        "outputTpm": {
+          "type": "number"
+        },
+        "rpm": {
+          "type": "number"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "tpm": {
+          "type": "number"
+        },
+        "verification": {
+          "$ref": "#/definitions/Verification"
+        }
+      },
+      "required": [
+        "scope",
+        "sources",
+        "verification"
+      ],
+      "type": "object"
+    },
+    "ReasoningSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "alwaysOn": {
+          "description": "True when thinking cannot be switched off (e.g. Claude Opus 5.5).",
+          "type": "boolean"
+        },
+        "defaultEffort": {
+          "type": "string"
+        },
+        "effortLevels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "parameter": {
+          "description": "Native parameter name(s), e.g. \"output_config.effort\", \"reasoning.effort\", \"thinking_level\".",
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "supported"
+      ],
+      "type": "object"
+    },
+    "RegionAvailability": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "scopes": {
+          "items": {
+            "$ref": "#/definitions/InferenceScope"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "region",
+        "label",
+        "scopes"
+      ],
+      "type": "object"
+    },
+    "ReleaseGate": {
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "entryCriteria": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "exitCriteria": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "requirementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "owner",
+        "entryCriteria",
+        "checks",
+        "exitCriteria",
+        "evidence",
+        "requirementIds"
+      ],
+      "type": "object"
+    },
+    "Requirement": {
+      "additionalProperties": false,
+      "properties": {
+        "acceptanceCriteria": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "gate": {
+          "type": "string"
+        },
+        "howToImplement": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "user",
+            "gap"
+          ],
+          "type": "string"
+        },
+        "priority": {
+          "$ref": "#/definitions/Priority"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tooling": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "verdict": {
+          "enum": [
+            "critical",
+            "important",
+            "nice-to-have"
+          ],
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "origin",
+        "priority",
+        "verdict",
+        "why",
+        "howToImplement",
+        "acceptanceCriteria",
+        "tooling",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "RequirementsFile": {
+      "additionalProperties": false,
+      "properties": {
+        "asOf": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "gates": {
+          "items": {
+            "$ref": "#/definitions/ReleaseGate"
+          },
+          "type": "array"
+        },
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "metricDefinitions": {
+          "description": "Standard definitions the portal should display next to performance numbers.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "definition": {
+                "type": "string"
+              },
+              "howMeasured": {
+                "type": "string"
+              },
+              "metric": {
+                "type": "string"
+              },
+              "pitfalls": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "metric",
+              "definition",
+              "howMeasured",
+              "pitfalls"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "requirements": {
+          "items": {
+            "$ref": "#/definitions/Requirement"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "const": "requirements/v1",
+          "type": "string"
+        },
+        "securityTestCatalog": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "modaRiskCategory": {
+                "type": "string"
+              },
+              "owasp": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "passCriteria": {
+                "type": "string"
+              },
+              "tools": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "what": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "category",
+              "owasp",
+              "what",
+              "passCriteria",
+              "tools"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "locale",
+        "asOf",
+        "requirements",
+        "gates",
+        "metricDefinitions",
+        "securityTestCatalog",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "SafetyProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "behaviours": {
+          "description": "Behaviours that change what the API returns (refusal routing, watermarking, etc.).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "classifications": {
+          "description": "Vendor risk classification, e.g. \"OpenAI Preparedness: Cyber = Critical\".",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "programmes": {
+          "description": "Trusted-access programmes relevant to security / life-science teams.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "classifications",
+        "behaviours",
+        "programmes",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "SecurityAdvisory": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "affected": {
+          "type": "string"
+        },
+        "fixedIn": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "published": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "affected",
+        "severity",
+        "summary",
+        "action",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "Service": {
+      "enum": [
+        "bedrock",
+        "foundry",
+        "agent-platform",
+        "anthropic-api",
+        "openai-api",
+        "gemini-api"
+      ],
+      "type": "string"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "accessed": {
+          "$ref": "#/definitions/ISODate"
+        },
+        "id": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "vendor-doc",
+            "csp-doc",
+            "vendor-blog",
+            "csp-blog",
+            "benchmark",
+            "news",
+            "community",
+            "regulator",
+            "github",
+            "security-advisory"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "type",
+        "accessed"
+      ],
+      "type": "object"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Reference into data/sources.json.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "note": {
+          "description": "Optional pointer inside the source, e.g. a table name or section.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "SourcesFile": {
+      "additionalProperties": false,
+      "properties": {
+        "generatedAt": {
+          "$ref": "#/definitions/ISODateTime"
+        },
+        "schema": {
+          "const": "sources/v1",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema",
+        "generatedAt",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "Vendor": {
+      "enum": [
+        "anthropic",
+        "openai",
+        "google",
+        "amazon",
+        "meta",
+        "mistral",
+        "deepseek",
+        "xai",
+        "cohere",
+        "moonshot",
+        "ai21",
+        "twelvelabs",
+        "microsoft",
+        "other"
+      ],
+      "type": "string"
+    },
+    "Verification": {
+      "description": "How much to trust a fact. `derived` = computed by us from other official facts.",
+      "enum": [
+        "official",
+        "independent",
+        "community",
+        "derived",
+        "unverified",
+        "internal-test"
+      ],
+      "type": "string"
+    },
+    "WatchItem": {
+      "additionalProperties": false,
+      "properties": {
+        "expected": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/SourceRef"
+          },
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "announced",
+            "rumoured",
+            "limited-preview",
+            "coming-soon"
+          ],
+          "type": "string"
+        },
+        "vendor": {
+          "$ref": "#/definitions/Vendor"
+        }
+      },
+      "required": [
+        "name",
+        "vendor",
+        "status",
+        "note",
+        "sources"
+      ],
+      "type": "object"
+    }
+  }
+}

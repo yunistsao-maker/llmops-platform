@@ -1,0 +1,52 @@
+{
+  "schema": "litellm/v1",
+  "generatedAt": "2026-10-01T14:30:00Z",
+  "locale": "zh-TW",
+  "asOf": "2026-10-01",
+  "supportPolicy": "【範例】LiteLLM 官方只維護最近四條 stable 線；請依官方 release notes 確認。",
+  "supportedLines": [
+    "v1.103.x",
+    "v1.102.x",
+    "v1.101.x",
+    "v1.100.x"
+  ],
+  "recommended": {
+    "version": "v1.102.1",
+    "pinning": "固定到 patch 版本並以 image digest 部署。",
+    "rationale": [
+      "【範例】Claude Sonnet 5.5 參數處理需要 v1.102 以上。"
+    ]
+  },
+  "minimumBaseline": {
+    "version": "v1.84.0",
+    "rationale": [
+      "【範例】低於此版本有已公開的安全公告。"
+    ]
+  },
+  "releases": [
+    {
+      "version": "v1.102.1",
+      "channel": "stable",
+      "supported": true,
+      "highlights": [
+        "【範例】Claude Sonnet 5.5 支援。"
+      ],
+      "sources": [
+        {
+          "id": "litellm-release-notes"
+        }
+      ]
+    }
+  ],
+  "avoid": [],
+  "advisories": [],
+  "knownPitfalls": [],
+  "sources": [
+    {
+      "id": "litellm-release-notes"
+    },
+    {
+      "id": "pypi-litellm"
+    }
+  ]
+}

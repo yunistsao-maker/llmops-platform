@@ -1,0 +1,4 @@
+-r ../../libs/llmops-common/requirements.in
+# Vertex AI provider: Google credentials (ADC, workload identity federation). The HTTP transport is httpx,
+# so `requests` is not needed.
+google-auth>=2.35,<3

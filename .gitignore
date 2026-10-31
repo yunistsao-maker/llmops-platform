@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+node_modules/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+deploy/compose/.env
+*.pem
+*.key
+.DS_Store
+build/
+.ruff_cache/

@@ -1,0 +1,95 @@
+{
+  "schema": "platform-inventory/v1",
+  "generatedAt": "2026-09-29T13:40:03Z",
+  "gateway": "tools/fixtures/model_info.sample.json",
+  "deployments": [
+    {
+      "modelName": "claude-opus-5-5",
+      "litellmModel": "bedrock/global.anthropic.claude-opus-5-5",
+      "catalogModelId": "claude-opus-5-5",
+      "matchedProviderModelId": "anthropic.claude-opus-5-5",
+      "lifecycle": {
+        "nextEvent": "eol-no-sooner-than",
+        "nextEventDate": "2027-09-22"
+      },
+      "daysToNextEvent": 358,
+      "risk": "ok"
+    },
+    {
+      "modelName": "claude-sonnet-4",
+      "litellmModel": "bedrock/apac.anthropic.claude-sonnet-4-20250514-v1:0",
+      "matchedProviderModelId": "anthropic.claude-sonnet-4-20250514-v1:0",
+      "lifecycle": {
+        "nextEvent": "retirement",
+        "nextEventDate": "2026-10-14"
+      },
+      "daysToNextEvent": 15,
+      "risk": "act-now"
+    },
+    {
+      "modelName": "claude-3-haiku",
+      "litellmModel": "bedrock/anthropic.claude-3-haiku-20240307-v1:0",
+      "matchedProviderModelId": "anthropic.claude-3-haiku-20240307-v1:0",
+      "lifecycle": {
+        "status": "retired",
+        "nextEvent": "retirement",
+        "nextEventDate": "2026-09-10"
+      },
+      "daysToNextEvent": -19,
+      "risk": "retired"
+    },
+    {
+      "modelName": "gpt-4o-prod",
+      "litellmModel": "azure/gpt-4o-prod",
+      "matchedProviderModelId": "gpt-4o",
+      "lifecycle": {
+        "nextEvent": "retirement",
+        "nextEventDate": "2027-04-14",
+        "replacement": "gpt-5.1"
+      },
+      "daysToNextEvent": 197,
+      "risk": "ok"
+    },
+    {
+      "modelName": "o3-reasoning",
+      "litellmModel": "azure/o3-team-a",
+      "matchedProviderModelId": "o3",
+      "lifecycle": {
+        "nextEvent": "retirement",
+        "nextEventDate": "2026-11-19",
+        "replacement": "gpt-5.6-sol"
+      },
+      "daysToNextEvent": 51,
+      "risk": "watch"
+    },
+    {
+      "modelName": "gemini-2.5-flash",
+      "litellmModel": "vertex_ai/gemini-2.5-flash",
+      "matchedProviderModelId": "gemini-2.5-flash",
+      "lifecycle": {
+        "nextEvent": "legacy",
+        "nextEventDate": "2026-10-20",
+        "replacement": "gemini-3.5-flash-lite 或 gemini-3.1-flash-lite"
+      },
+      "daysToNextEvent": 21,
+      "risk": "act-now"
+    },
+    {
+      "modelName": "gpt-6-astra@bedrock",
+      "litellmModel": "bedrock/converse/global.openai.gpt-6-astra",
+      "catalogModelId": "gpt-6-astra",
+      "matchedProviderModelId": "openai.gpt-6-astra",
+      "lifecycle": {
+        "nextEvent": "eol-no-sooner-than",
+        "nextEventDate": "2027-09-08"
+      },
+      "daysToNextEvent": 344,
+      "risk": "ok"
+    },
+    {
+      "modelName": "internal-finetune",
+      "litellmModel": "openai/my-custom-model",
+      "risk": "unknown"
+    }
+  ]
+}

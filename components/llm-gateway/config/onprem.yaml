@@ -1,0 +1,44 @@
+# Production routing (on-prem and the AWS test box with real models).
+# Callers use stable aliases; change routes here, never in component code.
+# Credentials: Bedrock uses the default AWS chain (IAM Roles Anywhere via entrypoint.sh, or the instance role on
+# the test box). Azure and Vertex entries are commented out until their identities are set up (see README).
+model_list:
+  # --- platform callers -------------------------------------------------------------------------
+  - model_name: portal-quick        # cheapest tier for 問問看 and the form helper
+    litellm_params: {model: bedrock/global.anthropic.claude-haiku-5-5, aws_region_name: os.environ/AWS_REGION}
+  - model_name: agent-research      # research agent (today: Sonnet 5.5, as on AgentCore)
+    litellm_params: {model: bedrock/global.anthropic.claude-sonnet-5-5, aws_region_name: os.environ/AWS_REGION}
+  - model_name: judge               # LLM-as-judge; keep the version fixed between runs
+    litellm_params: {model: bedrock/global.anthropic.claude-opus-5-5, aws_region_name: os.environ/AWS_REGION}
+
+  # --- catalog models (teams and test routes `gw:<gateway>:<model_id>`) --------------------------
+  - model_name: claude-sonnet-5-5
+    litellm_params: {model: bedrock/global.anthropic.claude-sonnet-5-5, aws_region_name: os.environ/AWS_REGION}
+  - model_name: claude-haiku-5-5
+    litellm_params: {model: bedrock/global.anthropic.claude-haiku-5-5, aws_region_name: os.environ/AWS_REGION}
+  - model_name: claude-opus-5-5
+    litellm_params: {model: bedrock/global.anthropic.claude-opus-5-5, aws_region_name: os.environ/AWS_REGION}
+
+  # Azure AI Foundry (GPT-6 family). Fill in deployment names and the endpoint, then uncomment.
+  # - model_name: gpt-6-luna
+  #   litellm_params: {model: azure/<deployment-name>, api_base: os.environ/AZURE_FOUNDRY_ENDPOINT,
+  #                    api_version: os.environ/AZURE_API_VERSION, tenant_id: os.environ/AZURE_TENANT_ID,
+  #                    client_id: os.environ/AZURE_CLIENT_ID, client_secret: os.environ/AZURE_CLIENT_SECRET}
+
+  # Google Vertex AI (Gemini). GOOGLE_APPLICATION_CREDENTIALS points to a workload identity federation file.
+  # - model_name: gemini-3-8-flash
+  #   litellm_params: {model: vertex_ai/<publisher-model-id>, vertex_project: os.environ/VERTEX_PROJECT,
+  #                    vertex_location: os.environ/VERTEX_LOCATION}
+
+router_settings:
+  num_retries: 2
+  timeout: 120
+
+litellm_settings:
+  drop_params: true
+  request_timeout: 120
+  turn_off_message_logging: true    # SEC-31
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL

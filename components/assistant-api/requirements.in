@@ -1,0 +1,3 @@
+# assistant-api: HTTP service (FastAPI + uvicorn).
+-r ../../libs/llmops-common/requirements.in
+-r ../../libs/llmops-common/requirements-fastapi.in

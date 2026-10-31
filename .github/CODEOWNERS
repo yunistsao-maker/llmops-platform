@@ -1,0 +1,8 @@
+# Default: the platform team. Supply-chain sensitive paths also need the security team.
+*                                    @yunistsao-maker/llmops-platform-team
+/components/llm-gateway/             @yunistsao-maker/llmops-platform-team @yunistsao-maker/security-team
+/components/*/Dockerfile             @yunistsao-maker/llmops-platform-team @yunistsao-maker/security-team
+/components/*/requirements.lock      @yunistsao-maker/llmops-platform-team @yunistsao-maker/security-team
+/libs/llmops-common/src/llmops_common/auth.py   @yunistsao-maker/llmops-platform-team @yunistsao-maker/security-team
+/contracts/                          @yunistsao-maker/llmops-platform-team @yunistsao-maker/llmops-web-team
+/.github/                            @yunistsao-maker/llmops-platform-team @yunistsao-maker/security-team

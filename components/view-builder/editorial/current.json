@@ -1,0 +1,768 @@
+{
+ "schema": "portal-editorial/v1",
+ "updated": "2026-10-30",
+ "about": "Hand-written overlay for the portal view (view-builder input). Every entry restates facts already in the release data; edit this file and publish editorial.updated to rebuild the view.",
+ "brief": [
+  {
+   "t": "LiteLLM v1.107.0 被植入惡意程式：確認沒有任何環境裝過，建議版本改為 v1.105.2",
+   "p": "P0"
+  },
+  {
+   "t": "Anthropic 新 API 版本：金鑰改走 Authorization: Bearer，gateway 要先確認相容",
+   "p": "P1"
+  },
+  {
+   "t": "GCP 兩條新路線：GPT-6 家族 private preview、Anthropic 自營的 Claude GA",
+   "p": "P1"
+  }
+ ],
+ "highlights": [
+  {
+   "id": "it-c3612f990f",
+   "zh": "LiteLLM 1.107.0 被植入惡意程式：請確認沒有任何環境裝過，改用 1.105.2",
+   "en": "LiteLLM 1.107.0 was shipped with malware: make sure no environment installed it, and use 1.105.2"
+  },
+  {
+   "id": "it-e336fcc19e",
+   "zh": "Bedrock：GPT-6.1 Sol 推出 Ultrafast 高速方案，價格是標準方案的 6 倍",
+   "en": "Bedrock: GPT-6.1 Sol Ultrafast tier costs 6 times the Standard price"
+  },
+  {
+   "id": "it-369694ebfb",
+   "zh": "開放權重：MiniMax M3.1 Flash 釋出權重；Reflection Beam 上架 SageMaker JumpStart",
+   "en": "Open weights: MiniMax M3.1 Flash released; Reflection Beam now on SageMaker JumpStart"
+  },
+  {
+   "id": "it-d745b03c6a",
+   "zh": "Google Cloud 新增由 Anthropic 自己營運的 Claude 服務，正式上架",
+   "en": "Google Cloud adds Claude run by Anthropic itself, now generally available"
+  },
+  {
+   "id": "it-3f0bc06f0a",
+   "zh": "GPT-6 Astra、GPT-6.1 Sol、GPT-6 Luna 在 Google Cloud 開放限定預覽，需要申請",
+   "en": "GPT-6 Astra, GPT-6.1 Sol and GPT-6 Luna reach Google Cloud as a private preview (request access)"
+  },
+  {
+   "id": "it-9a2b1aeae3",
+   "zh": "OpenAI：Responses API 可以把提示快取保留 12 小時",
+   "en": "OpenAI: the Responses API can now keep prompt caches for 12 hours"
+  }
+ ],
+ "countdown": {
+  "new": [
+   {
+    "date": "2026-10-31",
+    "zh": "Mistral Large 4 釋出權重",
+    "en": "Mistral Large 4 open weights",
+    "wz": "Hugging Face 預計日期；三雲上架未公布",
+    "we": "Expected on Hugging Face; no cloud date yet",
+    "link": "#news-open"
+   },
+   {
+    "date": null,
+    "zh": "GPT-6 家族在 Google Cloud 正式上架",
+    "en": "GPT-6 family generally available on Google Cloud",
+    "wz": "10-21 起限定預覽",
+    "we": "Private preview since 10-21",
+    "link": "#news-it-3f0bc06f0a"
+   },
+   {
+    "date": null,
+    "zh": "Gemini 3.5 Pro 上架",
+    "en": "Gemini 3.5 Pro launch",
+    "wz": "已宣布，沒有價格",
+    "we": "Announced, no price yet",
+    "link": "#news"
+   },
+   {
+    "date": null,
+    "zh": "DeepSeek-V4.1-Flash 在 Foundry 正式上架",
+    "en": "DeepSeek-V4.1-Flash generally available on Foundry",
+    "wz": "目前是預覽",
+    "we": "In preview now",
+    "link": "#news-open"
+   },
+   {
+    "date": null,
+    "zh": "Meta Muse Wonder 上架三雲",
+    "en": "Meta Muse Wonder on the three clouds",
+    "wz": "10-12 發表",
+    "we": "Announced 10-12",
+    "link": "#news"
+   }
+  ],
+  "price": [
+   {
+    "date": "2026-11-13",
+    "zh": "Gemini 4 Argon：超過 32K tokens 的回應逾時失敗也要付費",
+    "en": "Gemini 4 Argon: responses over 32K tokens are billed even when they time out",
+    "wz": "Agent Platform",
+    "we": "Agent Platform",
+    "link": "#m-gemini-4-argon"
+   },
+   {
+    "date": "2026-12-01",
+    "zh": "Gemini 4 Argon 漲價一倍：$2 / $10 → $4 / $20",
+    "en": "Gemini 4 Argon price doubles: $2 / $10 → $4 / $20",
+    "wz": "Agent Platform、Gemini API",
+    "we": "Agent Platform, Gemini API",
+    "link": "#m-gemini-4-argon"
+   },
+   {
+    "date": "2027-01-01",
+    "zh": "Gemini 3.8 Flash 漲價：$0.75 / $3.75 → $1.50 / $7.50",
+    "en": "Gemini 3.8 Flash price rises: $0.75 / $3.75 → $1.50 / $7.50",
+    "wz": "Agent Platform",
+    "we": "Agent Platform",
+    "link": "#m-gemini-3-8-flash"
+   }
+  ]
+ },
+ "models": {
+  "claude-opus-5-5": {
+   "one": "目前智慧指數第一，價格比 Opus 5 低 20%、典型任務成本約低 40%，三雲 GA。",
+   "hi": [
+    "AA 58（#1 / 225）",
+    "1M context、128K 輸出"
+   ],
+   "cau": [
+    "thinking 無法關閉，forced tool_choice 回 400",
+    "資安類請求會被改路由到 Opus 4.8"
+   ],
+   "oneZ": "目前能力分數第一；價格比 Opus 5 低 20%，一般任務成本約低 40%；三雲都已上架。",
+   "oneE": "Highest score today; 20% cheaper than Opus 5 and about 40% lower cost on typical tasks; available on all three clouds.",
+   "hiZ": [
+    "能力分數 58（225 個中第 1）",
+    "1M context、輸出上限 128K"
+   ],
+   "hiE": [
+    "Score 58 (1st of 225)",
+    "1M context, up to 128K output"
+   ],
+   "cauZ": [
+    "思考模式（thinking）不能關閉；強制指定工具會回錯誤",
+    "資安相關的請求會被轉給 Opus 4.8"
+   ],
+   "cauE": [
+    "Thinking can't be turned off; forcing a tool returns an error",
+    "Security-related requests are routed to Opus 4.8"
+   ],
+   "brE": [
+    "Thinking can't be turned off",
+    "Forced tool use isn't supported",
+    "Thinking blocks are tied to the model and conversation prefix",
+    "computer_20251124 is rejected on the Claude API and Google Cloud",
+    "Default effort is now medium",
+    "Progress messages between tools are now thinking blocks"
+   ]
+  },
+  "claude-sonnet-5-5": {
+   "one": "品質接近 Opus、單價一半，是日常主力的候選，三雲 GA。",
+   "hi": [
+    "AA 56（#2 / 225）",
+    "cache read 降到 $0.10（10-07 起）"
+   ],
+   "cau": [
+    "temperature 等送非預設值回 400",
+    "forced tool_choice 回 400"
+   ],
+   "oneZ": "品質接近 Opus、價格只要一半，是日常主力的候選；三雲都已上架。",
+   "oneE": "Close to Opus quality at half the price, the main everyday candidate; available on all three clouds.",
+   "hiZ": [
+    "能力分數 56（225 個中第 2）",
+    "快取讀取降到 $0.10（10-07 起）"
+   ],
+   "hiE": [
+    "Score 56 (2nd of 225)",
+    "Cache reads down to $0.10 (since 10-07)"
+   ],
+   "cauZ": [
+    "temperature 等參數改了預設值就會回錯誤",
+    "強制指定工具會回錯誤"
+   ],
+   "cauE": [
+    "Changing temperature or similar settings from the default returns an error",
+    "Forcing a tool returns an error"
+   ],
+   "brE": [
+    "thinking: disabled now means between_tools",
+    "Forced tool use isn't supported",
+    "Non-default temperature / top_p / top_k return 400",
+    "Thinking blocks are tied to the account",
+    "computer_20251124 is rejected on the Claude API and Google Cloud",
+    "The advisor tool won't take Opus 4.8 / 4.7 / Sonnet 5 as the advisor"
+   ]
+  },
+  "claude-haiku-5-5": {
+   "one": "Claude 5.5 最快最省的一款，適合高量、低延遲的工作，三雲同日 GA。",
+   "hi": [
+    "$0.10 / $0.50（prompt 100K 以內）",
+    "第一個有 effort 控制的 Haiku"
+   ],
+   "cau": [
+    "prompt 超過 100K 改收 $0.50 / $2.50",
+    "三雲都沒有台灣境內處理"
+   ],
+   "oneZ": "Claude 5.5 最快、最便宜的一款，適合大量、要求速度的工作；三雲同一天上架。",
+   "oneE": "The fastest and cheapest Claude 5.5, for high-volume work that needs speed; launched on all three clouds the same day.",
+   "hiZ": [
+    "$0.10 / $0.50（提示 100K tokens 以內）",
+    "第一個可以調整思考強度（effort）的 Haiku"
+   ],
+   "hiE": [
+    "$0.10 / $0.50 (prompts up to 100K tokens)",
+    "First Haiku with adjustable thinking effort"
+   ],
+   "cauZ": [
+    "提示超過 100K tokens 改收 $0.50 / $2.50",
+    "三雲都沒有在台灣境內處理"
+   ],
+   "cauE": [
+    "Prompts over 100K tokens cost $0.50 / $2.50",
+    "No cloud processes it inside Taiwan"
+   ],
+   "brE": [
+    "Manual extended thinking (budget_tokens) returns 400",
+    "Non-default sampling settings return 400",
+    "Assistant prefill returns 400",
+    "Responses may start with a thinking block",
+    "Bedrock doesn't support structured outputs",
+    "computer_20250124 is rejected"
+   ]
+  },
+  "claude-fable-5-1": {
+   "one": "Claude 最強的一款但最貴，官方建議多數工作先用 Opus 5.5。",
+   "hi": [
+    "AA 53（#5 / 216）",
+    "四個通路可用（Foundry 為 Preview）"
+   ],
+   "cau": [
+    "Bedrock 須 opt-in AWS review，流量保留最多 30 天",
+    "拒答率明顯高於先前的 Claude"
+   ],
+   "oneZ": "Claude 最強但最貴的一款；官方建議多數工作先用 Opus 5.5。",
+   "oneE": "Claude's most capable and most expensive model; Anthropic suggests starting most work on Opus 5.5.",
+   "hiZ": [
+    "能力分數 53（216 個中第 5）",
+    "四個管道可用（Foundry 為預覽）"
+   ],
+   "hiE": [
+    "Score 53 (5th of 216)",
+    "Available in four places (preview on Foundry)"
+   ],
+   "cauZ": [
+    "Bedrock 要先同意 AWS 審查，資料最多保留 30 天",
+    "比之前的 Claude 更常拒答"
+   ],
+   "cauE": [
+    "On Bedrock you must opt in to AWS review; data is kept up to 30 days",
+    "Refuses more often than earlier Claude models"
+   ],
+   "brE": []
+  },
+  "gpt-6-astra": {
+   "one": "OpenAI 旗艦，主打長時程代理與 computer use；三雲最貴的通用模型之一。",
+   "hi": [
+    "AA 53（#7 / 225）",
+    "Bedrock 與 Foundry GA"
+   ],
+   "cau": [
+    "$10 / $50，輸入超過 272K 改用長文價",
+    "Google Cloud 只有 private preview（10-21）"
+   ],
+   "oneZ": "OpenAI 的旗艦，擅長長時間執行的代理與操作電腦；是三雲最貴的通用模型之一。",
+   "oneE": "OpenAI's flagship for long-running agents and computer use; one of the most expensive general models on the clouds.",
+   "hiZ": [
+    "能力分數 53（225 個中第 7）",
+    "Bedrock 與 Foundry 已上架"
+   ],
+   "hiE": [
+    "Score 53 (7th of 225)",
+    "Available on Bedrock and Foundry"
+   ],
+   "cauZ": [
+    "$10 / $50；輸入超過 272K tokens 改用長文價",
+    "Google Cloud 只有限定預覽（10-21）"
+   ],
+   "cauE": [
+    "$10 / $50; inputs over 272K tokens use long-context pricing",
+    "Only a private preview on Google Cloud (10-21)"
+   ],
+   "brE": [
+    "effort has no none / minimal",
+    "No sampling settings while reasoning",
+    "Tool calls need the Responses API",
+    "Prompt caching parameters were renamed",
+    "More sensitive to skills and context files",
+    "Bedrock-specific limits"
+   ]
+  },
+  "gpt-6-sol": {
+   "one": "GPT-6 的日常層，價格約 GPT-5.6 Sol 的一半。",
+   "hi": [
+    "$2 / $10",
+    "Bedrock 與 Foundry GA"
+   ],
+   "cau": [
+    "同價的 GPT-6.1 Sol 分數較高（52 對 48）",
+    "Google Cloud 沒有提供"
+   ],
+   "oneZ": "GPT-6 的日常款，價格約是 GPT-5.6 Sol 的一半。",
+   "oneE": "GPT-6's everyday model, about half the price of GPT-5.6 Sol.",
+   "hiZ": [
+    "$2 / $10",
+    "Bedrock 與 Foundry 已上架"
+   ],
+   "hiE": [
+    "$2 / $10",
+    "Available on Bedrock and Foundry"
+   ],
+   "cauZ": [
+    "同價的 GPT-6.1 Sol 分數更高（52 比 48）",
+    "Google Cloud 沒有提供"
+   ],
+   "cauE": [
+    "GPT-6.1 Sol scores higher at the same price (52 vs 48)",
+    "Not offered on Google Cloud"
+   ],
+   "brE": [
+    "Chat Completions with tools needs effort=none",
+    "temperature only works with effort=none",
+    "Prompt caching parameters were renamed",
+    "Structured outputs on Bedrock need strict mode"
+   ]
+  },
+  "gpt-6-1-sol": {
+   "one": "GPT-6 Sol 的同價升級版：分數更高，cached input 降到 $0.10。",
+   "hi": [
+    "AA 52（#11 / 225）",
+    "Foundry 有 APAC Data Zone（+20%）"
+   ],
+   "cau": [
+    "不能用 temperature（effort 沒有 none）",
+    "Bedrock 沒有最低可用日，依 OpenAI 條款"
+   ],
+   "oneZ": "GPT-6 Sol 的同價升級版：分數更高，快取輸入降到 $0.10。",
+   "oneE": "A same-price upgrade to GPT-6 Sol: higher score, cached input down to $0.10.",
+   "hiZ": [
+    "能力分數 52（225 個中第 11）",
+    "Foundry 有亞太資料區（加價 20%）"
+   ],
+   "hiE": [
+    "Score 52 (11th of 225)",
+    "Foundry offers an Asia-Pacific data zone (+20%)"
+   ],
+   "cauZ": [
+    "不能調 temperature",
+    "Bedrock 沒有承諾最短可用期限"
+   ],
+   "cauE": [
+    "temperature can't be changed",
+    "Bedrock gives no minimum availability date"
+   ],
+   "brE": [
+    "No effort=none",
+    "temperature isn't dropped on the Bedrock path",
+    "Prompt caching support on Bedrock depends on the API (model card rewritten 10-06)"
+   ]
+  },
+  "gpt-6-luna": {
+   "one": "GPT-6 的高量低價層，適合摘要、擷取、分類與路由。",
+   "hi": [
+    "$0.10 / $0.50，每任務約 $0.07",
+    "Bedrock runtime 支援 structured outputs"
+   ],
+   "cau": [
+    "AA 38，複雜任務改用 Sol",
+    "Google Cloud 只有 private preview（10-21）"
+   ],
+   "oneZ": "GPT-6 的大量低價款，適合摘要、擷取、分類與分流。",
+   "oneE": "GPT-6's low-price model for volume work: summaries, extraction, classification and routing.",
+   "hiZ": [
+    "$0.10 / $0.50，每個任務約 $0.07",
+    "Bedrock 支援結構化輸出（JSON）"
+   ],
+   "hiE": [
+    "$0.10 / $0.50, about $0.07 per task",
+    "Structured outputs (JSON) on Bedrock"
+   ],
+   "cauZ": [
+    "能力分數 38，複雜任務改用 Sol",
+    "Google Cloud 只有限定預覽（10-21）"
+   ],
+   "cauE": [
+    "Score 38; use Sol for complex tasks",
+    "Only a private preview on Google Cloud (10-21)"
+   ],
+   "brE": [
+    "Chat Completions with tools needs effort=none"
+   ]
+  },
+  "gemini-4-argon": {
+   "one": "Google 的新旗艦，輸入與輸出共用 1M tokens；12-01 起價格翻倍。",
+   "hi": [
+    "AA 53（#8 / 216）",
+    "促銷價 $2 / $10 到 11-30"
+   ],
+   "cau": [
+    "只在 Google（Agent Platform、Gemini API）",
+    "沒有亞太區域"
+   ],
+   "oneZ": "Google 的新旗艦，輸入加輸出共 1M tokens；12-01 起價格翻倍。",
+   "oneE": "Google's new flagship with 1M tokens shared by input and output; the price doubles from 12-01.",
+   "hiZ": [
+    "能力分數 53（216 個中第 8）",
+    "促銷價 $2 / $10 到 11-30"
+   ],
+   "hiE": [
+    "Score 53 (8th of 216)",
+    "Promotional $2 / $10 until 11-30"
+   ],
+   "cauZ": [
+    "只在 Google（Agent Platform、Gemini API）",
+    "沒有亞太區域"
+   ],
+   "cauE": [
+    "Google only (Agent Platform, Gemini API)",
+    "No Asia-Pacific region"
+   ],
+   "brE": []
+  },
+  "gemini-3-8-flash": {
+   "one": "最快的模型之一（約 242 tok/s），只在 Google 提供。",
+   "hi": [
+    "促銷價 $0.75 / $3.75 到 12-31",
+    "1M context"
+   ],
+   "cau": [
+    "2027-01-01 起 $1.50 / $7.50",
+    "AWS、Azure 沒有提供"
+   ],
+   "oneZ": "最快的模型之一（約每秒 242 tokens），只在 Google 提供。",
+   "oneE": "One of the fastest models (about 242 tokens per second), offered only by Google.",
+   "hiZ": [
+    "促銷價 $0.75 / $3.75 到 12-31",
+    "1M context"
+   ],
+   "hiE": [
+    "Promotional $0.75 / $3.75 until 12-31",
+    "1M context"
+   ],
+   "cauZ": [
+    "2027-01-01 起漲到 $1.50 / $7.50",
+    "AWS、Azure 沒有提供"
+   ],
+   "cauE": [
+    "Rises to $1.50 / $7.50 from 2027-01-01",
+    "Not offered on AWS or Azure"
+   ],
+   "brE": [
+    "Sampling settings were removed",
+    "FunctionResponse must include call_id and name",
+    "No minimal thinking",
+    "Prefill isn't allowed"
+   ]
+  },
+  "grok-4-7": {
+   "one": "三雲都有的 xAI 旗艦，標準價 $2 / $6。",
+   "hi": [
+    "Bedrock 與 Foundry GA",
+    "500K context"
+   ],
+   "cau": [
+    "輸出非常冗長（AA 240M tokens）",
+    "Agent Platform 仍是 Preview"
+   ],
+   "oneZ": "xAI 的旗艦，三雲都有；標準價 $2 / $6。",
+   "oneE": "xAI's flagship, on all three clouds; standard price $2 / $6.",
+   "hiZ": [
+    "Bedrock 與 Foundry 已上架",
+    "500K context"
+   ],
+   "hiE": [
+    "Available on Bedrock and Foundry",
+    "500K context"
+   ],
+   "cauZ": [
+    "輸出很長，token 用量高",
+    "Agent Platform 仍是預覽"
+   ],
+   "cauE": [
+    "Very long answers, so high token use",
+    "Still a preview on Agent Platform"
+   ],
+   "brE": []
+  }
+ },
+ "offerings": [
+  {
+   "model": "gpt-6-astra",
+   "cloud": "gcp",
+   "add": {
+    "status": "private-preview",
+    "since": "2026-10-21",
+    "note": "Model Garden private preview，需申請；價格與區域未公布",
+    "src": [
+     {
+      "t": "Google Cloud brings OpenAI models to customers",
+      "u": "https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers",
+      "p": "Google Cloud Blog"
+     }
+    ]
+   },
+   "why": "2026-10-24 digest: GCP Model Garden private preview, not yet in catalog.json"
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "cloud": "gcp",
+   "add": {
+    "status": "private-preview",
+    "since": "2026-10-21",
+    "note": "Model Garden private preview，需申請；價格與區域未公布",
+    "src": [
+     {
+      "t": "Google Cloud brings OpenAI models to customers",
+      "u": "https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers",
+      "p": "Google Cloud Blog"
+     }
+    ]
+   },
+   "why": "2026-10-24 digest: GCP Model Garden private preview, not yet in catalog.json"
+  },
+  {
+   "model": "gpt-6-luna",
+   "cloud": "gcp",
+   "add": {
+    "status": "private-preview",
+    "since": "2026-10-21",
+    "note": "Model Garden private preview，需申請；價格與區域未公布",
+    "src": [
+     {
+      "t": "Google Cloud brings OpenAI models to customers",
+      "u": "https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers",
+      "p": "Google Cloud Blog"
+     }
+    ]
+   },
+   "why": "2026-10-24 digest: GCP Model Garden private preview, not yet in catalog.json"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "cloud": "aws",
+   "set": {
+    "so": "card-updated",
+    "soNote": "模型卡 10-20 起改為支援，待 compat 實測"
+   },
+   "why": "Bedrock model cards list structured outputs since 2026-10-20"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "cloud": "aws",
+   "set": {
+    "so": "card-updated",
+    "soNote": "模型卡 10-20 起改為支援，待 compat 實測"
+   },
+   "why": "Bedrock model cards list structured outputs since 2026-10-20"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "cloud": "aws",
+   "set": {
+    "so": "card-updated",
+    "soNote": "模型卡 10-20 起改為支援，待 compat 實測"
+   },
+   "why": "Bedrock model cards list structured outputs since 2026-10-20"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "cloud": "azure",
+   "default": {
+    "geoPrice": {
+     "scope": "data-zone-us",
+     "in": 4.4,
+     "out": 22.0
+    }
+   },
+   "why": "Foundry US Data Zone for Claude 4.6+ is 1.1x the global price (news 2026-10-02)"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "cloud": "azure",
+   "default": {
+    "geoPrice": {
+     "scope": "data-zone-us",
+     "in": 2.2,
+     "out": 11.0
+    }
+   },
+   "why": "Foundry US Data Zone for Claude 4.6+ is 1.1x the global price (news 2026-10-02)"
+  }
+ ],
+ "availability": {
+  "about": "Rollout estimate: standard days per gate (G3-G7 run in parallel and count once, as the longest). Per-model overrides: {\"state\": available|trial|evaluating|paused, \"eta\": \"YYYY-MM-DD\" or null, \"note\": \"...\"}.",
+  "durations": {
+   "G1": 3,
+   "G2": 10,
+   "G3": 3,
+   "G4": 3,
+   "G5": 5,
+   "G6": 5,
+   "G7": 2,
+   "G8": 14,
+   "G9": 2
+  },
+  "parallel": [
+   "G3",
+   "G4",
+   "G5",
+   "G6",
+   "G7"
+  ],
+  "models": {}
+ },
+ "mock": {
+  "perf": {
+   "runId": "perf-20260924T162816Z-2c61d1",
+   "route": "mock-reasoning",
+   "profile": {
+    "name": "tiny",
+    "approxInputTokens": 100,
+    "maxOutputTokens": 50,
+    "concurrency": 4,
+    "requests": 16,
+    "stream": true,
+    "reasoningEffort": "low"
+   },
+   "ttft": {
+    "n": 16,
+    "p50": 55.303,
+    "p90": 56.559,
+    "p99": 57.543,
+    "mean": 55.321,
+    "min": 53.421,
+    "max": 57.651
+   },
+   "metrics": {
+    "ttftMs": {
+     "n": 16,
+     "p50": 55.303,
+     "p90": 56.559,
+     "p99": 57.543,
+     "mean": 55.321,
+     "min": 53.421,
+     "max": 57.651
+    },
+    "ttfatMs": {
+     "n": 16,
+     "p50": 598.166,
+     "p90": 599.933,
+     "p99": 600.789,
+     "mean": 598.334,
+     "min": 594.99,
+     "max": 600.923
+    },
+    "itlMs": {
+     "n": 16,
+     "p50": 16.208,
+     "p90": 16.438,
+     "p99": 16.57,
+     "mean": 16.267,
+     "min": 16.136,
+     "max": 16.591
+    },
+    "ttltMs": {
+     "n": 16,
+     "p50": 858.107,
+     "p90": 862.92,
+     "p99": 864.937,
+     "mean": 858.599,
+     "min": 853.158,
+     "max": 865.291
+    },
+    "outputTokensPerSec": {
+     "n": 16,
+     "p50": 32.382,
+     "p90": 32.496,
+     "p99": 32.514,
+     "mean": 32.368,
+     "min": 32.164,
+     "max": 32.515
+    },
+    "aggregateOutputTokensPerSec": 121.005
+   }
+  },
+  "gw": {
+   "runId": "gwcsp-20261020T151329Z-adccd4",
+   "byRoute": [
+    {
+     "route": "mock-aws-claude~gw.silent-forced~drop-tools-stream",
+     "csp": "aws",
+     "service": "bedrock",
+     "applicable": 24,
+     "pass": 22,
+     "compatibilityRate": 0.9167,
+     "silentDegradations": 2,
+     "gatewayInduced": 1,
+     "providerLimited": 0,
+     "overheadMs": {
+      "p50": 23.8,
+      "p95": 24.1,
+      "n": 5
+     },
+     "costTrackingRate": 1.0
+    },
+    {
+     "route": "mock-azure-gpt~no-temp~gw.no-cost",
+     "csp": "azure",
+     "service": "foundry",
+     "applicable": 24,
+     "pass": 22,
+     "compatibilityRate": 0.9167,
+     "silentDegradations": 1,
+     "gatewayInduced": 1,
+     "providerLimited": 1,
+     "overheadMs": {
+      "p50": 21.9,
+      "p95": 23.7,
+      "n": 5
+     },
+     "costTrackingRate": 0.0
+    },
+    {
+     "route": "mock-gcp-gemini~no-schema~gw.err500~slow-gw",
+     "csp": "gcp",
+     "service": "agent-platform",
+     "applicable": 24,
+     "pass": 20,
+     "compatibilityRate": 0.8333,
+     "silentDegradations": 1,
+     "gatewayInduced": 3,
+     "providerLimited": 1,
+     "overheadMs": {
+      "p50": 80.2,
+      "p95": 83.8,
+      "n": 5
+     },
+     "costTrackingRate": 1.0
+    },
+    {
+     "route": "mock-gcp-claude~gw.fallback",
+     "csp": "gcp",
+     "service": "agent-platform",
+     "applicable": 24,
+     "pass": 23,
+     "compatibilityRate": 0.9583,
+     "silentDegradations": 1,
+     "gatewayInduced": 1,
+     "providerLimited": 0,
+     "overheadMs": {
+      "p50": 23.6,
+      "p95": 24.0,
+      "n": 5
+     },
+     "costTrackingRate": 1.0
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "type": "result",
+ "status": "accepted",
+ "runId": "run-20261002T030000Z-26269a",
+ "finishedAt": "2026-10-02T03:00:00Z",
+ "elapsedSeconds": 0.3,
+ "stopReason": "proposal_accepted",
+ "usage": {
+  "inputTokens": 50,
+  "outputTokens": 50,
+  "totalTokens": 100
+ },
+ "task": {
+  "kind": "prompt",
+  "instruction": "Check the Foundry retirement date of claude-sonnet-4-5",
+  "dryRun": false
+ },
+ "stats": {
+  "searches": 0,
+  "fetches": 1,
+  "toolCalls": 5,
+  "pages": [
+   {
+    "id": "p1",
+    "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
+    "tier": "official",
+    "chars": 381,
+    "rendered": false,
+    "truncated": false,
+    "suspiciousText": false
+   }
+  ],
+  "evidence": 1,
+  "suspiciousSearchResults": 0,
+  "suspiciousPortalText": 0
+ },
+ "proposal": {
+  "schema": "llmops-research-proposal/v1",
+  "id": "prop-20261002T030000Z-7dd4e9c6",
+  "createdAt": "2026-10-02T03:00:00Z",
+  "today": "2026-10-02",
+  "task": {
+   "kind": "prompt",
+   "instruction": "Check the Foundry retirement date of claude-sonnet-4-5",
+   "dryRun": false
+  },
+  "portal": {
+   "manifest": {
+    "kind": "release",
+    "source": "/data/portal",
+    "releaseId": "20261002T010000Z-1e6fcc45",
+    "publishedAt": "2026-10-02T01:00:00Z",
+    "recentReleases": [
+     {
+      "releaseId": "20261002T010000Z-1e6fcc45",
+      "publishedAt": "2026-10-02T01:00:00Z",
+      "kind": "bootstrap",
+      "summary": "第一個 release（由 portal checkout 建立）",
+      "changed": 10
+     }
+    ]
+   },
+   "sample": false,
+   "asOf": "2026-10-01"
+  },
+  "summary": "Microsoft Foundry 退役表現在把 claude-sonnet-4-5 列為 2026-11-30（原 portal 為 2026-11-15）；與 Anthropic 公告一致，舊日期保留為 superseded。",
+  "ops": [
+   {
+    "file": "data/lifecycle.json",
+    "op": "replace",
+    "path": "/events/azure-claude-sonnet-4-5-eol/date",
+    "value": "2026-11-30",
+    "before": "2026-11-15",
+    "rationale": "Foundry 退役表現在列 claude-sonnet-4-5 為 2026-11-30；portal 仍是舊值。",
+    "evidence": [
+     "e1"
+    ]
+   },
+   {
+    "file": "data/lifecycle.json",
+    "op": "add",
+    "path": "/events/azure-claude-sonnet-4-5-eol/conflicts/-",
+    "value": {
+     "date": "2026-11-15",
+     "kind": "superseded",
+     "note": "Foundry 表在 2026-10-02 之前列 2026-11-15，現已改列 2026-11-30，與 Anthropic 公告一致。",
+     "sources": [
+      {
+       "id": "ms-foundry-retirement-schedule"
+      }
+     ]
+    },
+    "rationale": "舊日期保留為 superseded，方便審核者對照。",
+    "evidence": [
+     "e1"
+    ]
+   }
+  ],
+  "newSources": [],
+  "touchSources": [
+   "ms-foundry-retirement-schedule"
+  ],
+  "digest": null,
+  "asOfFiles": [],
+  "unverified": [],
+  "checked": [
+   {
+    "topic": "Foundry Claude 退役表",
+    "result": "claude-sonnet-4-5 列 2026-11-30"
+   }
+  ],
+  "evidence": {
+   "e1": {
+    "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
+    "title": "Model retirement schedule - Microsoft Foundry | Microsoft Learn",
+    "tier": "official",
+    "publisher": "Microsoft",
+    "quote": "claude-sonnet-4-5 | 1 | GA | 2026-11-30 | claude-sonnet-5-5",
+    "under": "Model retirement schedule › Claude models",
+    "header": "Model | Version | Lifecycle status | Retirement date | Replacement",
+    "note": "Foundry retirement table row",
+    "fetchedAt": "2026-10-02T03:00:00Z",
+    "pageSha256": "9eef92d5043d6f3618ee432e4fa06a20f8e4b576d1aeb77af4b65476f1925ded",
+    "rendered": false,
+    "cited": true
+   }
+  },
+  "validation": {
+   "portalProblemsBefore": 0,
+   "portalProblemsAfter": 0,
+   "applied": [
+    "replace data/lifecycle.json/events/azure-claude-sonnet-4-5-eol/date",
+    "add data/lifecycle.json/events/azure-claude-sonnet-4-5-eol/conflicts/-",
+    "set accessed=2026-10-02 on 1 existing source(s)"
+   ],
+   "filesTouched": [
+    "data/lifecycle.json",
+    "data/sources.json"
+   ],
+   "warnings": [],
+   "flags": {},
+   "asOfCoverage": {},
+   "lastVerifiedCoverage": {},
+   "claims": [
+    {
+     "op": 0,
+     "kind": "date",
+     "path": "/events/azure-claude-sonnet-4-5-eol/date",
+     "value": "2026-11-30",
+     "support": "exact",
+     "evidence": "e1"
+    },
+    {
+     "op": 0,
+     "kind": "verification",
+     "labels": [
+      "official"
+     ],
+     "evidenceTiers": [
+      "official"
+     ]
+    },
+    {
+     "op": 1,
+     "kind": "date",
+     "path": "/events/azure-claude-sonnet-4-5-eol/conflicts/1/date",
+     "value": "2026-11-15",
+     "support": "superseded-portal-value"
+    },
+    {
+     "op": 1,
+     "kind": "verification",
+     "labels": [],
+     "evidenceTiers": [
+      "official"
+     ]
+    }
+   ]
+  },
+  "stats": {
+   "searches": 0,
+   "fetches": 1,
+   "toolCalls": 5,
+   "pages": [
+    {
+     "id": "p1",
+     "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
+     "tier": "official",
+     "chars": 381,
+     "rendered": false,
+     "truncated": false,
+     "suspiciousText": false
+    }
+   ],
+   "evidence": 1,
+   "suspiciousSearchResults": 0,
+   "suspiciousPortalText": 0
+  }
+ },
+ "report": {
+  "accepted": true,
+  "errors": [],
+  "warnings": [],
+  "flags": {},
+  "claims": [
+   {
+    "op": 0,
+    "kind": "date",
+    "path": "/events/azure-claude-sonnet-4-5-eol/date",
+    "value": "2026-11-30",
+    "support": "exact",
+    "evidence": "e1"
+   },
+   {
+    "op": 0,
+    "kind": "verification",
+    "labels": [
+     "official"
+    ],
+    "evidenceTiers": [
+     "official"
+    ]
+   },
+   {
+    "op": 1,
+    "kind": "date",
+    "path": "/events/azure-claude-sonnet-4-5-eol/conflicts/1/date",
+    "value": "2026-11-15",
+    "support": "superseded-portal-value"
+   },
+   {
+    "op": 1,
+    "kind": "verification",
+    "labels": [],
+    "evidenceTiers": [
+     "official"
+    ]
+   }
+  ],
+  "portalProblems": {
+   "before": 0,
+   "after": 0
+  }
+ }
+}

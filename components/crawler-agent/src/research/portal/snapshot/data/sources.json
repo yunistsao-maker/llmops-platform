@@ -1,0 +1,1454 @@
+{
+  "schema": "sources/v1",
+  "generatedAt": "2026-10-01T14:30:00Z",
+  "sources": [
+    {
+      "id": "anthropic-opus55-announce",
+      "title": "Introducing Claude Opus 5.5",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "publisher": "Anthropic",
+      "type": "vendor-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-opus55-whatsnew",
+      "title": "What's new in Claude Opus 5.5",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-opus55-systemcard",
+      "title": "System Card: Claude Opus 5.5 (2026-09-22)",
+      "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-deprecations",
+      "title": "Model deprecations",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-pricing",
+      "title": "Pricing (Claude Platform)",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-release-notes",
+      "title": "Claude Platform release notes",
+      "url": "https://platform.claude.com/docs/en/release-notes/overview",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-claude-on-gcp",
+      "title": "Claude on Google Cloud",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-claude-in-foundry",
+      "title": "Claude in Microsoft Foundry",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-fable-mythos-access",
+      "title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5",
+      "url": "https://www.anthropic.com/news/fable-mythos-access",
+      "publisher": "Anthropic",
+      "type": "vendor-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "anthropic-opus5-legacy",
+      "title": "Claude Opus 5 (legacy model page)",
+      "url": "https://platform.claude.com/docs/en/models/opus-5/overview",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "mikeyk-sonnet55",
+      "title": "Mike Krieger on Sonnet 5.5 and Haiku 5.5 timing",
+      "url": "https://x.com/mikeyk/status/2102441803253535060",
+      "publisher": "Anthropic (X post)",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "aws-bedrock-opus55-card",
+      "title": "Claude Opus 5.5 - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-opus-5-5.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-astra-card",
+      "title": "GPT-6 Astra - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-6-astra.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-bedrock-openai-cards",
+      "title": "OpenAI models - Amazon Bedrock",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards-openai.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-astra-whatsnew",
+      "title": "OpenAI GPT-6 Astra is now generally available on Amazon Bedrock",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-astra-on-amazon-bedrock/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-sol-luna-whatsnew",
+      "title": "OpenAI GPT-6 Sol and GPT-6 Luna are now generally available on Amazon Bedrock",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-sol-luna-on-amazon-bedrock/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "aws-sol-luna-blog",
+      "title": "Bring more intelligence to everyday work with GPT-6 Sol and GPT-6 Luna on Amazon Bedrock",
+      "url": "https://aws.amazon.com/blogs/machine-learning/bring-more-intelligence-to-everyday-work-with-gpt-6-sol-and-gpt-6-luna-on-amazon-bedrock/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-bedrock-lifecycle",
+      "title": "Model lifecycle (models launched on/after 2026-09-07)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-lifecycle-legacy",
+      "title": "Model lifecycle (Legacy) - Legacy and EOL table",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-endpoints",
+      "title": "Endpoints supported by Amazon Bedrock",
+      "url": "https://docs.aws.amazon.com/us_en/bedrock/latest/userguide/endpoints.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-bedrock-responses-api",
+      "title": "Responses API - Amazon Bedrock",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-responses-api.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-astra-blog",
+      "title": "GPT-6 Astra: Frontier intelligence for work, now available in Microsoft Foundry",
+      "url": "https://azure.microsoft.com/en-us/blog/gpt-6-astra-frontier-intelligence-for-work-now-generally-available-in-microsoft-foundry/",
+      "publisher": "Microsoft",
+      "type": "csp-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-gpt6-blog",
+      "title": "GPT-6 Astra, Sol, and Luna for production AI agents in Microsoft Foundry",
+      "url": "https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/",
+      "publisher": "Microsoft",
+      "type": "csp-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "ms-foundry-retirement-schedule",
+      "title": "Model retirement schedule - Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirement-schedule",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "ms-foundry-models-sold-by-azure",
+      "title": "Foundry Models sold by Azure",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-claude-models",
+      "title": "Claude models in Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/claude-models",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-claude-hosting",
+      "title": "Compare hosting options for Claude models in Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/claude-models-hosting-comparison",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-claude-howto",
+      "title": "Deploy and use Claude models in Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-azure-openai-v1-api",
+      "title": "Azure OpenAI in Microsoft Foundry Models v1 API",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/api-version-lifecycle",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-foundry-endpoints",
+      "title": "Endpoints for Microsoft Foundry Models",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/endpoints",
+      "publisher": "Microsoft",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "ms-qa-gpt41-oct2026",
+      "title": "Microsoft Q&A: GPT-4.1 retirement (Oct 14, 2026 stated as firm, Apr 2026)",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/5857280/can-we-extend-the-current-azure-openai-model-deplo",
+      "publisher": "Microsoft Q&A",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "openai-models",
+      "title": "Models (OpenAI API)",
+      "url": "https://developers.openai.com/api/docs/models",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "openai-gpt6-sol-model",
+      "title": "GPT-6 Sol model page",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "openai-latest-model-guide",
+      "title": "Model guidance: migrating to GPT-6",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "openai-astra-systemcard",
+      "title": "GPT-6 Astra System Card (Deployment Safety Hub)",
+      "url": "https://deploymentsafety.openai.com/gpt-6-astra",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "macrumors-sol-luna",
+      "title": "OpenAI's New GPT-6 Sol and Luna Models",
+      "url": "https://www.macrumors.com/2026/09/22/openai-gpt-6-sol-luna/",
+      "publisher": "MacRumors",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-gemini38-model",
+      "title": "Gemini 3.8 Flash (Gemini API model page)",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "publisher": "Google",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-gemini38-latest",
+      "title": "What's new in Gemini 3.8 Flash",
+      "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+      "publisher": "Google",
+      "type": "vendor-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "google-agentplatform-opus55",
+      "title": "Claude Opus 5.5 on Google Cloud",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude/opus-5-5",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-agentplatform-claude-quotas",
+      "title": "Quotas for Anthropic Claude models",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude/quotas",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-vertex-model-versions",
+      "title": "Model versions and lifecycle (Gemini)",
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-agentplatform-model-versions",
+      "title": "Model versions and lifecycle | Gemini Enterprise Agent Platform",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-agentplatform-release-notes",
+      "title": "Gemini Enterprise Agent Platform release notes",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/release-notes",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-vertex-release-notes",
+      "title": "Release notes (Generative AI)",
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/release-notes",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-agentplatform-openai",
+      "title": "OpenAI models on Agent Platform (gpt-oss)",
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/maas/openai",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "google-agent-platform",
+      "title": "Gemini Enterprise Agent Platform (formerly Vertex AI)",
+      "url": "https://cloud.google.com/products/gemini-enterprise-agent-platform",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-opus55",
+      "title": "Day 0 Support: Claude Opus 5.5",
+      "url": "https://docs.litellm.ai/blog/claude_opus_5_5",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-opus5",
+      "title": "Day 0 Support: Claude Opus 5",
+      "url": "https://docs.litellm.ai/blog/claude_opus_5",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-astra",
+      "title": "Day 0 Support: GPT-6 Astra",
+      "url": "https://docs.litellm.ai/blog/gpt_6_astra",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-sol-luna",
+      "title": "Day 0 Support: GPT-6 Sol and GPT-6 Luna",
+      "url": "https://docs.litellm.ai/blog/gpt_6_sol_luna",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-gemini38",
+      "title": "Day 0 support: Gemini 3.8 Flash",
+      "url": "https://docs.litellm.ai/blog/gemini_3_8_flash",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-release-notes",
+      "title": "LiteLLM release notes",
+      "url": "https://docs.litellm.ai/release_notes/",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "litellm-v1-102-0",
+      "title": "v1.102.0 - Auto Router Controls, Native OCR & Gateway Reliability",
+      "url": "https://docs.litellm.ai/release_notes/v1.102.0/v1-102-0",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-v1-100-1",
+      "title": "v1.100.1 - Retry Breadcrumb Memory Fix",
+      "url": "https://docs.litellm.ai/release_notes/v1.100.1/v1-100-1",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-oom-incident",
+      "title": "Incident Report: Retry Breadcrumb Memory Growth Causing OOM on v1.100.0",
+      "url": "https://docs.litellm.ai/blog/retry-breadcrumb-oom-incident",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-version-support",
+      "title": "LiteLLM version support: focusing on the four most recent stable lines",
+      "url": "https://docs.litellm.ai/blog/version-support",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-v1-95-0",
+      "title": "v1.95.0 - Claude Opus 5, MCP Gateway DCR & Rust /v1/messages",
+      "url": "https://docs.litellm.ai/release_notes/v1.95.0/v1-95-0",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-drop-params",
+      "title": "Drop Unsupported Params",
+      "url": "https://docs.litellm.ai/docs/completion/drop_params",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-azure",
+      "title": "Azure OpenAI provider",
+      "url": "https://docs.litellm.ai/docs/providers/azure/",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-cve-2026-42208",
+      "title": "Security Update: CVE-2026-42208 in LiteLLM Proxy",
+      "url": "https://docs.litellm.ai/blog/cve-2026-42208-litellm-proxy-sql-injection",
+      "publisher": "LiteLLM",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "sysdig-cve-2026-42208",
+      "title": "CVE-2026-42208: targeted SQL injection discovered 36 hours after disclosure",
+      "url": "https://www.sysdig.com/blog/cve-2026-42208-targeted-sql-injection-against-litellms-authentication-path-discovered-36-hours-following-vulnerability-disclosure",
+      "publisher": "Sysdig",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-host-header",
+      "title": "Fixed in 1.84.0+: Authentication Bypass via Host Header Injection (GHSA-4xpc-pv4p-pm3w)",
+      "url": "https://docs.litellm.ai/blog/host-header-auth-bypass",
+      "publisher": "LiteLLM",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-mcp-cve",
+      "title": "Security Update: CVE-2026-30623 - Command Injection via Anthropic's MCP SDK",
+      "url": "https://docs.litellm.ai/blog/mcp-stdio-command-injection-april-2026",
+      "publisher": "LiteLLM",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-guardrail-logging",
+      "title": "Incident Report: Guardrail logging exposed secret headers in spend logs and traces",
+      "url": "https://docs.litellm.ai/blog/guardrail-logging-secret-exposure-incident",
+      "publisher": "LiteLLM",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-supplychain-issue",
+      "title": "litellm PyPI package compromised (issue #24518)",
+      "url": "https://github.com/BerriAI/litellm/issues/24518",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "zscaler-supplychain",
+      "title": "Supply Chain Attacks Surge in March 2026 (LiteLLM 1.82.7/1.82.8)",
+      "url": "https://www.zscaler.com/blogs/security-research/supply-chain-attacks-surge-march-2026",
+      "publisher": "Zscaler ThreatLabz",
+      "type": "security-advisory",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "socradar-aug2026",
+      "title": "Major cyber attacks, August 2026 (LiteLLM supply chain scope: 2,500+ orgs)",
+      "url": "https://socradar.io/blog/major-cyber-attacks-august-2026",
+      "publisher": "SOCRadar",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "litellm-issue-42689",
+      "title": "Failed auth with an unknown key writes its own spend rows (issue #42689)",
+      "url": "https://github.com/BerriAI/litellm/issues/42689",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "opik-8524",
+      "title": "GEval fails on Bedrock GPT-6 Sol/Luna/Astra: temperature=0.0 not dropped (issue #8524)",
+      "url": "https://github.com/comet-ml/opik/issues/8524",
+      "publisher": "GitHub / comet-ml",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "trulens-2815",
+      "title": "GPT-6 on Bedrock fail through LiteLLM/OpenAI providers: temperature rejected (issue #2815)",
+      "url": "https://github.com/truera/trulens/issues/2815",
+      "publisher": "GitHub / truera",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-pr-42746",
+      "title": "feat(bedrock): add gpt-6-sol and gpt-6-luna model pricing (PR #42746)",
+      "url": "https://github.com/BerriAI/litellm/pull/42746",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-pr-42704",
+      "title": "feat(azure): price GPT-6 Sol and GPT-6 Luna on the azure route (PR #42704)",
+      "url": "https://github.com/BerriAI/litellm/pull/42704",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "aa-opus55",
+      "title": "Claude Opus 5.5 (max with fallback) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-astra",
+      "title": "GPT-6 Astra (max) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/gpt-6-astra",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-sol",
+      "title": "GPT-6 Sol (max) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/gpt-6-sol",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-luna",
+      "title": "GPT-6 Luna (max) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-gemini38",
+      "title": "Gemini 3.8 Flash (high) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-gemini38-article",
+      "title": "Google has released Gemini 3.8 Flash (launch analysis)",
+      "url": "https://artificialanalysis.ai/articles/gemini-3-8-flash",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aa-methodology",
+      "title": "Intelligence Benchmarking Methodology (Index v4.3.2)",
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-index-v43",
+      "title": "Announcing the Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aa-perf-methodology",
+      "title": "Language Model API Performance Benchmarking Methodology",
+      "url": "https://artificialanalysis.ai/methodology/performance-benchmarking",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "vals-opus55",
+      "title": "Vals AI: Claude Opus 5.5",
+      "url": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "publisher": "Vals AI",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "llmstats-gemini38",
+      "title": "Gemini 3.8 Flash: Benchmarks, Pricing & Context Window",
+      "url": "https://llm-stats.com/models/gemini-3.8-flash",
+      "publisher": "LLM Stats",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "classmethod-opus55-bedrock",
+      "title": "I tried out Claude Opus 5.5 on Amazon Bedrock (verified 2026-09-23)",
+      "url": "https://dev.classmethod.jp/en/articles/bedrock-claude-opus-5-5/",
+      "publisher": "Classmethod DevelopersIO",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "modelsdev-7805",
+      "title": "feat(amazon-bedrock): add GPT-6 Sol and Luna inference profiles (PR #7805)",
+      "url": "https://github.com/anomalyco/models.dev/pull/7805",
+      "publisher": "GitHub / models.dev",
+      "type": "github",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "genai-prices-713",
+      "title": "Add AWS Bedrock GPT-6 Astra, Sol and Luna pricing (PR #713)",
+      "url": "https://github.com/pydantic/genai-prices/pull/713",
+      "publisher": "GitHub / pydantic",
+      "type": "github",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "foundrymap-astra",
+      "title": "gpt-6-astra Azure regions (September 2026)",
+      "url": "https://foundrymap.fyi/models/gpt-6-astra",
+      "publisher": "Foundry Map",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "kingy-astra-access",
+      "title": "GPT-6 Astra Access: Plans, API, Pricing (Azure quota tiers)",
+      "url": "https://kingy.ai/news/gpt-6-astra-access-chatgpt-api-daybreak/",
+      "publisher": "Kingy AI",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "technspire-astra-foundry",
+      "title": "GPT-6 Astra in Foundry: the price, the gate and the EU gap",
+      "url": "https://technspire.com/en/blog/gpt-6-astra-foundry-price-gate-eu-gap",
+      "publisher": "Technspire",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "vorplabs-foundry",
+      "title": "Microsoft Foundry Model Retirements (checked 2026-08-10)",
+      "url": "https://vorplabs.com/models/microsoft-foundry-model-retirements",
+      "publisher": "Vorp Labs",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "vorplabs-google",
+      "title": "Google model retirements: Gemini API vs Vertex calendars",
+      "url": "https://vorplabs.com/models/google-model-retirements",
+      "publisher": "Vorp Labs",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "innfactory-gemini",
+      "title": "Google Gemini: Versions, Benchmarks & EU Availability",
+      "url": "https://innfactory.ai/en/ai-models/google-gemini/",
+      "publisher": "innFactory",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "innfactory-claude",
+      "title": "Anthropic Claude: Versions, Benchmarks & EU Availability",
+      "url": "https://innfactory.ai/en/ai-models/anthropic-claude/",
+      "publisher": "innFactory",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "infoq-claude-foundry-eu",
+      "title": "Claude Reaches GA on Microsoft Foundry: European Enterprises Cannot Deploy It",
+      "url": "https://www.infoq.com/news/2026/07/claude-foundry-ga-europe/",
+      "publisher": "InfoQ",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "julien-45days",
+      "title": "At Least 45 Days (Bedrock lifecycle policy change)",
+      "url": "https://www.julien.org/blog/industry-perspectives/2026-09-20_at-least-45-days/",
+      "publisher": "Julien Simon",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "infoq-astra-critical",
+      "title": "GPT-6 Astra is the First Model OpenAI Classifies as Critical for Cybersecurity",
+      "url": "https://www.infoq.com/news/2026/09/gpt-6-astra-critical-cyber/",
+      "publisher": "InfoQ",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "neuraltrust-opus55",
+      "title": "Claude Opus 5.5 Enterprise Security: Safeguards & Gaps",
+      "url": "https://neuraltrust.ai/blog/claude-opus-5-5-enterprise",
+      "publisher": "NeuralTrust",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "dailydev-opus55-foundry",
+      "title": "Claude Opus 5.5 comes to Microsoft Foundry (pricing summary)",
+      "url": "https://daily.dev/posts/claude-opus-5-5-comes-to-microsoft-foundry-for-long-running-coding-and-knowledge-work-cyxjhafni",
+      "publisher": "daily.dev",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "apidog-astra",
+      "title": "GPT-6 Astra for developers: API, pricing, 1M context",
+      "url": "https://apidog.com/blog/gpt-6-astra-api/",
+      "publisher": "Apidog",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "capitalandcompute-sept",
+      "title": "New AI Models Released in September 2026: Prices",
+      "url": "https://capitalandcompute.net/blog/new-ai-models-september-2026/",
+      "publisher": "Capital & Compute",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "model-eol-feed",
+      "title": "model-eol: machine-readable deprecation feed for AI models",
+      "url": "https://github.com/thossullivan/model-eol",
+      "publisher": "GitHub / model-eol",
+      "type": "github",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "gcp-gemini25-notice-1763",
+      "title": "[deadline 2027-03-31] Migrate off gemini-2.5-flash (Vertex retirement) (issue #1763, quotes Google's 2026-09-15 notice)",
+      "url": "https://github.com/Daatan/daatan/issues/1763",
+      "publisher": "GitHub / Daatan",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "gcp-gemini25-notice-4509",
+      "title": "Gemini 2.5 Vertex AI retirement: re-issued notice adds Oct 20 2026 inactivity cutoff (issue #4509)",
+      "url": "https://github.com/dimagi/open-chat-studio/issues/4509",
+      "publisher": "GitHub / dimagi",
+      "type": "github",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "google-forum-gemini25-dates",
+      "title": "Deprecation (shutdown) date for gemini-2.5-pro? Conflicting information",
+      "url": "https://discuss.ai.google.dev/t/deprecation-shutdown-date-for-gemini-2-5-pro-conflicting-information/183251",
+      "publisher": "Google AI Developers Forum",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "releasebot-agent-platform",
+      "title": "Gemini Enterprise Agent Platform updates - September 2026 (release-note mirror)",
+      "url": "https://releasebot.io/updates/google/gemini-enterprise-agent-platform",
+      "publisher": "Releasebot",
+      "type": "community",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "devto-gemini25-date-removed",
+      "title": "Google removed an announced Gemini 2.5 shutdown date with no changelog entry",
+      "url": "https://dev.to/ai_changewatch/the-same-claude-model-gives-you-60-days-notice-on-one-platform-and-184-on-another-347p",
+      "publisher": "DEV Community",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "hidekazu-lifecycle",
+      "title": "AI Model Deprecation and Lifecycle Calendar",
+      "url": "https://hidekazu-konishi.com/entry/ai_model_deprecation_and_lifecycle_calendar.html",
+      "publisher": "hidekazu-konishi.com",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "nvidia-aiperf",
+      "title": "AIPerf: Comprehensive LLM Benchmarking",
+      "url": "https://docs.nvidia.com/aiperf/getting-started/ai-perf-comprehensive-llm-benchmarking",
+      "publisher": "NVIDIA",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "nvidia-nim-metrics",
+      "title": "NIM LLM Benchmarking - Metrics",
+      "url": "https://docs.nvidia.com/nim/benchmarking/llm/latest/metrics.html",
+      "publisher": "NVIDIA",
+      "type": "vendor-doc",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "braintrust-redteam",
+      "title": "Best LLM red teaming tools for production in 2026",
+      "url": "https://www.braintrust.dev/articles/best-llm-red-teaming-tools-2026",
+      "publisher": "Braintrust",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "otel-genai-status",
+      "title": "OpenTelemetry's GenAI semantic conventions are NOT stable yet (2026)",
+      "url": "https://dev.to/azena-ai/opentelemetrys-genai-semantic-conventions-are-not-stable-yet-heres-what-actually-shipped-in-2026-3mke",
+      "publisher": "DEV Community",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "imperva-owasp",
+      "title": "The OWASP LLM Top 10 Was the Warm-Up: What Comes Next",
+      "url": "https://www.imperva.com/blog/owasp-llm-top-10-what-comes-next-agentic-mcp/",
+      "publisher": "Imperva",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "modulos-owasp-agentic",
+      "title": "OWASP Top 10 for Agentic Applications (2026) governance guide",
+      "url": "https://docs.modulos.ai/frameworks/owasp-top-10-agentic",
+      "publisher": "Modulos",
+      "type": "community",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "tmmlu-plus",
+      "title": "TMMLU+: An Improved Traditional Chinese Evaluation Suite",
+      "url": "https://openreview.net/pdf?id=95TayIeqJ4",
+      "publisher": "COLM 2024",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "tw-legalbench",
+      "title": "TW-LegalBench: Measuring Taiwanese Legal Understanding",
+      "url": "https://arxiv.org/html/2606.18699v1",
+      "publisher": "arXiv",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "tw-sovereignty-bias",
+      "title": "Bilingual Bias in LLMs: A Taiwan Sovereignty Benchmark Study",
+      "url": "https://arxiv.org/pdf/2602.06371",
+      "publisher": "arXiv",
+      "type": "benchmark",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "moda-risk-framework",
+      "title": "數發部正式公布人工智慧風險分類框架（3 大類 20 項子類別）",
+      "url": "https://www.ithome.com.tw/news/177184",
+      "publisher": "iThome",
+      "type": "news",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "moda-ai-governance",
+      "title": "AI 基本法｜治理與評測 - 數位發展部 AI 專區",
+      "url": "https://moda.gov.tw/major-policies/ai/governance/19248",
+      "publisher": "數位發展部",
+      "type": "regulator",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "tw-ai-basic-act",
+      "title": "Taiwan: AI Basic Act (passed 2025-12-23)",
+      "url": "https://www.bakermckenzie.com/en/insight/publications/2026/01/taiwan-ai-basic-act",
+      "publisher": "Baker McKenzie",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "tw-ai-basic-act-promulgated",
+      "title": "Taiwan Artificial Intelligence Basic Act (promulgated and in force 2026-01-14)",
+      "url": "https://regulations.ai/regulations/taiwan-2024-7-ai-basic-act",
+      "publisher": "regulations.ai",
+      "type": "regulator",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "fsc-agentic-ai",
+      "title": "金管會將代理 AI 納入金融業運用 AI 指引（2026-05-07 報告）",
+      "url": "https://www.kscthinktank.com.tw/%E9%87%91%E7%AE%A1%E6%9C%83%E5%87%BA%E6%8B%9B%EF%BC%81%E3%80%8C%E4%BB%A3%E7%90%86-ai%E3%80%8D%E6%AD%A3%E5%BC%8F%E7%B4%8D%E5%85%A5%E9%87%91%E8%9E%8D%E6%A5%AD%E7%9B%A3%E7%90%86%E6%8C%87%E5%BC%95/",
+      "publisher": "先行智庫",
+      "type": "news",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "fsc-ai-guideline",
+      "title": "金管會發布「金融業運用人工智慧(AI)指引」",
+      "url": "https://www.fsc.gov.tw/ch/home.jsp?id=96&parentpath=0%2C2&mcustomize=news_view.jsp&dataserno=202406200001&dtable=News",
+      "publisher": "金融監督管理委員會",
+      "type": "regulator",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aiec",
+      "title": "AI 產品與系統評測中心（AIEC）",
+      "url": "https://www.aiec.org.tw/",
+      "publisher": "數位發展部 / AIEC",
+      "type": "regulator",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "eu-ai-act-omnibus",
+      "title": "EU AI Act Digital Omnibus (Reg. 2026/1744): high-risk delayed, Article 50 unchanged",
+      "url": "https://usercentrics.com/knowledge-hub/eu-ai-act-high-risk-delay-article-50-transparency-consent/",
+      "publisher": "Usercentrics",
+      "type": "news",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "csa-eu-art50",
+      "title": "EU AI Act Article 50: Transparency Obligations Take Effect",
+      "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-article-50-transparency-20260729/",
+      "publisher": "Cloud Security Alliance",
+      "type": "news",
+      "accessed": "2026-09-24"
+    },
+    {
+      "id": "aws-bedrock-sol-card",
+      "title": "GPT-6 Sol - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-6-sol.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "aws-bedrock-luna-card",
+      "title": "GPT-6 Luna - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-6-luna.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "ms-foundry-sept24-blog",
+      "title": "Ship agents faster with expanded model choice, voice agents, and continuous optimization",
+      "url": "https://azure.microsoft.com/en-us/blog/ship-agents-faster-with-expanded-model-choice-voice-agents-and-continuous-optimization/",
+      "publisher": "Microsoft",
+      "type": "csp-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "ms-techcommunity-opus55-foundry",
+      "title": "Claude Opus 5.5 comes to Microsoft Foundry for long-running coding and knowledge work (2026-09-22)",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/claude-opus-5-5-comes-to-microsoft-foundry-for-long-running-coding-and-knowledge/4558051",
+      "publisher": "Microsoft Tech Community",
+      "type": "csp-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "ms-techcommunity-deepseek-v41",
+      "title": "DeepSeek-V4.1-Flash is coming to Microsoft Foundry (2026-09-23, modified 2026-09-25)",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/deepseek-v4-1-flash-is-coming-to-microsoft-foundry/4556431",
+      "publisher": "Microsoft Tech Community",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "google-agentplatform-pricing",
+      "title": "Generative AI pricing | Gemini Enterprise Agent Platform",
+      "url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+      "publisher": "Google Cloud",
+      "type": "csp-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "google-gemini-api-deprecations",
+      "title": "Gemini API deprecations (last updated 2026-09-24)",
+      "url": "https://ai.google.dev/gemini-api/docs/deprecations",
+      "publisher": "Google",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "google-gemini-api-changelog",
+      "title": "Gemini API changelog (2026-09-18: access to 2.5 models limited to active users)",
+      "url": "https://ai.google.dev/gemini-api/docs/changelog",
+      "publisher": "Google",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "digitalapplied-flash-image",
+      "title": "Gemini 2.5 Flash Image retirement: October 2 (API) vs Vertex (2026-09-25)",
+      "url": "https://www.digitalapplied.com/blog/gemini-2-5-flash-image-retirement-october-2-api-vertex",
+      "publisher": "Digital Applied",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "zentor-gemini25",
+      "title": "Gemini 2.5 Pro shutdown date (updated 2026-09-24)",
+      "url": "https://zentor.ai/blog/gemini-2-5-pro-shutdown-date",
+      "publisher": "Zentor",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "requesty-gemini38-eu",
+      "title": "Vertex gemini-3.8-flash (EU) rates (updated 2026-09-27)",
+      "url": "https://www.requesty.ai/models/vertex/gemini-3.8-flash-eu",
+      "publisher": "Requesty",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "tokencost-gemini38",
+      "title": "Gemini 3.8 Flash introductory price expiry (2026-09-03)",
+      "url": "https://tokencost.app/blog/gemini-3-8-flash-introductory-price-expiry",
+      "publisher": "tokencost.app",
+      "type": "community",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "pypi-litellm",
+      "title": "litellm on PyPI (1.103.0 released 2026-09-27)",
+      "url": "https://pypi.org/project/litellm/",
+      "publisher": "PyPI",
+      "type": "vendor-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-v1-103-0-rc1",
+      "title": "v1.103.0rc1 release notes",
+      "url": "https://docs.litellm.ai/release_notes/v1.103.0rc1/v1-103-0-rc-1",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-sept-townhall",
+      "title": "September Townhall updates (2026-09-24)",
+      "url": "https://docs.litellm.ai/blog/september-townhall-updates",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-cleaner-versions",
+      "title": "Cleaner release versions (minor = weekly stable, patch = hotfix)",
+      "url": "https://docs.litellm.ai/blog/cleaner-release-versions",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-v1-102-1-release",
+      "title": "Release v1.102.1 (BerriAI/litellm)",
+      "url": "https://github.com/BerriAI/litellm/releases/tag/v1.102.1",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "homeops-8005",
+      "title": "Renovate PR: litellm v1.102.1 → v1.103.0 (notes no upstream stable tag yet, 2026-09-27)",
+      "url": "https://github.com/drag0n141/home-ops/pull/8005",
+      "publisher": "GitHub / home-ops",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-issue-42725",
+      "title": "Bedrock GPT-6: temperature not dropped (issue #42725)",
+      "url": "https://github.com/BerriAI/litellm/issues/42725",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "litellm-pr-42726",
+      "title": "fix: drop temperature for Bedrock GPT-6 reasoning models (PR #42726, open)",
+      "url": "https://github.com/BerriAI/litellm/pull/42726",
+      "publisher": "GitHub / BerriAI",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "trulens-pr-2816",
+      "title": "Fix GPT-6 on Bedrock temperature (PR #2816, merged 2026-09-24)",
+      "url": "https://github.com/truera/trulens/pull/2816",
+      "publisher": "GitHub / truera",
+      "type": "github",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "gitlab-cve-2026-59823",
+      "title": "CVE-2026-59823: litellm SSRF via api_base in user_config (GHSA-hx8v-g79f-8w5f)",
+      "url": "https://advisories.gitlab.com/pypi/litellm/CVE-2026-59823/",
+      "publisher": "GitLab Advisory Database",
+      "type": "security-advisory",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "gitlab-cve-2026-49468",
+      "title": "CVE-2026-49468: litellm auth bypass via Host header injection (GHSA-4xpc-pv4p-pm3w)",
+      "url": "https://advisories.gitlab.com/pypi/litellm/CVE-2026-49468/",
+      "publisher": "GitLab Advisory Database",
+      "type": "security-advisory",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "skycloak-cve-2026-59822",
+      "title": "CVE-2026-59822: LiteLLM MCP auth bypass (GHSA-7488-6r32-c95q)",
+      "url": "https://skycloak.io/blog/cve-2026-59822-litellm-mcp-auth-bypass-ai-gateway-identity-2/",
+      "publisher": "Skycloak",
+      "type": "security-advisory",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "fortune-gpt6-cyber",
+      "title": "OpenAI to unveil GPT-6 Cyber model, plus a cybersecurity-focused product (title only)",
+      "url": "https://fortune.com/2026/09/24/openai-launching-gpt-6-cyber-model-and-security-product-devday/",
+      "publisher": "Fortune",
+      "type": "news",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "testingcatalog-sonnet55",
+      "title": "Anthropic Claude Sonnet 5.5 release date leaks (title only)",
+      "url": "https://www.testingcatalog.com/anthropic-claude-sonnet-5-5-release-date-leaks/",
+      "publisher": "TestingCatalog",
+      "type": "news",
+      "accessed": "2026-09-28"
+    },
+    {
+      "id": "anthropic-sonnet55-news",
+      "title": "Introducing Claude Sonnet 5.5 (2026-09-28)",
+      "url": "https://www.anthropic.com/news/claude-sonnet-5-5",
+      "publisher": "Anthropic",
+      "type": "vendor-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-sonnet55-overview",
+      "title": "Claude Sonnet 5.5 model overview",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-sonnet55-whatsnew",
+      "title": "What's new in Claude Sonnet 5.5",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "anthropic-models-overview",
+      "title": "Models overview (Claude Platform)",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "publisher": "Anthropic",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-sonnet55-card",
+      "title": "Claude Sonnet 5.5 - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-5-5.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-sonnet55-whatsnew",
+      "title": "Claude Sonnet 5.5 now available on AWS (2026-09-28)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/claude-sonnet-5-5-aws/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-gpt61-sol-card",
+      "title": "GPT-6.1 Sol - Amazon Bedrock model card",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-6-1-sol.html",
+      "publisher": "AWS",
+      "type": "csp-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-gpt61-sol-whatsnew",
+      "title": "OpenAI GPT-6.1 Sol is now generally available on Amazon Bedrock (2026-09-29)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-1-sol-on-amazon-bedrock/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-grok47-whatsnew",
+      "title": "Grok 4.7 now available on Amazon Bedrock (2026-09-28)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-bedrock-grok-4-7/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-claude-region-sk",
+      "title": "Claude regional expansion: India, Seoul, Singapore (2026-09-29)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/claude-region-expansion-in-sk/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-claude-region-lhr",
+      "title": "Claude Opus 5.5 and Sonnet 5 in-region inference in London (2026-09-30)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/claude-region-expansion-lhr/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-astra-ultrafast",
+      "title": "GPT-6 Astra UltraFast mode on Amazon Bedrock (2026-09-30)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-astra-ultrafast-on-amazon-bedrock/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aws-bedrock-managed-agents",
+      "title": "Amazon Bedrock Managed Agents powered by OpenAI (preview, 2026-09-29)",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/bedrock-managed-agents-preview/",
+      "publisher": "AWS",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "ms-techcommunity-sonnet55-foundry",
+      "title": "Claude Sonnet 5.5 is now available in Microsoft Foundry (2026-09-28)",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/claude-sonnet-5-5-is-now-available-in-microsoft-foundry/4559774",
+      "publisher": "Microsoft Tech Community",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "ms-techcommunity-gpt61-sol",
+      "title": "Introducing GPT-6.1 Sol in Microsoft Foundry (2026-09-29)",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/introducing-gpt-6-1-sol-in-microsoft-foundry-advanced-intelligence-optimized-for/4560811",
+      "publisher": "Microsoft Tech Community",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "ms-techcommunity-cohere-embed-v5",
+      "title": "Cohere Embed V5 brings more relevant retrieval to Microsoft Foundry (2026-09-30)",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/cohere-embed-v5-brings-more-relevant-retrieval-to-microsoft/ba-p/4560845",
+      "publisher": "Microsoft Tech Community",
+      "type": "csp-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "openai-gpt61-sol-model",
+      "title": "GPT-6.1 Sol model page",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "openai-gpt61-sol-announce",
+      "title": "Introducing GPT-6.1 Sol (2026-09-29)",
+      "url": "https://openai.com/index/introducing-gpt-6-1-sol/",
+      "publisher": "OpenAI",
+      "type": "vendor-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "openai-devday-2026",
+      "title": "DevDay 2026 recap (2026-09-29)",
+      "url": "https://openai.com/index/devday-2026-recap/",
+      "publisher": "OpenAI",
+      "type": "vendor-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "openai-deprecations",
+      "title": "Deprecations (OpenAI API)",
+      "url": "https://developers.openai.com/api/docs/deprecations",
+      "publisher": "OpenAI",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "pymnts-gpt6-cyber",
+      "title": "OpenAI builds new security gateway to deploy GPT-6 Cyber (2026-09-25)",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/openai-builds-new-security-gateway-to-deploy-gpt-6-cyber/",
+      "publisher": "PYMNTS",
+      "type": "news",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-sonnet55",
+      "title": "Claude Sonnet 5.5 (max) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "aa-gpt61-sol",
+      "title": "GPT-6.1 Sol (max) - Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/gpt-6-1-sol",
+      "publisher": "Artificial Analysis",
+      "type": "benchmark",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "litellm-v1-103-0",
+      "title": "v1.103.0 - Config File Ownership, Fuse Routing & Gateway Hardening (2026-09-27)",
+      "url": "https://docs.litellm.ai/release_notes/v1.103.0/v1-103-0",
+      "publisher": "LiteLLM",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "pypi-litellm-json",
+      "title": "PyPI JSON API: litellm release history",
+      "url": "https://pypi.org/pypi/litellm/json",
+      "publisher": "PyPI",
+      "type": "vendor-doc",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "litellm-sonnet55",
+      "title": "Day 0 Support: Claude Sonnet 5.5 (2026-09-28)",
+      "url": "https://docs.litellm.ai/blog/claude_sonnet_5_5",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "litellm-gpt61-sol",
+      "title": "Day 0 Support: GPT-6.1 Sol (2026-09-29)",
+      "url": "https://docs.litellm.ai/blog/gpt_6_1_sol",
+      "publisher": "LiteLLM",
+      "type": "vendor-blog",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "pts-moda-agentic-ai",
+      "title": "數發部 AI 風險分類框架與代理 AI 安全參考指引草擬（2026-09-30）",
+      "url": "https://news.pts.org.tw/article/829381",
+      "publisher": "公視新聞網",
+      "type": "news",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "ithome-ai-risk-inventory",
+      "title": "數發部偕 8 部會盤點 AI 風險：年底完成盤點、2027-06-30 前完成首輪法規調適評估（2026-09-09）",
+      "url": "https://www.ithome.com.tw/news/178826",
+      "publisher": "iThome",
+      "type": "news",
+      "accessed": "2026-10-01"
+    },
+    {
+      "id": "cdt-eu-ai-bulletin-sep2026",
+      "title": "CDT Europe's AI Bulletin: September 2026",
+      "url": "https://cdt.org/insights/cdt-europes-ai-bulletin-september-2026/",
+      "publisher": "CDT Europe",
+      "type": "news",
+      "accessed": "2026-10-01"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# Local and AWS-test (no cloud spend): every alias goes to tools/mock-llm (OpenAI-compatible fake).
+# Aliases match onprem.yaml so components never change their LLM_MODEL settings between environments.
+model_list:
+  - model_name: portal-quick        # 問問看 and the form helper (cheapest tier)
+    litellm_params: {model: openai/portal-quick, api_base: os.environ/MOCK_LLM_URL, api_key: mock}
+  - model_name: agent-research      # crawler-agent
+    litellm_params: {model: openai/agent-research, api_base: os.environ/MOCK_LLM_URL, api_key: mock}
+  - model_name: judge               # test-runner's LLM-as-judge (fixed version in production)
+    litellm_params: {model: openai/judge, api_base: os.environ/MOCK_LLM_URL, api_key: mock}
+  - model_name: claude-sonnet-5-5   # test targets through the gateway
+    litellm_params: {model: openai/claude-sonnet-5-5, api_base: os.environ/MOCK_LLM_URL, api_key: mock}
+  - model_name: claude-haiku-5-5
+    litellm_params: {model: openai/refuse-claude-haiku-5-5, api_base: os.environ/MOCK_LLM_URL, api_key: mock}
+
+litellm_settings:
+  drop_params: true
+  request_timeout: 120
+  turn_off_message_logging: true    # SEC-31: never keep prompts or answers in gateway logs
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL

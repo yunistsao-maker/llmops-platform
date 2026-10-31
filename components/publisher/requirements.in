@@ -1,0 +1,3 @@
+-r ../../libs/llmops-common/requirements.in
+# portal JSON Schema (draft-07) validation: the shared portal data model (crawler-agent's research/portal/checks.py)
+jsonschema>=4.18,<5

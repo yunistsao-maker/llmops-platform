@@ -1,0 +1,2 @@
+# key-provisioner runtime dependencies (httpx for the LiteLLM admin API and Vault, boto3 for Secrets Manager).
+-r ../../libs/llmops-common/requirements.in

@@ -1,0 +1,112 @@
+# LiteLLM proxy — example config for the 2026-09 model releases (Claude Opus 5.5, GPT-6 Astra/Sol/Luna, Gemini 3.8 Flash)
+#
+# 範例設定，不是可直接上線的設定：
+#   * 以 v1.102.1 為基準（最低 v1.101.0）；image 請以 digest 釘選，不要用 main-latest。
+#   * 所有 additional_drop_params / api_version 等行為，請先在 staging 用 tools/compat_suite.py 驗證。
+#   * model_info 內的 catalog_id / service / data_residency / model_version 是本 portal 的自訂欄位，
+#     tools/sync_inventory.py 用它們對照 data/catalog.json 與 data/lifecycle.json。
+#
+# 命名慣例
+#   <model-id>              預設路由（應用一般用這個）
+#   <model-id>@<route>      釘選到特定 CSP / 區域（需要可重現性或資料駐留時用）
+#   tier/frontier|general|fast   能力層 alias，平台升級時改指向（見 router_settings.model_group_alias）
+
+model_list:
+  # ---------------------------------------------------------------- Claude Opus 5.5
+  - model_name: claude-opus-5-5                     # 預設：Bedrock Global CRIS（台北區可呼叫）
+    litellm_params:
+      model: bedrock/global.anthropic.claude-opus-5-5
+      aws_region_name: ap-east-2
+    model_info: {catalog_id: claude-opus-5-5, service: bedrock, data_residency: global}
+
+  - model_name: claude-opus-5-5@bedrock-jp           # 日本境內處理（JP geo）
+    litellm_params:
+      model: bedrock/jp.anthropic.claude-opus-5-5
+      aws_region_name: ap-northeast-1
+    model_info: {catalog_id: claude-opus-5-5, service: bedrock, data_residency: jp}
+
+  - model_name: claude-opus-5-5@vertex
+    litellm_params:
+      model: vertex_ai/claude-opus-5-5
+      vertex_project: os.environ/VERTEX_PROJECT
+      vertex_location: global                        # 或 us / eu（multi-region，+10%）
+    model_info: {catalog_id: claude-opus-5-5, service: agent-platform, data_residency: global}
+
+  - model_name: claude-opus-5-5@azure
+    litellm_params:
+      model: azure_ai/claude-opus-5-5
+      api_base: os.environ/AZURE_AI_CLAUDE_API_BASE  # https://<resource>.services.ai.azure.com/anthropic
+      api_key: os.environ/AZURE_AI_CLAUDE_API_KEY
+    model_info: {catalog_id: claude-opus-5-5, service: foundry, data_residency: global}
+
+  # ---------------------------------------------------------------- GPT-6 Astra
+  - model_name: gpt-6-astra                          # 預設：Azure Global Standard
+    litellm_params:
+      model: azure/gpt-6-astra                       # = Azure 部署名稱
+      api_base: os.environ/AZURE_OPENAI_API_BASE     # https://<resource>.openai.azure.com
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: "v1"                              # v1 GA API；舊版 LiteLLM 請改用 dated api-version
+    model_info: {catalog_id: gpt-6-astra, service: foundry, data_residency: global, model_version: "2026-09-03"}
+
+  - model_name: gpt-6-astra@bedrock
+    litellm_params:
+      model: bedrock/converse/global.openai.gpt-6-astra
+      aws_region_name: ap-northeast-1                # 台北區不在 Astra 的區域清單
+      additional_drop_params: ["temperature"]        # 1.102.1 的 Bedrock 路徑不會自動丟棄（opik #8524）
+    model_info: {catalog_id: gpt-6-astra, service: bedrock, data_residency: global}
+
+  # ---------------------------------------------------------------- GPT-6 Sol / Luna
+  - model_name: gpt-6-sol
+    litellm_params:
+      model: azure/gpt-6-sol
+      api_base: os.environ/AZURE_OPENAI_API_BASE
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: "v1"
+    model_info: {catalog_id: gpt-6-sol, service: foundry, data_residency: global}
+
+  - model_name: gpt-6-sol@bedrock                    # beta：Bedrock 官方模型卡發布前
+    litellm_params:
+      model: bedrock/converse/global.openai.gpt-6-sol
+      aws_region_name: us-east-1
+      additional_drop_params: ["temperature"]
+    model_info: {catalog_id: gpt-6-sol, service: bedrock, data_residency: global}
+
+  - model_name: gpt-6-luna
+    litellm_params:
+      model: azure/gpt-6-luna
+      api_base: os.environ/AZURE_OPENAI_API_BASE
+      api_key: os.environ/AZURE_OPENAI_API_KEY
+      api_version: "v1"
+    model_info: {catalog_id: gpt-6-luna, service: foundry, data_residency: global}
+
+  # ---------------------------------------------------------------- Gemini 3.8 Flash
+  - model_name: gemini-3-8-flash
+    litellm_params:
+      model: vertex_ai/gemini-3.8-flash
+      vertex_project: os.environ/VERTEX_PROJECT
+      vertex_location: global
+      drop_params: true                              # 3.8 Flash 移除 temperature / top_p / top_k
+    model_info: {catalog_id: gemini-3-8-flash, service: agent-platform, data_residency: global}
+
+router_settings:
+  num_retries: 2
+  allowed_fails: 3
+  cooldown_time: 30
+  # 同模型跨雲 fallback 放前面；跨家族（thinking 不相容）放最後
+  fallbacks:
+    - claude-opus-5-5: ["claude-opus-5-5@vertex", "claude-opus-5-5@azure"]
+    - gpt-6-astra: ["gpt-6-astra@bedrock"]
+    - gpt-6-sol: ["gpt-6-sol@bedrock"]
+  # 能力層 alias：GA 後才指向新模型；切換走變更管理 + canary
+  model_group_alias:
+    "tier/frontier": "claude-opus-5-5"
+    "tier/general": "gpt-6-sol"
+    "tier/fast": "gpt-6-luna"
+
+litellm_settings:
+  drop_params: true            # 全域開啟，但不要依賴它處理 forced tool_choice（會被靜默降級）
+  request_timeout: 900         # max effort 的首答 token 可能數分鐘
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL

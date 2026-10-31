@@ -1,0 +1,681 @@
+{
+  "schema": "compat-run/v1",
+  "runId": "compat-20260924T162806Z-6f3a85",
+  "startedAt": "2026-09-24T16:28:06.941467Z",
+  "finishedAt": "2026-09-24T16:28:15.812431Z",
+  "gateway": "http://127.0.0.1:4011/v1",
+  "routes": [
+    "mock-good",
+    "mock-reasoning",
+    "mock-no-temp",
+    "mock-silent-forced"
+  ],
+  "cases": [
+    {
+      "id": "chat.basic",
+      "title": "Chat Completions 基本回應",
+      "required": true
+    },
+    {
+      "id": "chat.system",
+      "title": "System prompt",
+      "required": false
+    },
+    {
+      "id": "chat.stream",
+      "title": "串流（SSE）",
+      "required": true
+    },
+    {
+      "id": "chat.stream_usage",
+      "title": "串流 usage（stream_options.include_usage）",
+      "required": false
+    },
+    {
+      "id": "params.max_tokens",
+      "title": "max_tokens 參數",
+      "required": true
+    },
+    {
+      "id": "params.max_completion_tokens",
+      "title": "max_completion_tokens 參數",
+      "required": false
+    },
+    {
+      "id": "params.temperature",
+      "title": "temperature=0（reasoning 模型常拒收，gateway 應丟棄）",
+      "required": false
+    },
+    {
+      "id": "params.reasoning_effort",
+      "title": "reasoning_effort=low",
+      "required": false
+    },
+    {
+      "id": "tools.auto",
+      "title": "Tool calling（tool_choice=auto）",
+      "required": true
+    },
+    {
+      "id": "tools.forced",
+      "title": "Forced tool_choice（指定函式）",
+      "required": false
+    },
+    {
+      "id": "structured.json_schema",
+      "title": "Structured output（response_format json_schema）",
+      "required": false
+    },
+    {
+      "id": "vision.image",
+      "title": "影像輸入（data URL）",
+      "required": false
+    },
+    {
+      "id": "usage.cache",
+      "title": "Prompt caching（重複長前綴，第二次應有 cached tokens）",
+      "required": false
+    },
+    {
+      "id": "responses.basic",
+      "title": "Responses API（/v1/responses）",
+      "required": false
+    },
+    {
+      "id": "responses.tools",
+      "title": "Responses API + function tool",
+      "required": false
+    },
+    {
+      "id": "messages.basic",
+      "title": "Anthropic Messages（/v1/messages）",
+      "required": false
+    },
+    {
+      "id": "meta.response_model",
+      "title": "回應的 model 欄位（偵測 fallback / alias）",
+      "required": false
+    }
+  ],
+  "results": [
+    {
+      "route": "mock-good",
+      "caseId": "chat.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 55.7,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "chat.system",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 93.1,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "chat.stream",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 311.9,
+      "detail": "17 chunks"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "chat.stream_usage",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 312.1,
+      "detail": "usage={'prompt_tokens': 1, 'completion_tokens': 17, 'total_tokens': 18, 'completion_tokens_details': {'reasoning_tokens': 0}, 'prompt_tokens_details': {'cached_tokens': 0}}"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "params.max_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 52.7,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "params.max_completion_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.1,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "params.temperature",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.8,
+      "detail": "accepted or dropped by gateway"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "params.reasoning_effort",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.9,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "tools.auto",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "tools.forced",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.8,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "structured.json_schema",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.8,
+      "detail": "符合 schema 必填欄位"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "vision.image",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 96.3,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "usage.cache",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 96.0,
+      "detail": "cached_tokens=4099"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "responses.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "有 output_text"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "responses.tools",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "有 function_call"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "messages.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 44.0,
+      "detail": "stop_reason=end_turn"
+    },
+    {
+      "route": "mock-good",
+      "caseId": "meta.response_model",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "response.model=mock-good"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "chat.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "chat.system",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "chat.stream",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 854.0,
+      "detail": "17 chunks"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "chat.stream_usage",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 854.7,
+      "detail": "usage={'prompt_tokens': 1, 'completion_tokens': 26, 'total_tokens': 27, 'completion_tokens_details': {'reasoning_tokens': 9}, 'prompt_tokens_details': {'cached_tokens': 0}}"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "params.max_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 52.2,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "params.max_completion_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 94.6,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "params.temperature",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "accepted or dropped by gateway"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "params.reasoning_effort",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "tools.auto",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "tools.forced",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "structured.json_schema",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "符合 schema 必填欄位"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "vision.image",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.8,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "usage.cache",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.7,
+      "detail": "cached_tokens=4099"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "responses.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "有 output_text"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "responses.tools",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.8,
+      "detail": "有 function_call"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "messages.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 44.0,
+      "detail": "stop_reason=end_turn"
+    },
+    {
+      "route": "mock-reasoning",
+      "caseId": "meta.response_model",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 96.0,
+      "detail": "response.model=mock-reasoning"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "chat.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.8,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "chat.system",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.8,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "chat.stream",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 311.3,
+      "detail": "17 chunks"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "chat.stream_usage",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 312.4,
+      "detail": "usage={'prompt_tokens': 1, 'completion_tokens': 17, 'total_tokens': 18, 'completion_tokens_details': {'reasoning_tokens': 0}, 'prompt_tokens_details': {'cached_tokens': 0}}"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "params.max_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 52.8,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "params.max_completion_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.2,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "params.temperature",
+      "status": "fail",
+      "httpStatus": 400,
+      "latencyMs": 44.0,
+      "detail": "{\"error\": {\"message\": \"Unsupported parameter: 'temperature'\", \"type\": \"invalid_request_error\", \"code\": \"400\"}}"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "params.reasoning_effort",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "tools.auto",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "tools.forced",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.8,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "structured.json_schema",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.7,
+      "detail": "符合 schema 必填欄位"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "vision.image",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "usage.cache",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 95.7,
+      "detail": "cached_tokens=4099"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "responses.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.8,
+      "detail": "有 output_text"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "responses.tools",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 44.1,
+      "detail": "有 function_call"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "messages.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.8,
+      "detail": "stop_reason=end_turn"
+    },
+    {
+      "route": "mock-no-temp",
+      "caseId": "meta.response_model",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "response.model=mock-no-temp"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "chat.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "chat.system",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "chat.stream",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 311.3,
+      "detail": "17 chunks"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "chat.stream_usage",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 312.6,
+      "detail": "usage={'prompt_tokens': 1, 'completion_tokens': 17, 'total_tokens': 18, 'completion_tokens_details': {'reasoning_tokens': 0}, 'prompt_tokens_details': {'cached_tokens': 0}}"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "params.max_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 52.9,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "params.max_completion_tokens",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 94.9,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "params.temperature",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.8,
+      "detail": "accepted or dropped by gateway"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "params.reasoning_effort",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "accepted"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "tools.auto",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "有 tool_calls"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "tools.forced",
+      "status": "fail",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "HTTP 200 但沒有 tool_calls：forced tool_choice 可能被 gateway 靜默降級為 auto"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "structured.json_schema",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "符合 schema 必填欄位"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "vision.image",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.8,
+      "detail": "非空回應"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "usage.cache",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 91.9,
+      "detail": "cached_tokens=4099"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "responses.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "有 output_text"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "responses.tools",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "有 function_call"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "messages.basic",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 43.9,
+      "detail": "stop_reason=end_turn"
+    },
+    {
+      "route": "mock-silent-forced",
+      "caseId": "meta.response_model",
+      "status": "pass",
+      "httpStatus": 200,
+      "latencyMs": 92.0,
+      "detail": "response.model=mock-silent-forced"
+    }
+  ],
+  "summary": [
+    {
+      "route": "mock-good",
+      "pass": 17,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "requiredFailures": []
+    },
+    {
+      "route": "mock-reasoning",
+      "pass": 17,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "requiredFailures": []
+    },
+    {
+      "route": "mock-no-temp",
+      "pass": 16,
+      "fail": 1,
+      "error": 0,
+      "skip": 0,
+      "requiredFailures": []
+    },
+    {
+      "route": "mock-silent-forced",
+      "pass": 16,
+      "fail": 1,
+      "error": 0,
+      "skip": 0,
+      "requiredFailures": []
+    }
+  ],
+  "litellmVersion": "1.102.1-mock"
+}

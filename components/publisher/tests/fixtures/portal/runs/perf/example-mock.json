@@ -1,0 +1,86 @@
+{
+  "schema": "perf-run/v1",
+  "runId": "perf-20260924T162816Z-2c61d1",
+  "startedAt": "2026-09-24T16:28:16.902523Z",
+  "finishedAt": "2026-09-24T16:28:20.340406Z",
+  "gateway": "http://127.0.0.1:4011/v1",
+  "route": "mock-reasoning",
+  "clientLocation": "mock",
+  "profile": {
+    "name": "tiny",
+    "approxInputTokens": 100,
+    "maxOutputTokens": 50,
+    "concurrency": 4,
+    "requests": 16,
+    "stream": true,
+    "reasoningEffort": "low"
+  },
+  "metrics": {
+    "ttftMs": {
+      "n": 16,
+      "p50": 55.303,
+      "p90": 56.559,
+      "p99": 57.543,
+      "mean": 55.321,
+      "min": 53.421,
+      "max": 57.651
+    },
+    "ttfatMs": {
+      "n": 16,
+      "p50": 598.166,
+      "p90": 599.933,
+      "p99": 600.789,
+      "mean": 598.334,
+      "min": 594.99,
+      "max": 600.923
+    },
+    "itlMs": {
+      "n": 16,
+      "p50": 16.208,
+      "p90": 16.438,
+      "p99": 16.57,
+      "mean": 16.267,
+      "min": 16.136,
+      "max": 16.591
+    },
+    "ttltMs": {
+      "n": 16,
+      "p50": 858.107,
+      "p90": 862.92,
+      "p99": 864.937,
+      "mean": 858.599,
+      "min": 853.158,
+      "max": 865.291
+    },
+    "outputTokensPerSec": {
+      "n": 16,
+      "p50": 32.382,
+      "p90": 32.496,
+      "p99": 32.514,
+      "mean": 32.368,
+      "min": 32.164,
+      "max": 32.515
+    },
+    "aggregateOutputTokensPerSec": 121.005,
+    "requestsPerSec": 4.654,
+    "errorRate": 0.0,
+    "errorsByType": {},
+    "goodputPct": 100.0
+  },
+  "usage": {
+    "inputTokens": 1728,
+    "outputTokens": 416,
+    "reasoningTokens": 144,
+    "cachedInputTokens": 0
+  },
+  "notes": [
+    "finish_reason counts: {\"stop\": 16}",
+    "response.model counts: {\"mock-reasoning\": 16}（與 route 不同時可能是 safeguard fallback 或 alias 設定）",
+    "max tokens parameter: max_tokens=50",
+    "warmup requests excluded: 1"
+  ],
+  "slo": {
+    "ttfatMs": 2000.0,
+    "ttltMs": 5000.0
+  }
+}

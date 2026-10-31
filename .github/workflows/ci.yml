@@ -1,0 +1,133 @@
+# Pull requests and main: test what changed, check generated files, build every changed image and scan it.
+# Nothing is pushed here (release.yml does that on main). Renovate pins the actions to commit SHAs.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      components: ${{ steps.pick.outputs.components }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: pick
+        name: Changed components (libs/, contracts/ or tools/ changes test and build everything)
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          all=$(ls components | jq -R . | jq -cs .)
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE" 2>/dev/null; then echo "components=$all" >> "$GITHUB_OUTPUT"; exit 0; fi
+          changed=$(git diff --name-only "$BASE" HEAD)
+          if echo "$changed" | grep -qE '^(libs|contracts|tools)/'; then echo "components=$all" >> "$GITHUB_OUTPUT"; exit 0; fi
+          list=$(echo "$changed" | sed -n 's#^components/\([^/]*\)/.*#\1#p' | sort -u | jq -R . | jq -cs 'map(select(length > 0))')
+          echo "components=$list" >> "$GITHUB_OUTPUT"
+
+  libs:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env: {POSTGRES_PASSWORD: test}
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgresql://postgres:test@127.0.0.1:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r libs/llmops-common/requirements.in -r libs/llmops-common/requirements-fastapi.in pytest
+      - run: python -m pytest -q libs/llmops-common/tests
+
+  test:
+    needs: changes
+    if: needs.changes.outputs.components != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJSON(needs.changes.outputs.components) }}
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env: {POSTGRES_PASSWORD: test}
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgresql://postgres:test@127.0.0.1:5432/postgres
+      C: components/${{ matrix.component }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Locked dependencies
+        run: |
+          pip install uv
+          if [ -f "$C/requirements.lock" ]; then uv pip install --system --require-hashes --no-deps -r "$C/requirements.lock"; fi
+          uv pip install --system pytest "moto[s3]>=5.1"
+      - name: Tests
+        run: |
+          if [ -d "$C/tests" ]; then PYTHONPATH="libs/llmops-common/src:$C/src" python -m pytest -q "$C/tests"; else echo "no tests"; fi
+
+  generated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Tools
+        run: >-
+          pip install pyyaml jsonschema -r libs/llmops-common/requirements.in
+          -r libs/llmops-common/requirements-fastapi.in
+      - name: Compose file and handoff table are current
+        run: python3 tools/render_deploy.py --check
+      - name: OpenAPI contracts are current
+        run: python3 tools/export_openapi.py --check
+      - name: Kubernetes manifests render (as the release PR to llmops-deploy will)
+        run: |
+          python3 tools/render_deploy.py --k8s-out build/k8s --argocd
+          kubectl kustomize build/k8s/base > /dev/null && kubectl kustomize build/k8s/testjobs > /dev/null
+      - name: Shell and Python syntax
+        run: |
+          for f in $(git ls-files '*.sh'); do bash -n "$f"; done
+          python3 -m compileall -q tools libs components > /dev/null
+
+  image:
+    needs: [changes, test]
+    if: needs.changes.outputs.components != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJSON(needs.changes.outputs.components) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: components/${{ matrix.component }}/Dockerfile
+          platforms: linux/amd64
+          load: true
+          push: false
+          tags: llmops/${{ matrix.component }}:ci
+          cache-from: type=gha,scope=${{ matrix.component }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.component }}
+      - name: Trivy (fixable HIGH / CRITICAL fail the build)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: llmops/${{ matrix.component }}:ci
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"

@@ -1,0 +1,34 @@
+{
+  "_comment": "Local and local-k3s: the gateway's fake models and the built-in mock provider. Nothing leaves the machine.",
+  "baseline_model_id": null,
+  "provider_defaults": {},
+  "routes": [
+    {
+      "model_id": "claude-sonnet-5-5",
+      "kind": "gateway",
+      "provider": "gateway",
+      "gateway": "onprem",
+      "target": {
+        "model": "claude-sonnet-5-5"
+      }
+    },
+    {
+      "model_id": "claude-haiku-5-5",
+      "kind": "gateway",
+      "provider": "gateway",
+      "gateway": "onprem",
+      "target": {
+        "model": "claude-haiku-5-5"
+      }
+    },
+    {
+      "id": "direct:mock:local:mock-refuse",
+      "model_id": "mock-refuse",
+      "kind": "direct",
+      "provider": "mock",
+      "target": {
+        "behaviour": "refuse"
+      }
+    }
+  ]
+}

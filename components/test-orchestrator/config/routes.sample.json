@@ -1,0 +1,36 @@
+{
+  "_comment": "Sample ROUTES_FILE for test-orchestrator. Mount the real one from a ConfigMap and set ROUTES_FILE to its path. Route ids are derived (gw:<gateway>:<model_id>, direct:<provider>:<region>:<model_id>) unless given. Routes listed here are the source of truth: a sync overwrites them. Routes added later by route.added events are not removed by a sync. Disabled routes are kept but never planned.",
+  "baseline_model_id": null,
+  "provider_defaults": {
+    "azure": {"endpoint": "https://<foundry-resource>.services.ai.azure.com", "api_version": "2025-04-01-preview"},
+    "vertex": {"project": "<gcp-project-id>", "region": "global"}
+  },
+  "routes": [
+    {"model_id": "claude-sonnet-5-5", "kind": "gateway", "provider": "gateway", "gateway": "onprem",
+     "target": {"model": "claude-sonnet-5-5"}},
+    {"model_id": "claude-haiku-5-5", "kind": "gateway", "provider": "gateway", "gateway": "onprem",
+     "target": {"model": "claude-haiku-5-5"}},
+    {"model_id": "claude-opus-5-5", "kind": "gateway", "provider": "gateway", "gateway": "onprem",
+     "target": {"model": "claude-opus-5-5"}},
+
+    {"model_id": "claude-sonnet-5-5", "kind": "direct", "provider": "bedrock", "region": "us-east-1",
+     "target": {"model": "global.anthropic.claude-sonnet-5-5", "region": "us-east-1"}},
+    {"model_id": "claude-haiku-5-5", "kind": "direct", "provider": "bedrock", "region": "us-east-1",
+     "target": {"model": "global.anthropic.claude-haiku-5-5", "region": "us-east-1"}},
+
+    {"model_id": "claude-sonnet-5-5", "kind": "direct", "provider": "vertex", "region": "global", "enabled": false,
+     "target": {"project": "<gcp-project-id>", "region": "global", "model": "claude-sonnet-5-5"}},
+    {"model_id": "gemini-3-8-flash", "kind": "direct", "provider": "vertex", "region": "global", "enabled": false,
+     "target": {"project": "<gcp-project-id>", "region": "global", "model": "gemini-3.8-flash", "publisher": "google"}},
+    {"model_id": "gpt-6-luna", "kind": "direct", "provider": "azure", "region": "eastus2", "enabled": false,
+     "target": {"endpoint": "https://<foundry-resource>.services.ai.azure.com", "deployment": "gpt-6-luna",
+                "api_version": "2025-04-01-preview"}},
+    {"model_id": "claude-sonnet-5-5", "kind": "direct", "provider": "anthropic", "region": "global", "enabled": false,
+     "target": {"model": "claude-sonnet-5-5"}},
+
+    {"id": "direct:mock:local:mock-refuse", "model_id": "mock-refuse", "kind": "direct", "provider": "mock", "enabled": false,
+     "target": {"behaviour": "refuse"}},
+    {"id": "direct:mock:local:mock-simulate", "model_id": "mock-simulate", "kind": "direct", "provider": "mock", "enabled": false,
+     "target": {"behaviour": "simulate", "profile": "weak"}}
+  ]
+}

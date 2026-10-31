@@ -1,0 +1,1706 @@
+{
+  "schema": "lifecycle/v1",
+  "generatedAt": "2026-10-01T14:30:00Z",
+  "locale": "zh-TW",
+  "asOf": "2026-10-01",
+  "policies": [
+    {
+      "service": "bedrock",
+      "summary": "2026-09-07 起新上架的模型：模型卡標示「EOL no sooner than」日期與 Legacy 期（6 個月或 45 天，多數為 6 個月；首例 45 天為 2026-09-18 上架的 Kimi K3），進入 Legacy 時才公布確切 EOL 日。2026-09-07 前上架者沿用舊政策：上架後至少 12 個月、Legacy 至少 6 個月；EOL 在 2026-02-01 之後的模型，Legacy 滿 3 個月後進入 public extended access，價格可能由供應商調高。Legacy 期間新客戶不可使用、既有客戶 15 天未使用可能失去存取、不可新建 Provisioned Throughput；EOL 後呼叫一律失敗，不會自動遷移。 例外：GPT-6.1 Sol 依 OpenAI 一方模型的生命週期與 EOL 條款，沒有 Bedrock 自己的最低可用日（模型卡 EOL「Not announced」，至少 6 個月通知）。",
+      "noticePeriod": "舊模型 ≥6 個月；新模型依模型卡（6 個月或 45 天）",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle"
+        },
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        },
+        {
+          "id": "julien-45days"
+        }
+      ]
+    },
+    {
+      "service": "foundry",
+      "summary": "退役表逐版本列出 lifecycle（Preview/GA/Legacy/Deprecated）、退役日與建議替代；Standard / Global / Data Zone 部署可設自動升級（versionUpgradeOption），Provisioned 部署不會自動升級。日期會調整且可能提前：gpt-4.1 曾於 2026-04 被告知 2026-10-14 為固定日，現行表為 2027-04-14；o3-pro 由 2026-12-17、o3-deep-research 由 2026-12-26 提前到 2026-11-19。Claude on Foundry 由 Anthropic 營運，但 Foundry 表可能另列日期。 注意：Anthropic 頁面稱其日期適用 Foundry，但兩邊日期常不同步（例：Sonnet 4.5 Anthropic 2026-11-30、Foundry 表 2026-11-15）。",
+      "noticePeriod": "依退役表；GA 版本通常自發布起約 12～18 個月",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "vorplabs-foundry"
+        },
+        {
+          "id": "ms-qa-gpt41-oct2026"
+        }
+      ]
+    },
+    {
+      "service": "agent-platform",
+      "summary": "穩定版通常自發布起提供 12 個月（部分僅短期），退役資訊在模型版本頁、release notes 與帳號通知；文件已搬到 Gemini Enterprise Agent Platform 網址，舊的 Vertex AI 文件頁可能停止更新（2026-09-24 查詢時，舊 release notes 只到 2026-05）。同一個模型 ID 在 Gemini API 與 Agent Platform 的時程可能完全不同，日期也會被改：Gemini 2.5 在 7 月公告 10-16，2026-09-15 重新發布的客戶通知改為 10-20 起封鎖新專案與閒置專案、2027 年分階段停止服務；Gemini API 頁面則已移除停止日。gemini-2.5-flash-image 在 Agent Platform 延到 2027-03-15（2026-09-14 release note），但 Gemini API 仍為 2026-10-02 關閉；Gemini API 另於 2026-09-18 起限縮 2.5 模型只給近期有使用的帳號。Claude 等合作夥伴模型由 Google 自訂退役時程。退役後的模型 ID 通常回 404。",
+      "noticePeriod": "穩定版約 12 個月；以 Agent Platform 模型版本頁與帳號通知為準",
+      "sources": [
+        {
+          "id": "google-agentplatform-model-versions"
+        },
+        {
+          "id": "google-agentplatform-release-notes"
+        },
+        {
+          "id": "google-vertex-model-versions"
+        },
+        {
+          "id": "google-vertex-release-notes"
+        },
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "devto-gemini25-date-removed"
+        },
+        {
+          "id": "vorplabs-google"
+        },
+        {
+          "id": "google-agent-platform"
+        },
+        {
+          "id": "google-gemini-api-deprecations"
+        },
+        {
+          "id": "google-gemini-api-changelog"
+        }
+      ]
+    },
+    {
+      "service": "anthropic-api",
+      "summary": "Active → Legacy → Deprecated → Retired；頁面日期適用 Claude API、Claude Platform on AWS 與 Microsoft Foundry，Bedrock 與 Google Cloud 自訂時程。新模型標示「退役不早於」日期（例如 Opus 5.5 不早於 2027-09-22）。同一模型在不同通路的關閉日可能差好幾個月（Opus 4.1：Anthropic 2026-08-05、Bedrock 2027-01-08）。",
+      "noticePeriod": "新模型至少 1 年；以 deprecations 頁為準",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        },
+        {
+          "id": "model-eol-feed"
+        }
+      ]
+    },
+    {
+      "service": "openai-api",
+      "summary": "OpenAI deprecations 頁逐一列出公告日、關閉日與替代模型；cyber 系列模型更新快、通知期短（gpt-5.4-cyber 於 2026-09-11 公告、10-01 關閉）。Azure / Bedrock 上的同一模型時程各自獨立。",
+      "noticePeriod": "依 deprecations 頁；一般模型通常數個月，cyber 系列可短至約 3 週",
+      "sources": [
+        {
+          "id": "openai-deprecations"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "bedrock-claude-3-haiku-eol",
+      "modelName": "Claude 3 Haiku",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-3-haiku-20240307-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-09-10",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "ap-northeast-1、ap-southeast-2、eu-*、us-*、GovCloud",
+      "notes": [
+        "已退役：呼叫會失敗。"
+      ]
+    },
+    {
+      "id": "bedrock-nova-premier-eol",
+      "modelName": "Amazon Nova Premier",
+      "vendor": "amazon",
+      "providerModelId": "amazon.nova-premier-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-09-14",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "us-east-1、us-east-2、us-west-2",
+      "notes": [
+        "已退役。"
+      ]
+    },
+    {
+      "id": "bedrock-nova-sonic-eol",
+      "modelName": "Amazon Nova Sonic (v1)",
+      "vendor": "amazon",
+      "providerModelId": "amazon.nova-sonic-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-09-14",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "ap-northeast-1、eu-north-1、us-east-1",
+      "notes": [
+        "已退役。"
+      ]
+    },
+    {
+      "id": "gemini-api-gemini-2-5-limited",
+      "modelName": "gemini-2.5-pro / flash / flash-lite（Gemini API）",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-pro, gemini-2.5-flash, gemini-2.5-flash-lite",
+      "cloud": "vendor-direct",
+      "service": "gemini-api",
+      "event": "legacy",
+      "date": "2026-09-18",
+      "notes": [
+        "Gemini API changelog 2026-09-18：2.5 模型限縮為只給過去有實際使用的使用者。",
+        "Gemini API 棄用頁（2026-10-01 更新）三者皆為「No shutdown date announced」；changelog 指引新專案改用 3.5 Flash-Lite 或 3.8 Flash。",
+        "與 Agent Platform 的分階段退役是不同通路、不同時程。"
+      ],
+      "sources": [
+        {
+          "id": "google-gemini-api-changelog"
+        },
+        {
+          "id": "google-gemini-api-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-gpt-realtime-mini-1006-eol",
+      "modelName": "gpt-realtime-mini",
+      "vendor": "openai",
+      "providerModelId": "gpt-realtime-mini",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-09-21",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-10-06",
+      "notes": [
+        "已過官方表其中一列的退役日；表中另一列寫 2027-04-06——請以 Azure portal 部署頁確認是否仍可呼叫。",
+        "2025-12-15 版本見另一事件。"
+      ],
+      "conflicts": [
+        {
+          "date": "2027-04-06",
+          "kind": "conflicting",
+          "note": "同一官方退役表（2026-09-21 更新）另有一列 gpt-realtime-mini 2025-10-06 為 2027-04-06；表內重複列互相矛盾，依規則以最早日期（09-21）計。",
+          "sources": [
+            {
+              "id": "ms-foundry-retirement-schedule"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bedrock-nova-canvas-eol",
+      "modelName": "Amazon Nova Canvas",
+      "vendor": "amazon",
+      "providerModelId": "amazon.nova-canvas-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-09-30",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "ap-northeast-1、eu-west-1、us-east-1"
+    },
+    {
+      "id": "bedrock-nova-reel-eol",
+      "modelName": "Amazon Nova Reel",
+      "vendor": "amazon",
+      "providerModelId": "amazon.nova-reel-v1:0 / v1:1",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-09-30",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "v1:0：ap-northeast-1、eu-west-1、us-east-1；v1:1：us-east-1"
+    },
+    {
+      "id": "anthropic-sonnet-4-5-deprecation",
+      "modelName": "Claude Sonnet 4.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-sonnet-4-5-20250929",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "deprecation",
+      "date": "2026-09-30",
+      "replacement": "claude-sonnet-5-5",
+      "notes": [
+        "Anthropic 2026-09-30 通知使用者；取代先前的「不早於 2026-09-29」。"
+      ],
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        },
+        {
+          "id": "anthropic-release-notes"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-mai-image-2-5-eol",
+      "modelName": "MAI-Image-2.5 / -Pro / -Flash",
+      "vendor": "microsoft",
+      "providerModelId": "MAI-Image-2.5, MAI-Image-2.5-Pro, MAI-Image-2.5-Flash",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-01",
+      "notes": [
+        "Preview。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "openai-gpt-5-4-cyber-eol",
+      "modelName": "gpt-5.4-cyber",
+      "vendor": "openai",
+      "providerModelId": "gpt-5.4-cyber",
+      "cloud": "vendor-direct",
+      "service": "openai-api",
+      "event": "retirement",
+      "date": "2026-10-01",
+      "replacement": "the most capable cyber model available to you",
+      "notes": [
+        "2026-09-11 公告。API models 頁目前的 cyber 模型為 gpt-5.6-cyber。"
+      ],
+      "sources": [
+        {
+          "id": "openai-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "gemini-api-gemini-2-5-flash-image-eol",
+      "modelName": "gemini-2.5-flash-image（Gemini API）",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash-image",
+      "cloud": "vendor-direct",
+      "service": "gemini-api",
+      "event": "retirement",
+      "date": "2026-10-02",
+      "notes": [
+        "Gemini API 棄用頁（2026-10-01 更新）仍列 2026-10-02 關閉。Agent Platform 同名模型為 2027-03-15。"
+      ],
+      "sources": [
+        {
+          "id": "google-gemini-api-deprecations"
+        }
+      ],
+      "verification": "official",
+      "replacement": "gemini-3.1-flash-image-preview"
+    },
+    {
+      "id": "azure-kimi-k2-7-code-eol",
+      "modelName": "Kimi-K2.7-Code",
+      "vendor": "moonshot",
+      "providerModelId": "Kimi-K2.7-Code",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-03",
+      "notes": [
+        "Preview。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "bedrock-claude-opus-4-1-ext",
+      "modelName": "Claude Opus 4.1",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-opus-4-1-20250805-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "extended-access",
+      "date": "2026-10-08",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "us-east-1、us-east-2、us-west-2",
+      "notes": [
+        "進入 public extended access 後價格可能上調。"
+      ]
+    },
+    {
+      "id": "azure-gpt-4-1-nano-eol",
+      "modelName": "gpt-4.1-nano",
+      "vendor": "openai",
+      "providerModelId": "gpt-4.1-nano",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-14",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "vorplabs-foundry"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-04-14",
+      "notes": [
+        "Lifecycle：Deprecated；官方退役表（2026-09-21 更新）已列出。"
+      ]
+    },
+    {
+      "id": "bedrock-claude-sonnet-4-eol",
+      "modelName": "Claude Sonnet 4",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-sonnet-4-20250514-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-10-14",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "多區域，含 ap-east-2（台北）、ap-northeast-1/2/3、ap-southeast-1/2、ap-south-1 等",
+      "notes": [
+        "2026-07-14 已進入 public extended access（價格可能較高）。",
+        "替代：評估 Claude Sonnet 5（或即將推出的 Sonnet 5.5）。"
+      ]
+    },
+    {
+      "id": "anthropic-haiku-4-5-nst",
+      "modelName": "Claude Haiku 4.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-haiku-4-5-20251001",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "eol-no-sooner-than",
+      "date": "2026-10-15",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official",
+      "notes": [
+        "Anthropic 表示此日期適用 Claude API、Claude Platform on AWS 與 Foundry；Haiku 5.5 預計數週內推出。"
+      ]
+    },
+    {
+      "id": "azure-gpt-4o-transcribe-eol",
+      "modelName": "gpt-4o-transcribe",
+      "vendor": "openai",
+      "providerModelId": "gpt-4o-transcribe",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-15",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-03-20"
+    },
+    {
+      "id": "azure-claude-haiku-4-5-eol",
+      "modelName": "claude-haiku-4-5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-haiku-4-5",
+      "version": "1, 2",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-15",
+      "conflicts": [
+        {
+          "date": "2026-11-15",
+          "kind": "conflicting",
+          "note": "Foundry 表（v1、v2）列 2026-11-15；Anthropic 為「不早於 2026-10-15」（聲明適用 Foundry）。以最早日期倒數。",
+          "sources": [
+            {
+              "id": "ms-foundry-retirement-schedule"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "2026-10-01 更正：2026-09-28 版誤記 Foundry 表為 2026-10-19；逐字複查官方表（2026-09-21 版，updated_at 2026-09-23，期間未變更）為本日期。",
+        "Haiku 5.5 尚未發布；替代先評估 Claude Sonnet 5.5、GPT-6 Luna 或 Gemini 3.8 Flash。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-gpt-4o-mini-transcribe-tts-eol",
+      "modelName": "gpt-4o-mini-transcribe / gpt-4o-mini-tts",
+      "vendor": "openai",
+      "providerModelId": "gpt-4o-mini-transcribe, gpt-4o-mini-tts",
+      "version": "2025-03-20",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-15",
+      "notes": [
+        "2025-12-15 版本為 2027-06-15。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-sora-2-eol",
+      "modelName": "sora-2",
+      "vendor": "openai",
+      "providerModelId": "sora-2",
+      "version": "2025-12-08",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-15",
+      "notes": [
+        "Preview。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-cohere-command-a-plus-eol",
+      "modelName": "Cohere-command-a-plus-05-2026",
+      "vendor": "cohere",
+      "providerModelId": "Cohere-command-a-plus-05-2026",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-16",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "replacement": "coherelabs-command-a-plus-05-2026-fp8 / -bf16 / -w4a4",
+      "conflicts": [
+        {
+          "date": "2026-10-13",
+          "kind": "superseded",
+          "note": "先前官方表的日期；2026-09-21 更新後為 10-16",
+          "sources": [
+            {
+              "id": "ms-foundry-retirement-schedule"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Preview 版本。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-flash-legacy",
+      "modelName": "gemini-2.5-flash",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "legacy",
+      "date": "2026-10-20",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        },
+        {
+          "id": "google-forum-gemini25-dates"
+        },
+        {
+          "id": "zentor-gemini25"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.5-flash-lite 或 gemini-3.1-flash-lite",
+      "conflicts": [
+        {
+          "date": "2026-10-16",
+          "kind": "superseded",
+          "note": "7 月公告與舊版 Vertex AI 文件的日期（not before 10-16）；2026-09-15 重新發布的通知改為 10-20 起分階段退役",
+          "sources": [
+            {
+              "id": "google-vertex-release-notes"
+            },
+            {
+              "id": "google-vertex-model-versions"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "公開退役開始：新專案，以及 2026-07-22～10-20 期間沒有呼叫過的專案會被封鎖；持續使用中的專案維持現價與 SLA 直到停止服務日。",
+        "DR / fallback 專案若平常沒有流量，也會被視為閒置而被封鎖。",
+        "Gemini API（ai.google.dev）頁面寫「No shutdown date announced」——兩個通路時程不同。",
+        "2026-10-01 複查：官方 Agent Platform 頁面仍無法直接讀取；引述 Google 2026-09-15 通知的 GitHub issue 未見更新，也未找到更新的通知。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-flash-lite-legacy",
+      "modelName": "gemini-2.5-flash-lite",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash-lite",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "legacy",
+      "date": "2026-10-20",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        },
+        {
+          "id": "google-forum-gemini25-dates"
+        },
+        {
+          "id": "zentor-gemini25"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.1-flash-lite 或 Gemma 4",
+      "conflicts": [
+        {
+          "date": "2026-10-16",
+          "kind": "superseded",
+          "note": "7 月公告與舊版 Vertex AI 文件的日期（not before 10-16）；2026-09-15 重新發布的通知改為 10-20 起分階段退役",
+          "sources": [
+            {
+              "id": "google-vertex-release-notes"
+            },
+            {
+              "id": "google-vertex-model-versions"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "公開退役開始：新專案，以及 2026-07-22～10-20 期間沒有呼叫過的專案會被封鎖；持續使用中的專案維持現價與 SLA 直到停止服務日。",
+        "DR / fallback 專案若平常沒有流量，也會被視為閒置而被封鎖。",
+        "Gemini API（ai.google.dev）頁面寫「No shutdown date announced」——兩個通路時程不同。",
+        "2026-10-01 複查：官方 Agent Platform 頁面仍無法直接讀取；引述 Google 2026-09-15 通知的 GitHub issue 未見更新，也未找到更新的通知。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-pro-legacy",
+      "modelName": "gemini-2.5-pro",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-pro",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "legacy",
+      "date": "2026-10-20",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        },
+        {
+          "id": "google-forum-gemini25-dates"
+        },
+        {
+          "id": "zentor-gemini25"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.5-flash",
+      "conflicts": [
+        {
+          "date": "2026-10-16",
+          "kind": "superseded",
+          "note": "7 月公告與舊版 Vertex AI 文件的日期（not before 10-16）；2026-09-15 重新發布的通知改為 10-20 起分階段退役",
+          "sources": [
+            {
+              "id": "google-vertex-release-notes"
+            },
+            {
+              "id": "google-vertex-model-versions"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "公開退役開始：新專案，以及 2026-07-22～10-20 期間沒有呼叫過的專案會被封鎖；持續使用中的專案維持現價與 SLA 直到停止服務日。",
+        "DR / fallback 專案若平常沒有流量，也會被視為閒置而被封鎖。",
+        "Gemini API（ai.google.dev）頁面寫「No shutdown date announced」——兩個通路時程不同。",
+        "2026-10-01 複查：官方 Agent Platform 頁面仍無法直接讀取；引述 Google 2026-09-15 通知的 GitHub issue 未見更新，也未找到更新的通知。"
+      ]
+    },
+    {
+      "id": "azure-gpt-image-1-eol",
+      "modelName": "gpt-image-1",
+      "vendor": "openai",
+      "providerModelId": "gpt-image-1",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-10-23",
+      "notes": [
+        "Preview。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-claude-sonnet-4-5-eol",
+      "modelName": "claude-sonnet-4-5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-sonnet-4-5",
+      "version": "1",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-15",
+      "conflicts": [
+        {
+          "date": "2026-11-30",
+          "kind": "conflicting",
+          "note": "Anthropic 2026-09-30 宣布 Sonnet 4.5 退役日 2026-11-30（頁面稱其日期適用 Foundry）；Foundry 表為 2026-11-15，以較早者倒數。",
+          "sources": [
+            {
+              "id": "anthropic-deprecations"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "2026-10-01 更正：2026-09-28 版誤記 Foundry 表為 2026-10-19；逐字複查官方表（2026-09-21 版，updated_at 2026-09-23，期間未變更）為本日期。",
+        "Foundry 表在 Anthropic 宣布前更新，尚未標為 Deprecated、未列替代；Anthropic 建議替代為 claude-sonnet-5-5。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official",
+      "replacement": "claude-sonnet-5-5"
+    },
+    {
+      "id": "azure-codex-mini-eol",
+      "modelName": "codex-mini",
+      "vendor": "openai",
+      "providerModelId": "codex-mini",
+      "version": "2025-05-16",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-15",
+      "notes": [
+        "Lifecycle：Deprecated。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-o1-eol",
+      "modelName": "o1",
+      "vendor": "openai",
+      "providerModelId": "o1",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2024-12-17",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-10-21",
+          "kind": "superseded",
+          "note": "2026-08-10 時的公告日，現已延後",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-o1-pro-eol",
+      "modelName": "o1-pro",
+      "vendor": "openai",
+      "providerModelId": "o1-pro",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-03-19",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-10-21",
+          "kind": "superseded",
+          "note": "舊公告日",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-o3-deep-research-eol",
+      "modelName": "o3-deep-research",
+      "vendor": "openai",
+      "providerModelId": "o3-deep-research",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-06-26",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-12-26",
+          "kind": "superseded",
+          "note": "舊公告日——退役日被提前",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            },
+            {
+              "id": "model-eol-feed"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "OpenAI API 上的同一模型已於 2026-07-23 關閉。"
+      ]
+    },
+    {
+      "id": "azure-o3-eol",
+      "modelName": "o3",
+      "vendor": "openai",
+      "providerModelId": "o3",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-04-16",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-10-21",
+          "kind": "superseded",
+          "note": "舊公告日",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-o3-mini-eol",
+      "modelName": "o3-mini",
+      "vendor": "openai",
+      "providerModelId": "o3-mini",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-01-31",
+      "replacement": "gpt-5.6-terra",
+      "conflicts": [
+        {
+          "date": "2026-10-01",
+          "kind": "superseded",
+          "note": "舊公告日",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-o3-pro-eol",
+      "modelName": "o3-pro",
+      "vendor": "openai",
+      "providerModelId": "o3-pro",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-06-10",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-12-17",
+          "kind": "superseded",
+          "note": "舊公告日——退役日被提前",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-o4-mini-eol",
+      "modelName": "o4-mini",
+      "vendor": "openai",
+      "providerModelId": "o4-mini",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-19",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-04-16",
+      "replacement": "gpt-5.6-terra",
+      "conflicts": [
+        {
+          "date": "2026-10-16",
+          "kind": "superseded",
+          "note": "舊公告日",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-claude-opus-4-5-eol",
+      "modelName": "claude-opus-4-5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-opus-4-5",
+      "version": "1",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-11-24",
+      "replacement": "claude-opus-5-5",
+      "notes": [
+        "2026-10-01 更正：2026-09-28 版誤記 Foundry 表為 2026-10-19；逐字複查官方表（2026-09-21 版，updated_at 2026-09-23，期間未變更）為本日期。",
+        "與 Anthropic「不早於 2026-11-24」一致。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "anthropic-opus-4-5-nst",
+      "modelName": "Claude Opus 4.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-opus-4-5-20251101",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "eol-no-sooner-than",
+      "date": "2026-11-24",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "bedrock-jamba-1-5-eol",
+      "modelName": "Jamba 1.5 Large / Mini",
+      "vendor": "ai21",
+      "providerModelId": "ai21.jamba-1-5-large-v1:0 / ai21.jamba-1-5-mini-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-11-26",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "us-east-1",
+      "notes": [
+        "2026-08-26 起為 public extended access。"
+      ]
+    },
+    {
+      "id": "bedrock-marengo-2-7-eol",
+      "modelName": "TwelveLabs Marengo Embed v2.7",
+      "vendor": "twelvelabs",
+      "providerModelId": "twelvelabs.marengo-embed-2-7-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2026-11-30",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "ap-northeast-2、eu-west-1、us-east-1",
+      "notes": [
+        "2026-08-29 起為 public extended access。"
+      ]
+    },
+    {
+      "id": "anthropic-sonnet-4-5-eol",
+      "modelName": "Claude Sonnet 4.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-sonnet-4-5-20250929",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "retirement",
+      "date": "2026-11-30",
+      "replacement": "claude-sonnet-5-5",
+      "notes": [
+        "適用 Claude API、Claude Platform on AWS 與 Foundry（Foundry 表另列 11-15）；Bedrock 與 Google Cloud 自訂時程，目前未見公告。"
+      ],
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-gpt-chat-latest-0806-eol",
+      "modelName": "gpt-chat-latest",
+      "vendor": "openai",
+      "providerModelId": "gpt-chat-latest",
+      "version": "2026-08-06",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-02",
+      "notes": [
+        "Preview。2026-06-24 版本已於 2026-09-24 退役。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-deepseek-v4-flash-0731-eol",
+      "modelName": "DeepSeek-V4-Flash-0731",
+      "vendor": "deepseek",
+      "providerModelId": "DeepSeek-V4-Flash-0731",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-03",
+      "notes": [
+        "Preview。DeepSeek-V4.1-Flash 已預告將上 Foundry（見 watchlist）。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-gpt-4o-0513-eol",
+      "modelName": "gpt-4o",
+      "vendor": "openai",
+      "providerModelId": "gpt-4o",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-09",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2024-05-13",
+      "replacement": "gpt-5.6-sol",
+      "conflicts": [
+        {
+          "date": "2026-10-01",
+          "kind": "superseded",
+          "note": "第三方追蹤頁（2026-08-10）的日期；官方表（2026-09-21 更新）為 12-09",
+          "sources": [
+            {
+              "id": "vorplabs-foundry"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Lifecycle：Deprecated。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-live-2-5-eol",
+      "modelName": "gemini-live-2.5-flash-native-audio",
+      "vendor": "google",
+      "providerModelId": "gemini-live-2.5-flash-native-audio",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "retirement",
+      "date": "2026-12-13",
+      "sources": [
+        {
+          "id": "google-vertex-model-versions"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-gpt-realtime-mini-eol",
+      "modelName": "gpt-realtime-mini",
+      "vendor": "openai",
+      "providerModelId": "gpt-realtime-mini",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-15",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-12-15",
+      "conflicts": [
+        {
+          "date": "2027-06-15",
+          "kind": "conflicting",
+          "note": "同一官方退役表另有一列 gpt-realtime-mini 2025-12-15 為 2027-06-15；依規則以最早日期（2026-12-15）計。",
+          "sources": [
+            {
+              "id": "ms-foundry-retirement-schedule"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-whisper-tts-eol",
+      "modelName": "whisper / tts / tts-hd",
+      "vendor": "openai",
+      "providerModelId": "whisper, tts, tts-hd",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-15",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "001"
+    },
+    {
+      "id": "azure-gpt-image-1-5-eol",
+      "modelName": "gpt-image-1.5",
+      "vendor": "openai",
+      "providerModelId": "gpt-image-1.5",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2026-12-16",
+      "notes": [
+        "GA。2026-09-28 首次收錄。"
+      ],
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "gemini-3-8-flash-price",
+      "modelName": "Gemini 3.8 Flash",
+      "vendor": "google",
+      "providerModelId": "gemini-3.8-flash",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "price-change",
+      "date": "2027-01-01",
+      "sources": [
+        {
+          "id": "google-gemini38-latest"
+        }
+      ],
+      "verification": "official",
+      "notes": [
+        "促銷價 $0.75/$3.75 結束，改為 $1.50/$7.50（cache $0.15）。"
+      ]
+    },
+    {
+      "id": "bedrock-claude-opus-4-1-eol",
+      "modelName": "Claude Opus 4.1",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-opus-4-1-20250805-v1:0",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "retirement",
+      "date": "2027-01-08",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "verification": "official",
+      "scopeNote": "us-east-1、us-east-2、us-west-2",
+      "notes": [
+        "同一模型在 Anthropic API 已於 2026-08-05 關閉——不同通路時程不同。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-flash-lite-eol",
+      "modelName": "gemini-2.5-flash-lite",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash-lite",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "retirement",
+      "date": "2027-01-28",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.1-flash-lite 或 Gemma 4",
+      "notes": [
+        "依 Google 2026-09-15 客戶通知（公開 GitHub issue 轉述）；請在 GCP 帳號通知核對。",
+        "停止服務前價格維持不變。"
+      ]
+    },
+    {
+      "id": "azure-claude-opus-4-6-eol",
+      "modelName": "claude-opus-4-6",
+      "vendor": "anthropic",
+      "providerModelId": "claude-opus-4-6",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2027-02-02",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "conflicts": [
+        {
+          "date": "2027-02-05",
+          "kind": "conflicting",
+          "note": "Anthropic：不早於 2027-02-05",
+          "sources": [
+            {
+              "id": "anthropic-deprecations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure-claude-sonnet-4-6-eol",
+      "modelName": "claude-sonnet-4-6",
+      "vendor": "anthropic",
+      "providerModelId": "claude-sonnet-4-6",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2027-02-10",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "conflicts": [
+        {
+          "date": "2027-02-17",
+          "kind": "conflicting",
+          "note": "Anthropic：不早於 2027-02-17",
+          "sources": [
+            {
+              "id": "anthropic-deprecations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-transcribe-family-eol",
+      "modelName": "whisper-1 / gpt-4o-transcribe / gpt-4o-mini-transcribe / gpt-4o-transcribe-diarize（OpenAI API）",
+      "vendor": "openai",
+      "providerModelId": "whisper-1, gpt-4o-transcribe, gpt-4o-mini-transcribe, gpt-4o-transcribe-diarize",
+      "cloud": "vendor-direct",
+      "service": "openai-api",
+      "event": "retirement",
+      "date": "2027-02-26",
+      "replacement": "gpt-live-transcribe 或 gpt-transcribe",
+      "notes": [
+        "2026-08-26 公告。Azure 上同名模型依 Foundry 退役表（例：gpt-4o-transcribe 2025-03-20 為 2026-10-15）。"
+      ],
+      "sources": [
+        {
+          "id": "openai-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "vertex-gemini-2-5-flash-image-eol",
+      "modelName": "gemini-2.5-flash-image",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash-image",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "retirement",
+      "date": "2027-03-15",
+      "sources": [
+        {
+          "id": "releasebot-agent-platform"
+        },
+        {
+          "id": "digitalapplied-flash-image"
+        }
+      ],
+      "verification": "independent",
+      "replacement": "gemini-3.1-flash-lite-image",
+      "conflicts": [
+        {
+          "date": "2026-10-02",
+          "kind": "superseded",
+          "note": "先前資料記為 Agent Platform 原退役日；2026-09-28 複查發現 10-02 是 Gemini API 的關閉日（Gemini API 棄用頁，2026-09-24 更新），Agent Platform release note（2026-09-14）只寫延到 2027-03-15。Gemini API 的 10-02 見另一事件。",
+          "sources": [
+            {
+              "id": "google-gemini-api-deprecations"
+            },
+            {
+              "id": "releasebot-agent-platform"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "官方 release note 經第三方轉載取得（Agent Platform 文件頁為 JS 渲染，無法直接讀取）；第三方（digitalapplied，2026-09-25）引述 Vertex 模型版本頁（2026-09-24 更新）亦為 2027-03-15。請在 GCP console 確認。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-flash-eol",
+      "modelName": "gemini-2.5-flash",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-flash",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "retirement",
+      "date": "2027-03-31",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.5-flash-lite 或 gemini-3.1-flash-lite",
+      "scopeNote": "多數區域；韓國、巴西、法國為 2027-08-06",
+      "notes": [
+        "依 Google 2026-09-15 客戶通知（公開 GitHub issue 轉述）；請在 GCP 帳號通知核對。",
+        "停止服務前價格維持不變。"
+      ]
+    },
+    {
+      "id": "vertex-gemini-2-5-pro-eol",
+      "modelName": "gemini-2.5-pro",
+      "vendor": "google",
+      "providerModelId": "gemini-2.5-pro",
+      "cloud": "gcp",
+      "service": "agent-platform",
+      "event": "retirement",
+      "date": "2027-03-31",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        }
+      ],
+      "verification": "community",
+      "replacement": "gemini-3.5-flash",
+      "scopeNote": "多數區域；韓國、巴西、法國為 2027-08-06",
+      "notes": [
+        "依 Google 2026-09-15 客戶通知（公開 GitHub issue 轉述）；請在 GCP 帳號通知核對。",
+        "停止服務前價格維持不變。"
+      ]
+    },
+    {
+      "id": "azure-gpt-4-1-eol",
+      "modelName": "gpt-4.1 / gpt-4.1-mini",
+      "vendor": "openai",
+      "providerModelId": "gpt-4.1, gpt-4.1-mini",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2027-04-14",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "version": "2025-04-14",
+      "conflicts": [
+        {
+          "date": "2026-10-14",
+          "kind": "superseded",
+          "note": "2026-04 Microsoft Q&A 稱為固定日；現行官方表已延至 2027-04-14",
+          "sources": [
+            {
+              "id": "ms-qa-gpt41-oct2026"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "生命週期為 Deprecated：新客戶不可用。"
+      ]
+    },
+    {
+      "id": "azure-gpt-4o-eol",
+      "modelName": "gpt-4o / gpt-4o-mini",
+      "vendor": "openai",
+      "providerModelId": "gpt-4o (2024-08-06, 2024-11-20), gpt-4o-mini (2024-07-18)",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2027-04-14",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "verification": "official",
+      "replacement": "gpt-5.1"
+    },
+    {
+      "id": "gemini-api-gemini-3-1-flash-lite-eol",
+      "modelName": "gemini-3.1-flash-lite（Gemini API）",
+      "vendor": "google",
+      "providerModelId": "gemini-3.1-flash-lite",
+      "cloud": "vendor-direct",
+      "service": "gemini-api",
+      "event": "retirement",
+      "date": "2027-05-07",
+      "replacement": "gemini-3.5-flash-lite",
+      "notes": [
+        "Gemini API 棄用頁（2026-10-01 更新）；頁面說明日期為「最早可能日期」。Agent Platform 時程另計。"
+      ],
+      "sources": [
+        {
+          "id": "google-gemini-api-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "azure-claude-opus-5-eol",
+      "modelName": "claude-opus-5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-opus-5",
+      "cloud": "azure",
+      "service": "foundry",
+      "event": "retirement",
+      "date": "2027-07-08",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "anthropic-opus5-legacy"
+        }
+      ],
+      "verification": "official",
+      "conflicts": [
+        {
+          "date": "2027-07-24",
+          "kind": "conflicting",
+          "note": "Anthropic：不早於 2027-07-24",
+          "sources": [
+            {
+              "id": "anthropic-deprecations"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Anthropic 已將 Opus 5 標為 legacy，建議遷移至 Opus 5.5。"
+      ]
+    },
+    {
+      "id": "bedrock-astra-nst",
+      "modelName": "GPT-6 Astra",
+      "vendor": "openai",
+      "providerModelId": "openai.gpt-6-astra",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-08",
+      "sources": [
+        {
+          "id": "aws-bedrock-astra-card"
+        }
+      ],
+      "verification": "official",
+      "notes": [
+        "Legacy 期至少 6 個月。"
+      ]
+    },
+    {
+      "id": "anthropic-opus-5-5-nst",
+      "modelName": "Claude Opus 5.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-opus-5-5",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-22",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "bedrock-opus-5-5-nst",
+      "modelName": "Claude Opus 5.5",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-opus-5-5",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-22",
+      "sources": [
+        {
+          "id": "aws-bedrock-opus55-card"
+        }
+      ],
+      "verification": "official",
+      "notes": [
+        "Legacy 期 6 個月。"
+      ]
+    },
+    {
+      "id": "bedrock-gpt-6-sol-nst",
+      "modelName": "GPT-6 Sol",
+      "vendor": "openai",
+      "providerModelId": "openai.gpt-6-sol",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-22",
+      "notes": [
+        "Legacy 期至少 6 個月。"
+      ],
+      "sources": [
+        {
+          "id": "aws-bedrock-sol-card"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "bedrock-gpt-6-luna-nst",
+      "modelName": "GPT-6 Luna",
+      "vendor": "openai",
+      "providerModelId": "openai.gpt-6-luna",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-22",
+      "notes": [
+        "Legacy 期至少 6 個月。"
+      ],
+      "sources": [
+        {
+          "id": "aws-bedrock-luna-card"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "anthropic-sonnet-5-5-nst",
+      "modelName": "Claude Sonnet 5.5",
+      "vendor": "anthropic",
+      "providerModelId": "claude-sonnet-5-5",
+      "cloud": "vendor-direct",
+      "service": "anthropic-api",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-28",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        }
+      ],
+      "verification": "official"
+    },
+    {
+      "id": "bedrock-sonnet-5-5-nst",
+      "modelName": "Claude Sonnet 5.5",
+      "vendor": "anthropic",
+      "providerModelId": "anthropic.claude-sonnet-5-5",
+      "cloud": "aws",
+      "service": "bedrock",
+      "event": "eol-no-sooner-than",
+      "date": "2027-09-28",
+      "notes": [
+        "Legacy 期 6 個月。"
+      ],
+      "sources": [
+        {
+          "id": "aws-bedrock-sonnet55-card"
+        }
+      ],
+      "verification": "official"
+    }
+  ]
+}

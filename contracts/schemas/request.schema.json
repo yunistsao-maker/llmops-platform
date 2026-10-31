@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llmops.example/contracts/request.schema.json",
+  "title": "Model access request (POST /api/requests)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["team", "use_case", "data_class"],
+  "properties": {
+    "team": {"type": "string", "minLength": 1, "maxLength": 120, "description": "申請單位"},
+    "alias": {"type": "string", "maxLength": 64, "pattern": "^[A-Za-z0-9._-]*$", "description": "填表人 Alias; defaults to the signed-in user"},
+    "use_case": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "models": {"type": "array", "maxItems": 10, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]{1,80}$"}},
+    "unsure": {"type": "boolean", "default": false},
+    "data_class": {"enum": ["other", "property", "sec-c", "sec-b", "sec-a"]},
+    "data_class_other": {"type": "string", "maxLength": 200},
+    "cloud": {"enum": ["any", "aws", "azure", "gcp"], "default": "any"},
+    "rpd": {"type": "integer", "minimum": 0, "maximum": 100000000, "default": 0},
+    "tokens_in": {"type": "integer", "minimum": 0, "maximum": 10000000, "default": 0},
+    "tokens_out": {"type": "integer", "minimum": 0, "maximum": 10000000, "default": 0},
+    "target_date": {"type": "string", "format": "date"},
+    "external": {"type": "boolean", "default": false},
+    "taiwan_only": {"type": "boolean", "default": false},
+    "note": {"type": "string", "maxLength": 4000}
+  },
+  "allOf": [
+    {"if": {"properties": {"data_class": {"const": "other"}}, "required": ["data_class"]},
+     "then": {"required": ["data_class_other"], "properties": {"data_class_other": {"minLength": 1}}}},
+    {"if": {"properties": {"unsure": {"const": false}}},
+     "then": {"properties": {"models": {"minItems": 1}}, "required": ["models"]}}
+  ]
+}

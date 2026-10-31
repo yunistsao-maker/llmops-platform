@@ -1,0 +1,5 @@
+{
+  "kind": "sample",
+  "capturedAt": "2026-10-01T14:30:00Z",
+  "description": "SAMPLE snapshot bundled with the agent so it runs out of the box: the real schema, sources.json, lifecycle.json and the 2026-09-24 digest from the 3P New Model Release Research project, plus a hand-built minimal catalog.json and litellm.json (one model).  It is NOT the live portal data.  Point PORTAL_DATA_URI at a checkout or S3 copy of the portal repo before using proposals for real."
+}

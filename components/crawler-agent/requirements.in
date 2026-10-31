@@ -1,0 +1,11 @@
+-r ../../libs/llmops-common/requirements.in
+# The research agent (llmops-research-agent app/llmops_research), as run on AWS, minus AgentCore / Bedrock / ADOT:
+# Strands with its OpenAI-compatible provider (the model is reached through the LLM gateway).
+strands-agents[openai]==1.57.2
+# fetching / parsing public pages (pure Python on purpose)
+httpx>=0.27,<1
+beautifulsoup4>=4.12,<5
+# pages that omit optional end tags (</td></tr></li>) need the HTML5 tree-building rules; pure Python
+html5lib>=1.1,<2
+# portal JSON Schema (draft-07) validation
+jsonschema>=4.18,<5

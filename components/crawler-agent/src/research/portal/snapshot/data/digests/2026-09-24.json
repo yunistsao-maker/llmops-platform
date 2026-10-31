@@ -1,0 +1,584 @@
+{
+  "schema": "digest/v1",
+  "id": "2026-09-24",
+  "locale": "zh-TW",
+  "periodStart": "2026-09-01",
+  "periodEnd": "2026-09-24",
+  "generatedAt": "2026-09-24T14:30:00Z",
+  "headline": "9 月是今年最密集的發布月：Claude Opus 5.5、GPT-6 Astra / Sol / Luna、Gemini 3.8 Flash 都已上 CSP。10 月中有一串退役截止（Azure gpt-4.1-nano 10/14、Bedrock Claude Sonnet 4 10/14、Azure gpt-4o-transcribe 10/15），Agent Platform 的 Gemini 2.5 系列 10/20 起封鎖新專案與閒置專案，Azure o 系列全面在 11/19 退役。LiteLLM 請升到 ≥ v1.101.0（建議 v1.102.1）再接 GPT-6。",
+  "newModels": [
+    {
+      "title": "Claude Fable 5.1 / Mythos 5.1",
+      "detail": "Mythos 級模型更新；需 30 天資料保留、並有額外安全措施（Fable）。Foundry 為 Preview。6/12–7/1 曾因美國出口管制指令全面停用前一代 Fable 5 / Mythos 5。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "anthropic-deprecations"
+        },
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "anthropic-fable-mythos-access"
+        }
+      ],
+      "date": "2026-09-01",
+      "vendor": "anthropic",
+      "clouds": [
+        "aws",
+        "gcp",
+        "azure"
+      ]
+    },
+    {
+      "title": "Gemini 3.8 Flash（GA）",
+      "detail": "Flash 旗艦直接 GA；$0.75/$3.75 促銷價到 2026-12-31；約 291 tok/s；只在 Gemini API / Agent Platform。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "google-gemini38-latest"
+        },
+        {
+          "id": "aa-gemini38"
+        }
+      ],
+      "date": "2026-09-02",
+      "vendor": "google",
+      "clouds": [
+        "gcp"
+      ]
+    },
+    {
+      "title": "GPT-6 Astra",
+      "detail": "OpenAI 旗艦（$10/$50，1.05M context）；Azure 09-03 起以 Limited Access 釋出後轉 GA，Bedrock 09-08 GA；首個資安能力 Critical 的模型。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "ms-foundry-astra-blog"
+        },
+        {
+          "id": "aws-astra-whatsnew"
+        },
+        {
+          "id": "infoq-astra-critical"
+        }
+      ],
+      "date": "2026-09-03",
+      "vendor": "openai",
+      "clouds": [
+        "azure",
+        "aws"
+      ]
+    },
+    {
+      "title": "Claude Opus 5.5",
+      "detail": "Claude 5.5 家族首發；$4/$20（比 Opus 5 低 20%）；三雲同日 GA；thinking 不可關閉、預設 effort 改 medium、forced tool_choice 回 400。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "anthropic-opus55-announce"
+        },
+        {
+          "id": "aws-bedrock-opus55-card"
+        },
+        {
+          "id": "google-agentplatform-opus55"
+        },
+        {
+          "id": "ms-foundry-claude-models"
+        }
+      ],
+      "date": "2026-09-22",
+      "vendor": "anthropic",
+      "clouds": [
+        "aws",
+        "gcp",
+        "azure"
+      ]
+    },
+    {
+      "title": "GPT-6 Sol / GPT-6 Luna",
+      "detail": "Sol $2/$10、Luna $0.10/$0.50（約 GPT-5.6 的一半）；Azure 與 Bedrock 同日 GA；Chat Completions 的工具呼叫只在 effort=none 時可用。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "ms-foundry-gpt6-blog"
+        },
+        {
+          "id": "aws-sol-luna-whatsnew"
+        },
+        {
+          "id": "openai-latest-model-guide"
+        }
+      ],
+      "date": "2026-09-22",
+      "vendor": "openai",
+      "clouds": [
+        "azure",
+        "aws"
+      ]
+    }
+  ],
+  "lifecycleChanges": [
+    {
+      "title": "Bedrock 新生命週期政策（2026-09-07 起上架的模型）",
+      "detail": "模型卡改標「EOL no sooner than」與 Legacy 期（6 個月或 45 天）；首個 45 天案例為 09-18 上架的 Kimi K3。模型選型時要讀模型卡這兩欄。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle"
+        },
+        {
+          "id": "julien-45days"
+        }
+      ],
+      "date": "2026-09-07",
+      "clouds": [
+        "aws"
+      ]
+    },
+    {
+      "title": "Azure o 系列統一在 2026-11-19 退役",
+      "detail": "o1、o1-pro、o3、o3-mini、o3-pro、o3-deep-research、o4-mini 退役日統一為 11-19；其中 o3-pro 與 o3-deep-research 比先前公告提前約一個月。替代：gpt-5.6-sol / gpt-5.6-terra。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "vorplabs-foundry"
+        }
+      ],
+      "vendor": "openai",
+      "clouds": [
+        "azure"
+      ]
+    },
+    {
+      "title": "Azure gpt-4.1 / gpt-4o 延到 2027-04-14，但 nano 與舊版 gpt-4o 更早",
+      "detail": "現行官方表（2026-09-21 更新）：gpt-4.1 / 4.1-mini / gpt-4o 2024-08-06、2024-11-20 / gpt-4o-mini 為 2027-04-14；gpt-4.1-nano 為 2026-10-14；gpt-4o 2024-05-13 為 2026-12-09（替代 gpt-5.6-sol）。2026-04 時 gpt-4.1 曾被告知 10-14 為固定日。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "ms-foundry-retirement-schedule"
+        },
+        {
+          "id": "ms-qa-gpt41-oct2026"
+        }
+      ],
+      "vendor": "openai",
+      "clouds": [
+        "azure"
+      ]
+    },
+    {
+      "title": "Gemini 2.5 系列在 Agent Platform 改為分階段退役",
+      "detail": "Google 2026-09-15 重新發布通知：10-20 起新專案與 07-22 之後沒有呼叫過的專案被封鎖；Flash-Lite 2027-01-28、Pro / Flash 2027-03-31（韓國、巴西、法國 2027-08-06）停止服務，停止前價格不變。7 月原公告為 10-16；Gemini API 頁面則已移除停止日。gemini-2.5-flash-image 由 10-02 延到 2027-03-15。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "gcp-gemini25-notice-1763"
+        },
+        {
+          "id": "gcp-gemini25-notice-4509"
+        },
+        {
+          "id": "google-forum-gemini25-dates"
+        },
+        {
+          "id": "releasebot-agent-platform"
+        },
+        {
+          "id": "devto-gemini25-date-removed"
+        },
+        {
+          "id": "vorplabs-google"
+        }
+      ],
+      "date": "2026-10-20",
+      "vendor": "google",
+      "clouds": [
+        "gcp"
+      ]
+    },
+    {
+      "title": "Bedrock 已退役：Claude 3 Haiku（09-10）、Nova Premier / Nova Sonic v1（09-14）",
+      "detail": "仍有呼叫者會收到錯誤；Nova Canvas / Reel 將於 09-30 退役。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "aws-bedrock-lifecycle-legacy"
+        }
+      ],
+      "clouds": [
+        "aws"
+      ]
+    },
+    {
+      "title": "Claude Opus 5 轉為 legacy（Anthropic）",
+      "detail": "Anthropic 模型頁建議遷移到 Opus 5.5；Foundry 表列 Opus 5 退役 2027-07-08，Anthropic 為不早於 2027-07-24。",
+      "impact": "low",
+      "sources": [
+        {
+          "id": "anthropic-opus5-legacy"
+        },
+        {
+          "id": "ms-foundry-retirement-schedule"
+        }
+      ],
+      "vendor": "anthropic",
+      "clouds": [
+        "azure",
+        "vendor-direct"
+      ]
+    }
+  ],
+  "pricingChanges": [
+    {
+      "title": "Claude Opus 5.5 降價",
+      "detail": "$4/$20（-20%）、cache read $0.20（-60%）；Bedrock geo/in-region $4.40/$22。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "anthropic-opus55-announce"
+        },
+        {
+          "id": "classmethod-opus55-bedrock"
+        }
+      ],
+      "date": "2026-09-22",
+      "vendor": "anthropic"
+    },
+    {
+      "title": "GPT-6 Sol / Luna 價格約為 GPT-5.6 的一半",
+      "detail": "Sol $2/$10、Luna $0.10/$0.50；Azure US Data Zone +10%、EU Data Zone +20%。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "ms-foundry-gpt6-blog"
+        }
+      ],
+      "date": "2026-09-22",
+      "vendor": "openai"
+    },
+    {
+      "title": "GPT-6 Astra 為三雲最貴的通用模型",
+      "detail": "$10/$50；>272K 輸入 $20/$75；Bedrock geo/in-region $11/$55。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "aws-bedrock-astra-card"
+        },
+        {
+          "id": "ms-foundry-gpt6-blog"
+        }
+      ],
+      "date": "2026-09-03",
+      "vendor": "openai"
+    },
+    {
+      "title": "Gemini 3.8 Flash 促銷價 12/31 到期",
+      "detail": "2027-01-01 起 $1.50/$7.50（cache $0.15）——預算與 cost map 需提前更新。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "google-gemini38-latest"
+        }
+      ],
+      "date": "2027-01-01",
+      "vendor": "google"
+    }
+  ],
+  "litellm": [
+    {
+      "title": "v1.102.0（09-19）含 breaking changes",
+      "detail": "organization endpoint 需 enterprise license、response ID 授權更嚴、Rust OCR 預設、Auto Router output cap 行為改變。建議 v1.102.1。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "litellm-v1-102-0"
+        }
+      ]
+    },
+    {
+      "title": "v1.100.0 的 OOM 問題",
+      "detail": "上游或 Redis 持續失敗時 retry breadcrumb 幾何成長導致 OOM；v1.100.1 / v1.101.0 修正。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "litellm-oom-incident"
+        },
+        {
+          "id": "litellm-v1-100-1"
+        }
+      ]
+    },
+    {
+      "title": "Day-0：Claude Opus 5.5、GPT-6 Sol/Luna、Gemini 3.8 Flash",
+      "detail": "remote cost map reload（≥ v1.76.0）即可路由；GPT-6 參數處理需 ≥ v1.101.0；Opus 5.5 內建 cost map 需 v1.103.0-rc.1 之後的 image。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "litellm-opus55"
+        },
+        {
+          "id": "litellm-sol-luna"
+        },
+        {
+          "id": "litellm-gemini38"
+        }
+      ]
+    },
+    {
+      "title": "Bedrock GPT-6 的 temperature 不會被丟棄",
+      "detail": "LiteLLM 1.102.1 的 bedrock/ 與 bedrock_mantle/ 路徑仍把 temperature 送出而被拒；評測框架受影響。以 additional_drop_params 處理。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "opik-8524"
+        },
+        {
+          "id": "trulens-2815"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "title": "GPT-6 Astra：OpenAI 首個資安能力 Critical 的模型",
+      "detail": "system card 顯示可在強化系統中開發可用的 zero-day exploit；OpenAI 同時指出其較能控制 CoT，監控難度上升。資安團隊的使用需另外規劃。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "infoq-astra-critical"
+        },
+        {
+          "id": "openai-astra-systemcard"
+        }
+      ],
+      "date": "2026-09-03",
+      "vendor": "openai"
+    },
+    {
+      "title": "Claude Opus 5.5：多數資安請求改路由到 Opus 4.8",
+      "detail": "一般使用者的資安任務由 Opus 4.8 完成；Cyber Verification Program 將擴大到 Opus 5.5。安全測試與 SOC 使用情境要記錄實際回應模型。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "anthropic-opus55-announce"
+        },
+        {
+          "id": "neuraltrust-opus55"
+        }
+      ],
+      "date": "2026-09-22",
+      "vendor": "anthropic"
+    },
+    {
+      "title": "LiteLLM 供應鏈攻擊影響範圍擴大",
+      "detail": "SOCRadar 8 月分析：1.82.7 / 1.82.8 惡意版本影響 2,500 個以上組織，收集活動超出原本 PyPI 上架時間窗。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "socradar-aug2026"
+        },
+        {
+          "id": "zscaler-supplychain"
+        }
+      ]
+    }
+  ],
+  "regulatory": [
+    {
+      "title": "數發部公布 AI 風險分類框架",
+      "detail": "2026-07-07 公布：3 大類 20 子類、4 步驟（盤點、識別、評估、應對）；安全測試類別可直接對應。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "moda-risk-framework"
+        },
+        {
+          "id": "moda-ai-governance"
+        }
+      ],
+      "date": "2026-07-07"
+    },
+    {
+      "title": "金管會將代理 AI 納入金融業 AI 指引",
+      "detail": "2026-05-07 報告：權限邊界、稽核軌跡、中止與回滾、模型升版與 prompt 調整納入變更管理。",
+      "impact": "high",
+      "sources": [
+        {
+          "id": "fsc-agentic-ai"
+        }
+      ],
+      "date": "2026-05-07"
+    },
+    {
+      "title": "EU AI Act 第 50 條已生效；浮水印寬限至 12-02",
+      "detail": "高風險義務延至 2027-12-02（Annex III）；若有歐盟業務需準備 AI 生成內容揭露與標記。Opus 5.5 輸出已含浮水印。",
+      "impact": "medium",
+      "sources": [
+        {
+          "id": "eu-ai-act-omnibus"
+        },
+        {
+          "id": "csa-eu-art50"
+        },
+        {
+          "id": "anthropic-opus55-announce"
+        }
+      ],
+      "date": "2026-08-02"
+    }
+  ],
+  "actionItems": [
+    {
+      "priority": "P0",
+      "action": "Azure gpt-4.1-nano（2025-04-14）在 10-14 退役前完成遷移（官方表已列）。",
+      "due": "2026-10-07"
+    },
+    {
+      "priority": "P0",
+      "action": "盤點 Bedrock Claude Sonnet 4（anthropic.claude-sonnet-4-20250514-v1:0，含台北區）使用者，10-14 前完成遷移。",
+      "due": "2026-10-07"
+    },
+    {
+      "priority": "P0",
+      "action": "盤點仍呼叫 gemini-2.5-pro / flash / flash-lite 的 GCP 專案：10-20 起新專案與 07-22 之後沒有呼叫過的專案（含 DR / fallback 專案）會被封鎖；遷移期限 Flash-Lite 2027-01-28、Pro / Flash 2027-03-31。先在 GCP 帳號通知核對這些日期。",
+      "due": "2026-10-13"
+    },
+    {
+      "priority": "P0",
+      "action": "Azure o1 / o3 / o3-mini / o3-pro / o3-deep-research / o4-mini 在 11-19 前遷移到 gpt-5.6-sol / terra（或直接評估 GPT-6 Sol）。",
+      "due": "2026-11-05"
+    },
+    {
+      "priority": "P0",
+      "action": "LiteLLM 升級到 v1.102.1（最低 v1.101.0）；Bedrock GPT-6 deployment 加 additional_drop_params: [temperature]；確認不在 avoid 清單。",
+      "due": "2026-10-02",
+      "relatedModelIds": [
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-6-luna"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "對 Claude Opus 5.5（三雲）與 GPT-6 Sol（Azure/Bedrock）啟動 G1–G6 評估，作為 frontier / general 預設候選；GPT-6 Luna 與 Gemini 3.8 Flash 作為 fast 層候選。",
+      "relatedModelIds": [
+        "claude-opus-5-5",
+        "gpt-6-sol",
+        "gpt-6-luna",
+        "gemini-3-8-flash"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "制定「資料等級 → 允許路由」政策：9 月新模型都沒有台灣境內處理選項，最接近的是 Bedrock 上 Opus 5.5 的 JP geo。",
+      "relatedModelIds": [
+        "claude-opus-5-5"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "Gemini 3.8 Flash 以 2027 標準價（$1.50/$7.50）編列預算，12-24 前更新 cost map。",
+      "due": "2026-12-24",
+      "relatedModelIds": [
+        "gemini-3-8-flash"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "Azure gpt-4o-transcribe（2025-03-20）在 10-15 前遷移。",
+      "due": "2026-10-08"
+    },
+    {
+      "priority": "P1",
+      "action": "從 LiteLLM 設定移除已退役的路由（Bedrock Claude 3 Haiku、Amazon Nova Premier、Nova Sonic v1、Azure gpt-realtime-mini 2025-10-06），並確認沒有 fallback 指向它們。",
+      "due": "2026-09-30"
+    },
+    {
+      "priority": "P1",
+      "action": "在 GCP console 確認 gemini-2.5-flash-image 的退役日（09-14 release note 寫延到 2027-03-15，舊版文件仍寫 10-02）。",
+      "due": "2026-09-30"
+    },
+    {
+      "priority": "P1",
+      "action": "Azure gpt-4o 2024-05-13 在 12-09 退役前遷移到 gpt-5.6-sol（或評估 GPT-6 Sol）。",
+      "due": "2026-11-25"
+    },
+    {
+      "priority": "P1",
+      "action": "Bedrock Claude Opus 4.1 在 10-08 進入 public extended access（價格可能上調）、2027-01-08 EOL：決定遷移到 Claude Opus 5.5 的時程。",
+      "due": "2026-10-08",
+      "relatedModelIds": [
+        "claude-opus-5-5"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "在內部 CI 建立每日生命週期核對（Bedrock ListFoundationModels 的 modelLifecycle、Foundry 退役表、Agent Platform 模型版本頁）與 sync_inventory 告警。",
+      "due": "2026-10-16"
+    },
+    {
+      "priority": "P2",
+      "action": "追蹤 Claude Haiku 4.5（不早於 10-15）與 Sonnet 5.5 / Haiku 5.5 上線時程。"
+    }
+  ],
+  "watchlist": [
+    {
+      "name": "Claude Sonnet 5.5",
+      "vendor": "anthropic",
+      "status": "coming-soon",
+      "expected": "2026 年 10 月（官方：coming weeks）",
+      "note": "Anthropic 表示會帶來與 Opus 5.5 相同的效能、效率與安全改進；上線後評估是否取代 Sonnet 5 作為一般預設。",
+      "sources": [
+        {
+          "id": "anthropic-opus55-announce"
+        },
+        {
+          "id": "mikeyk-sonnet55"
+        }
+      ]
+    },
+    {
+      "name": "Claude Haiku 5.5",
+      "vendor": "anthropic",
+      "status": "coming-soon",
+      "expected": "2026 年 10 月（官方：coming weeks）",
+      "note": "Claude Haiku 4.5 在 Anthropic 平台的退役「不早於 2026-10-15」，Haiku 5.5 可能是其替代。",
+      "sources": [
+        {
+          "id": "anthropic-opus55-announce"
+        },
+        {
+          "id": "anthropic-deprecations"
+        }
+      ]
+    },
+    {
+      "name": "Gemini 3.5 Pro",
+      "vendor": "google",
+      "status": "limited-preview",
+      "expected": "未公布",
+      "note": "已宣布但尚無 GA 日期與公開價格；Gemini 3.1 Pro 仍為 preview。",
+      "sources": [
+        {
+          "id": "capitalandcompute-sept"
+        },
+        {
+          "id": "innfactory-gemini"
+        }
+      ]
+    }
+  ],
+  "unverified": [
+    "GPT-6 Sol / Luna 在 Bedrock 的價格與區域取自社群 PR（官方模型卡 09-22 尚未發布）。",
+    "GPT-6 Astra 在 Azure 的退役日：官方表未列，第三方顯示 2028-01-11。",
+    "Gemini 2.5（Agent Platform）10-20 封鎖規則與 2027 停止服務日，取自公開 GitHub issue 轉述的 Google 客戶通知（2026-09-15）；Agent Platform 文件頁無法直接讀取。",
+    "gemini-2.5-flash-image 延到 2027-03-15，取自第三方轉載的 Agent Platform release note（2026-09-14）。",
+    "Gemini 3.8 Flash 在 Agent Platform 的區域端點與價格取自第三方追蹤（innfactory，2026-09-18）。",
+    "Claude Opus 5.5 在 Foundry 的 cache 價格取自新聞整理（daily.dev），請以 Azure portal 為準。"
+  ]
+}

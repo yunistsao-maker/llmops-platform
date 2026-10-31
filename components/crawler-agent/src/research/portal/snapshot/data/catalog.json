@@ -1,0 +1,370 @@
+{
+  "schema": "catalog/v1",
+  "generatedAt": "2026-10-01T14:30:00Z",
+  "locale": "zh-TW",
+  "asOf": "2026-10-01",
+  "models": [
+    {
+      "id": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "vendor": "anthropic",
+      "family": "Claude Sonnet",
+      "tier": "balanced",
+      "releaseDate": "2026-09-28",
+      "platformStatus": "evaluating",
+      "predecessorId": "claude-sonnet-5",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "knowledgeCutoff": "2026-06",
+      "reasoning": {
+        "supported": true,
+        "alwaysOn": true,
+        "effortLevels": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "defaultEffort": "high",
+        "parameter": "output_config.effort（Messages API）；經 LiteLLM 以 reasoning_effort 傳入",
+        "notes": [
+          "thinking 不能完全關閉：thinking.type = disabled 改為 between_tools。",
+          "手動 budget_tokens 回 400。"
+        ]
+      },
+      "vendorModelId": "claude-sonnet-5-5",
+      "modelCardUrl": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "summary": "【範例資料】Anthropic 2026-09-28 發布的 Claude 5.5 家族第二款模型；單價與 Sonnet 5 相同（$2 / $10）。thinking 無法完全關閉、forced tool_choice 與非預設 temperature 回 400。",
+      "strengths": [
+        "AA Intelligence Index v4.3.2 56 分（max effort）。",
+        "1M context、128K output。"
+      ],
+      "weaknesses": [
+        "輸出冗長，每任務成本需自行量測。",
+        "沒有台灣境內處理選項。"
+      ],
+      "bestFor": [
+        "Sonnet 5 / Sonnet 4.5 的直接升級"
+      ],
+      "avoidFor": [
+        "仍依賴 forced tool_choice、thinking disabled 或 temperature 的程式"
+      ],
+      "safety": {
+        "classifications": [],
+        "behaviours": [
+          "拒答以 stop_reason: refusal 回傳。"
+        ],
+        "programmes": [],
+        "sources": [
+          {
+            "id": "anthropic-sonnet55-whatsnew"
+          }
+        ]
+      },
+      "benchmarks": [
+        {
+          "name": "Artificial Analysis Intelligence Index",
+          "version": "v4.3.2",
+          "variant": "max effort",
+          "score": 56,
+          "unit": "index",
+          "measuredBy": "independent",
+          "date": "2026-10-01",
+          "rank": "#3",
+          "sources": [
+            {
+              "id": "aa-sonnet55"
+            }
+          ]
+        }
+      ],
+      "performanceReference": [
+        {
+          "provider": "Anthropic",
+          "variant": "max effort",
+          "outputTokensPerSec": 140.8,
+          "ttftSec": 442,
+          "date": "2026-10-01",
+          "sources": [
+            {
+              "id": "aa-sonnet55"
+            }
+          ]
+        }
+      ],
+      "litellm": {
+        "status": "researched",
+        "recommendedVersion": "v1.102.1",
+        "providerStrings": [
+          {
+            "service": "bedrock",
+            "model": "bedrock/global.anthropic.claude-sonnet-5-5"
+          },
+          {
+            "service": "anthropic-api",
+            "model": "anthropic/claude-sonnet-5-5"
+          }
+        ],
+        "caveats": [
+          "forced tool_choice 與非預設 temperature 回 400；drop_params 會改成 auto 並只記 warning。"
+        ],
+        "sources": [
+          {
+            "id": "litellm-sonnet55"
+          }
+        ]
+      },
+      "offerings": [
+        {
+          "id": "claude-sonnet-5-5@anthropic",
+          "cloud": "vendor-direct",
+          "service": "anthropic-api",
+          "status": "ga",
+          "availableSince": "2026-09-28",
+          "providerModelId": "claude-sonnet-5-5",
+          "inferenceTargets": [
+            {
+              "scope": "vendor-default",
+              "id": "claude-sonnet-5-5"
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint": "api.anthropic.com",
+              "apis": [
+                "anthropic-messages",
+                "batch"
+              ]
+            }
+          ],
+          "features": [
+            {
+              "feature": "streaming",
+              "status": "supported"
+            },
+            {
+              "feature": "forced-tool-choice",
+              "status": "not-supported",
+              "note": "回 400",
+              "sources": [
+                {
+                  "id": "anthropic-sonnet55-whatsnew"
+                }
+              ]
+            },
+            {
+              "feature": "temperature",
+              "status": "partial",
+              "note": "非預設值回 400",
+              "sources": [
+                {
+                  "id": "anthropic-sonnet55-whatsnew"
+                }
+              ]
+            }
+          ],
+          "dataProcessing": {
+            "processor": "Anthropic",
+            "residencyOptions": [],
+            "retentionNotes": [],
+            "sources": [
+              {
+                "id": "anthropic-sonnet55-overview"
+              }
+            ],
+            "taiwanResidency": "unknown",
+            "zdr": "unknown"
+          },
+          "apacAvailability": [],
+          "pricing": [
+            {
+              "scope": "standard",
+              "currency": "USD",
+              "unit": "per_1m_tokens",
+              "input": 2.0,
+              "output": 10.0,
+              "cacheRead": 0.2,
+              "cacheWrite": 2.5,
+              "cacheWrite1h": 4.0,
+              "batchDiscountPct": 50,
+              "notes": [],
+              "sources": [
+                {
+                  "id": "anthropic-sonnet55-overview"
+                }
+              ],
+              "verification": "official"
+            }
+          ],
+          "quotas": [],
+          "lifecycle": {
+            "eolNoSoonerThan": "2027-09-28",
+            "notes": []
+          },
+          "onboardingNotes": [],
+          "sources": [
+            {
+              "id": "anthropic-sonnet55-overview"
+            },
+            {
+              "id": "anthropic-deprecations"
+            }
+          ],
+          "verification": "official"
+        },
+        {
+          "id": "claude-sonnet-5-5@bedrock",
+          "cloud": "aws",
+          "service": "bedrock",
+          "status": "ga",
+          "availableSince": "2026-09-28",
+          "providerModelId": "anthropic.claude-sonnet-5-5",
+          "inferenceTargets": [
+            {
+              "scope": "global",
+              "id": "global.anthropic.claude-sonnet-5-5",
+              "geography": "全球動態路由（無駐留保證）"
+            },
+            {
+              "scope": "geo",
+              "id": "us.anthropic.claude-sonnet-5-5",
+              "geography": "US + Canada"
+            },
+            {
+              "scope": "geo",
+              "id": "eu.anthropic.claude-sonnet-5-5",
+              "geography": "EU"
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint": "bedrock-runtime",
+              "apis": [
+                "bedrock-converse"
+              ],
+              "notes": [
+                "沒有 In-Region：必須用 us.* / eu.* / global.* inference profile。"
+              ]
+            }
+          ],
+          "features": [
+            {
+              "feature": "streaming",
+              "status": "supported"
+            },
+            {
+              "feature": "structured-outputs",
+              "status": "not-supported",
+              "sources": [
+                {
+                  "id": "aws-bedrock-sonnet55-card"
+                }
+              ]
+            },
+            {
+              "feature": "batch",
+              "status": "not-supported",
+              "sources": [
+                {
+                  "id": "aws-bedrock-sonnet55-card"
+                }
+              ]
+            }
+          ],
+          "dataProcessing": {
+            "processor": "AWS (Bedrock)",
+            "residencyOptions": [
+              "us.* / eu.* geo profile",
+              "global.*（無駐留保證）"
+            ],
+            "retentionNotes": [],
+            "sources": [
+              {
+                "id": "aws-bedrock-sonnet55-card"
+              }
+            ],
+            "taiwanResidency": "no",
+            "zdr": "unknown"
+          },
+          "apacAvailability": [
+            {
+              "region": "ap-northeast-1",
+              "label": "Tokyo",
+              "scopes": [
+                "global"
+              ],
+              "note": "沒有 jp profile，台北區只能走 Global CRIS。"
+            }
+          ],
+          "pricing": [],
+          "quotas": [],
+          "lifecycle": {
+            "eolNoSoonerThan": "2027-09-28",
+            "legacyPeriod": "6 個月",
+            "notes": []
+          },
+          "onboardingNotes": [
+            "模型卡與 pricing 頁未列價格。"
+          ],
+          "litellmModel": "bedrock/global.anthropic.claude-sonnet-5-5",
+          "sources": [
+            {
+              "id": "aws-bedrock-sonnet55-card"
+            }
+          ],
+          "verification": "official"
+        }
+      ],
+      "tags": [
+        "balanced",
+        "coding",
+        "agentic",
+        "1m-context"
+      ],
+      "sources": [
+        {
+          "id": "anthropic-sonnet55-news"
+        },
+        {
+          "id": "anthropic-sonnet55-overview"
+        },
+        {
+          "id": "anthropic-sonnet55-whatsnew"
+        },
+        {
+          "id": "aws-bedrock-sonnet55-card"
+        },
+        {
+          "id": "aa-sonnet55"
+        },
+        {
+          "id": "litellm-sonnet55"
+        }
+      ],
+      "lastVerified": "2026-10-01"
+    }
+  ],
+  "watchlist": [
+    {
+      "name": "Claude Haiku 5.5",
+      "vendor": "anthropic",
+      "status": "rumoured",
+      "note": "只有報導或貼文標題，尚無官方頁面。",
+      "expected": "未公布",
+      "sources": [
+        {
+          "id": "testingcatalog-sonnet55"
+        }
+      ]
+    }
+  ]
+}

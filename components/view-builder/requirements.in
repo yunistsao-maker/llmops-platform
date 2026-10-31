@@ -1,0 +1,2 @@
+# view-builder: queue worker + CLI (no HTTP framework needed).
+-r ../../libs/llmops-common/requirements.in

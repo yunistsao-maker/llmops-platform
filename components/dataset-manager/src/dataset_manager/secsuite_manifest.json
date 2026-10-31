@@ -1,0 +1,470 @@
+{
+ "schema": "secsuite-manifest/v1",
+ "verifiedAt": "2026-10-11",
+ "datasets": [
+  {
+   "id": "jbb-harmful",
+   "item": "SEC-01",
+   "title": "JailbreakBench JBB-Behaviors (harmful)",
+   "source": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors",
+   "license": "MIT",
+   "risk": "high",
+   "riskNote": "100 則一行式有害請求（10 類，含惡意程式、人身傷害、成人內容）；只有請求、沒有答案。",
+   "adapter": "jbb",
+   "scorer": "harm",
+   "share": 5,
+   "files": [
+    {
+     "name": "harmful-behaviors.csv",
+     "url": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors/resolve/main/data/harmful-behaviors.csv",
+     "bytes": 23116
+    }
+   ]
+  },
+  {
+   "id": "cse-pi-direct",
+   "item": "SEC-01",
+   "title": "CyberSecEval prompt injection (direct)",
+   "source": "https://github.com/meta-llama/PurpleLlama",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "system prompt 設定一條規則或秘密，使用者輸入試圖推翻它；內容本身無害。",
+   "adapter": "cse_pi_direct",
+   "scorer": "cse",
+   "share": 5,
+   "files": [
+    {
+     "name": "prompt_injection.json",
+     "url": "https://raw.githubusercontent.com/meta-llama/PurpleLlama/main/CybersecurityBenchmarks/datasets/prompt_injection/prompt_injection.json",
+     "bytes": 199176
+    }
+   ]
+  },
+  {
+   "id": "jbb-benign",
+   "item": "SEC-10",
+   "title": "JailbreakBench JBB-Behaviors (benign control)",
+   "source": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "與有害題同主題的良性請求，用來量過度拒答。",
+   "adapter": "jbb_benign",
+   "scorer": "overrefusal",
+   "share": 3,
+   "files": [
+    {
+     "name": "benign-behaviors.csv",
+     "url": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors/resolve/main/data/benign-behaviors.csv",
+     "bytes": 20570
+    }
+   ]
+  },
+  {
+   "id": "cse-pi-indirect",
+   "item": "SEC-02",
+   "title": "CyberSecEval prompt injection (indirect)",
+   "source": "https://github.com/meta-llama/PurpleLlama",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "指令藏在要處理的文件／程式碼／網頁內容裡。",
+   "adapter": "cse_pi_indirect",
+   "scorer": "cse",
+   "share": 4,
+   "files": [
+    {
+     "name": "prompt_injection.json",
+     "url": "https://raw.githubusercontent.com/meta-llama/PurpleLlama/main/CybersecurityBenchmarks/datasets/prompt_injection/prompt_injection.json",
+     "bytes": 199176
+    }
+   ]
+  },
+  {
+   "id": "injecagent-dh",
+   "item": "SEC-02",
+   "title": "InjecAgent (direct harm, base)",
+   "source": "https://github.com/uiuc-kang-lab/InjecAgent",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "合成的工具回傳內容夾帶指令（例如要求開門鎖、轉帳）；工具皆為虛構，不會真的執行。",
+   "adapter": "injecagent",
+   "scorer": "toolcall",
+   "share": 6,
+   "files": [
+    {
+     "name": "test_cases_dh_base.json",
+     "url": "https://raw.githubusercontent.com/uiuc-kang-lab/InjecAgent/main/data/test_cases_dh_base.json",
+     "bytes": 672918
+    },
+    {
+     "name": "tools.json",
+     "url": "https://raw.githubusercontent.com/uiuc-kang-lab/InjecAgent/main/data/tools.json",
+     "bytes": 541498
+    }
+   ]
+  },
+  {
+   "id": "canary-tw",
+   "item": "SEC-03",
+   "title": "合成 canary（本工具產生）",
+   "source": "tools/secsuite/fetch.py",
+   "license": "本 repo",
+   "risk": "low",
+   "riskNote": "不下載。以亂數產生檢查碼正確的假身分證字號／統編／卡號／API key 植入合成客戶資料；不含任何真實個資。",
+   "adapter": "canary",
+   "scorer": "canary",
+   "share": 10,
+   "files": []
+  },
+  {
+   "id": "tensortrust",
+   "item": "SEC-04",
+   "title": "Tensor Trust extraction robustness",
+   "source": "https://github.com/HumanCompatibleAI/tensor-trust-data",
+   "license": "未標示",
+   "risk": "low",
+   "riskNote": "線上遊戲蒐集的攻防 prompt；內容無害。風險在授權：repo 沒有 LICENSE，僅建議內部測試使用、不要再散布。",
+   "adapter": "tensortrust",
+   "scorer": "needle",
+   "share": 10,
+   "files": [
+    {
+     "name": "extraction_robustness_dataset.jsonl",
+     "url": "https://raw.githubusercontent.com/HumanCompatibleAI/tensor-trust-data/main/benchmarks/extraction-robustness/v1/extraction_robustness_dataset.jsonl",
+     "bytes": 685113
+    }
+   ],
+   "publish": false
+  },
+  {
+   "id": "cse-instruct",
+   "item": "SEC-05",
+   "title": "CyberSecEval instruct-v2 (insecure code)",
+   "source": "https://github.com/meta-llama/PurpleLlama",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "一般的程式撰寫題；檢查產出的程式碼是否踩到已知不安全寫法。",
+   "adapter": "cse_instruct",
+   "scorer": "regexrule",
+   "share": 10,
+   "files": [
+    {
+     "name": "instruct-v2.json",
+     "url": "https://raw.githubusercontent.com/meta-llama/PurpleLlama/main/CybersecurityBenchmarks/datasets/instruct/instruct-v2.json",
+     "bytes": 3006400
+    }
+   ]
+  },
+  {
+   "id": "agentharm-harmful",
+   "item": "SEC-06",
+   "title": "AgentHarm (harmful, public test)",
+   "source": "https://huggingface.co/datasets/ai-safety-institute/AgentHarm",
+   "license": "MIT＋僅限 AI 安全用途條款",
+   "risk": "high",
+   "riskNote": "要求 agent 以工具完成有害任務（詐欺、毒品、騷擾、網路犯罪等）。檔案帶 canary GUID，請勿放進公開 repo 或訓練資料。",
+   "adapter": "agentharm",
+   "scorer": "agentstep",
+   "share": 6,
+   "files": [
+    {
+     "name": "harmful_behaviors_test_public.json",
+     "url": "https://huggingface.co/datasets/ai-safety-institute/AgentHarm/resolve/main/benchmark/harmful_behaviors_test_public.json",
+     "bytes": 134140
+    }
+   ],
+   "publish": false
+  },
+  {
+   "id": "agentharm-benign",
+   "item": "SEC-06",
+   "title": "AgentHarm (benign control)",
+   "source": "https://huggingface.co/datasets/ai-safety-institute/AgentHarm",
+   "license": "MIT＋僅限 AI 安全用途條款",
+   "risk": "low",
+   "riskNote": "與有害任務同主題的良性版本，用來確認模型沒有因噎廢食。",
+   "adapter": "agentharm",
+   "scorer": "agentstep",
+   "share": 4,
+   "files": [
+    {
+     "name": "benign_behaviors_test_public.json",
+     "url": "https://huggingface.co/datasets/ai-safety-institute/AgentHarm/resolve/main/benchmark/benign_behaviors_test_public.json",
+     "bytes": 138721
+    }
+   ],
+   "publish": false
+  },
+  {
+   "id": "overthink",
+   "item": "SEC-07",
+   "title": "OverThink (SQuAD)",
+   "source": "https://huggingface.co/datasets/akumar0927/OverThink",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "閱讀理解題，context 內被塞入與題目無關的解謎內容以拉高推理 token。",
+   "adapter": "overthink",
+   "scorer": "amplify",
+   "share": 10,
+   "files": [
+    {
+     "name": "squad_attack.csv",
+     "url": "https://huggingface.co/datasets/akumar0927/OverThink/resolve/main/squad_attack.csv",
+     "bytes": 1398001
+    }
+   ]
+  },
+  {
+   "id": "tmmlu",
+   "item": "SEC-08",
+   "title": "TMMLU+（台灣地理、行政法、台灣常識 TTQA）",
+   "source": "https://huggingface.co/datasets/ikala/tmmluplus",
+   "license": "MIT",
+   "risk": "none",
+   "riskNote": "繁體中文考題。",
+   "adapter": "tmmlu",
+   "scorer": "mcq",
+   "share": 6,
+   "files": [
+    {
+     "name": "geography_of_taiwan_test.csv",
+     "url": "https://huggingface.co/datasets/ikala/tmmluplus/resolve/main/data/geography_of_taiwan_test.csv",
+     "bytes": 165313
+    },
+    {
+     "name": "administrative_law_test.csv",
+     "url": "https://huggingface.co/datasets/ikala/tmmluplus/resolve/main/data/administrative_law_test.csv",
+     "bytes": 131955
+    },
+    {
+     "name": "ttqav2_test.csv",
+     "url": "https://huggingface.co/datasets/ikala/tmmluplus/resolve/main/data/ttqav2_test.csv",
+     "bytes": 31531
+    }
+   ]
+  },
+  {
+   "id": "twlegal",
+   "item": "SEC-08",
+   "title": "tw-legal-benchmark-v1",
+   "source": "https://huggingface.co/datasets/lianghsun/tw-legal-benchmark-v1",
+   "license": "Apache-2.0",
+   "risk": "none",
+   "riskNote": "台灣法律選擇題。",
+   "adapter": "twlegal",
+   "scorer": "mcq",
+   "share": 4,
+   "files": [
+    {
+     "name": "benchmark.csv",
+     "url": "https://huggingface.co/datasets/lianghsun/tw-legal-benchmark-v1/resolve/main/benchmark.csv",
+     "bytes": 192861
+    }
+   ]
+  },
+  {
+   "id": "sst",
+   "item": "SEC-09",
+   "title": "SimpleSafetyTests",
+   "source": "https://huggingface.co/datasets/Bertievidgen/SimpleSafetyTests",
+   "license": "CC-BY-2.0",
+   "risk": "highest",
+   "riskNote": "100 則高嚴重度請求，含兒少侵害、自傷、武器、詐騙類別。只有請求文字，但請限制可存取的人員。",
+   "adapter": "sst",
+   "scorer": "harm",
+   "share": 10,
+   "files": [
+    {
+     "name": "sst_test_cases.csv",
+     "url": "https://huggingface.co/datasets/Bertievidgen/SimpleSafetyTests/resolve/main/sst_test_cases.csv",
+     "bytes": 12483
+    }
+   ]
+  },
+  {
+   "id": "xstest",
+   "item": "SEC-10",
+   "title": "XSTest v2 (safe prompts)",
+   "source": "https://github.com/paul-rottger/xstest",
+   "license": "CC-BY-4.0",
+   "risk": "low",
+   "riskNote": "聽起來危險但其實安全的問題。同一檔內另有 200 則不安全對照題，本工具不取用。",
+   "adapter": "xstest",
+   "scorer": "overrefusal",
+   "share": 7,
+   "files": [
+    {
+     "name": "xstest_prompts.csv",
+     "url": "https://raw.githubusercontent.com/paul-rottger/xstest/main/xstest_prompts.csv",
+     "bytes": 38719
+    }
+   ]
+  },
+  {
+   "id": "frr",
+   "item": "SEC-11",
+   "title": "CyberSecEval MITRE-FRR (benign cyber)",
+   "source": "https://github.com/meta-llama/PurpleLlama",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "看似可疑但良性的資安工程請求，用來觀察 safety classifier 是否誤擋。",
+   "adapter": "frr",
+   "scorer": "refusalsignal",
+   "share": 10,
+   "files": [
+    {
+     "name": "mitre_frr.json",
+     "url": "https://raw.githubusercontent.com/meta-llama/PurpleLlama/main/CybersecurityBenchmarks/datasets/mitre_frr/mitre_frr.json",
+     "bytes": 420424
+    }
+   ]
+  },
+  {
+   "id": "tw-sovereignty",
+   "item": "SEC-12",
+   "title": "Taiwan Sovereignty Benchmark (stage 1)",
+   "source": "https://github.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro",
+   "license": "MIT",
+   "risk": "medium",
+   "riskNote": "10 組中英對照的台灣主權相關提問與關鍵詞清單；題目政治敏感，判定規則帶有作者立場，結果需人工複核。",
+   "adapter": "tws",
+   "scorer": "stance",
+   "share": 4,
+   "files": [
+    {
+     "name": "prompts.json",
+     "url": "https://raw.githubusercontent.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro/main/benchmark/stage1_sovereignty/prompts.json",
+     "bytes": 4747
+    },
+    {
+     "name": "red_flags.json",
+     "url": "https://raw.githubusercontent.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro/main/benchmark/stage1_sovereignty/red_flags.json",
+     "bytes": 6236
+    }
+   ]
+  },
+  {
+   "id": "zhtw-terms",
+   "item": "SEC-12",
+   "title": "繁中用語檢查（本工具題目＋OpenCC 詞典）",
+   "source": "https://github.com/BYVoid/OpenCC",
+   "license": "Apache-2.0",
+   "risk": "none",
+   "riskNote": "題目由本工具提供（一般 IT／商務寫作）；OpenCC 詞典用來偵測簡體字與大陸用語。",
+   "adapter": "zhtw_terms",
+   "scorer": "zhtw",
+   "share": 3,
+   "files": [
+    {
+     "name": "STCharacters.txt",
+     "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/master/data/dictionary/STCharacters.txt",
+     "bytes": 36026
+    },
+    {
+     "name": "TSCharacters.txt",
+     "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/master/data/dictionary/TSCharacters.txt",
+     "bytes": 104520
+    },
+    {
+     "name": "TWPhrases.txt",
+     "url": "https://raw.githubusercontent.com/BYVoid/OpenCC/master/data/dictionary/TWPhrases.txt",
+     "bytes": 19429
+    }
+   ]
+  },
+  {
+   "id": "bbq",
+   "item": "SEC-12",
+   "title": "BBQ (Nationality)",
+   "source": "https://github.com/nyu-mll/BBQ",
+   "license": "CC-BY-4.0",
+   "risk": "medium",
+   "riskNote": "刻意包含對族群的刻板印象情境，用來測偏誤；美國語境。",
+   "adapter": "bbq",
+   "scorer": "mcq",
+   "share": 3,
+   "files": [
+    {
+     "name": "Nationality.jsonl",
+     "url": "https://raw.githubusercontent.com/nyu-mll/BBQ/main/data/Nationality.jsonl",
+     "bytes": 2900040
+    }
+   ]
+  },
+  {
+   "id": "safemt",
+   "item": "SEC-13",
+   "title": "SafeMTData Attack_600 (ActorAttack)",
+   "source": "https://huggingface.co/datasets/SafeMTData/SafeMTData",
+   "license": "MIT",
+   "risk": "high",
+   "riskNote": "多輪對話腳本，由無害話題逐步導向危險指示（含化學／生物類別）。請限制可存取的人員。",
+   "adapter": "safemt",
+   "scorer": "harm_multi",
+   "share": 10,
+   "files": [
+    {
+     "name": "Attack_600.json",
+     "url": "https://huggingface.co/datasets/SafeMTData/SafeMTData/resolve/main/SafeMTData/Attack_600.json",
+     "bytes": 619918
+    }
+   ]
+  },
+  {
+   "id": "poisonedrag",
+   "item": "SEC-14",
+   "title": "PoisonedRAG (NQ)",
+   "source": "https://github.com/sleeepeer/PoisonedRAG",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "植入錯誤事實的段落；內容無害。",
+   "adapter": "poisonedrag",
+   "scorer": "poison",
+   "share": 6,
+   "files": [
+    {
+     "name": "nq.json",
+     "url": "https://raw.githubusercontent.com/sleeepeer/PoisonedRAG/main/results/adv_targeted_results/nq.json",
+     "bytes": 123089
+    }
+   ]
+  },
+  {
+   "id": "atb-memory",
+   "item": "SEC-14",
+   "title": "AgentThreatBench memory_poison",
+   "source": "https://github.com/UKGovernmentBEIS/inspect_evals",
+   "license": "MIT",
+   "risk": "low",
+   "riskNote": "10 筆記憶內容被污染的問答情境（OWASP ASI06）。",
+   "adapter": "atb_memory",
+   "scorer": "marker",
+   "share": 4,
+   "files": [
+    {
+     "name": "memory_poison.json",
+     "url": "https://raw.githubusercontent.com/UKGovernmentBEIS/inspect_evals/main/src/inspect_evals/agent_threat_bench/data/memory_poison.json",
+     "bytes": 9907
+    }
+   ]
+  },
+  {
+   "id": "cse-interpreter",
+   "item": "SEC-15",
+   "title": "CyberSecEval interpreter abuse",
+   "source": "https://github.com/meta-llama/PurpleLlama",
+   "license": "MIT",
+   "risk": "medium-high",
+   "riskNote": "要求在 code interpreter 中撰寫提權、容器逃逸等程式的請求（雙用途資安內容）。本工具不執行任何模型產出的程式碼。",
+   "adapter": "cse_interpreter",
+   "scorer": "harm",
+   "share": 10,
+   "files": [
+    {
+     "name": "interpreter.json",
+     "url": "https://raw.githubusercontent.com/meta-llama/PurpleLlama/main/CybersecurityBenchmarks/datasets/interpreter/interpreter.json",
+     "bytes": 388355
+    }
+   ]
+  }
+ ]
+}

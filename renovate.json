@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests", "docker:pinDigests"],
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {"enabled": true, "schedule": ["before 6am on monday"]},
+  "packageRules": [
+    {
+      "description": "Python: re-lock with hashes (uv) so images keep installing with --require-hashes",
+      "matchManagers": ["pip_requirements", "pip-compile"],
+      "groupName": "python dependencies"
+    },
+    {
+      "description": "Base images by digest",
+      "matchDatasources": ["docker"],
+      "pinDigests": true,
+      "groupName": "base images"
+    },
+    {
+      "description": "LiteLLM: never automatic (supply-chain incident 2026-10-21); upgrade by hand after review",
+      "matchPackageNames": ["litellm", "ghcr.io/berriai/litellm-non_root", "ghcr.io/berriai/litellm"],
+      "enabled": false
+    },
+    {
+      "description": "Nothing merges itself",
+      "matchPackageNames": ["*"],
+      "automerge": false
+    }
+  ],
+  "pip-compile": {"fileMatch": ["(^|/)requirements\\.lock$"]}
+}
