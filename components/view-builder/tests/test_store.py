@@ -134,8 +134,10 @@ def test_store_rejects_bad_release_id(mini_data):
     assert store_io.SAFE_ID.match("20261031T000000Z")
 
 
-def test_seed_without_release_uploads_only_extras(tmp_path):
-    """After `publisher bootstrap` made the release: editorial, matrix and security results only."""
+def test_seed_without_release_uploads_only_extras(tmp_path, portal_data):
+    """After `publisher bootstrap` made the release: editorial, matrix and security results only.
+
+    Needs `portal_data` only so it is skipped without the llmops-portal checkout, where SECURITY_RUN lives."""
     store = MemoryStore()
     store.ensure_bucket("b")
     done = store_io.seed(store, "b", None, security_run=SECURITY_RUN, matrix=MATRIX, editorial=EDITORIAL,

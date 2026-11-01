@@ -47,10 +47,10 @@ class Watcher(threading.Thread):
         url = (s.gw_url or "").rstrip("/")
         url = url[:-3] if url.endswith("/v1") else url  # GatewayClient adds the paths itself
         self.client = client or (GatewayClient(url, s.gw_key, timeout=15, max_retries=0) if url else None)
-        self._stop = threading.Event()
+        self._stop_event = threading.Event()  # not _stop: that name is threading.Thread internals (join() calls it on 3.12)
 
     def stop(self) -> None:
-        self._stop.set()
+        self._stop_event.set()
 
     def tick(self, now: float, schedule: dict) -> None:
         s = self.orch.settings
@@ -74,6 +74,6 @@ class Watcher(threading.Thread):
         schedule: dict = {}
         log.info("watcher started", extra=kv(gateway=self.orch.settings.gateway_name, url_set=bool(self.client),
                                              poll_seconds=self.orch.settings.gw_poll_seconds))
-        while not self._stop.is_set():
+        while not self._stop_event.is_set():
             self.tick(time.monotonic(), schedule)
-            self._stop.wait(1.0)
+            self._stop_event.wait(1.0)
