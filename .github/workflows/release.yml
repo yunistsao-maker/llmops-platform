@@ -4,6 +4,7 @@
 # v* tags: re-tag the images, publish a GitHub Release with the contracts bundle, open PRs adding
 # platform/<tag>/ to llmops-deploy and vendoring the contracts into llmops-portal-web.
 # Needs: variables AWS_REGION, ECR_REGISTRY, AWS_CI_PUSH_ROLE_ARN, COSIGN_KMS_KEY; secrets CI_APP_ID, CI_APP_PRIVATE_KEY.
+# Until AWS_CI_PUSH_ROLE_ARN is set, every job here is skipped, so a fresh repository shows no failures.
 name: release
 
 on:
@@ -25,6 +26,7 @@ env:
 
 jobs:
   images:
+    if: vars.AWS_CI_PUSH_ROLE_ARN != ''
     runs-on: ubuntu-latest
     permissions:
       contents: read
